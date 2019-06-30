@@ -1,0 +1,238 @@
+<apex:page >
+ function : 
+ 1. function is a group of statements defined in a scope.
+ 2. all the statments defined in the scope run together to perform a task.
+ 3. We call the function where ever we want 
+ 4. Functions are classified into four types 
+    a. Function without returntype and without parameters 
+    b. function without returntype and with parameters
+    c. Function with returnType and without parameters
+    d. function with returnType and with parameters.
+    
+ 5. syntax : 
+    returnType functionName(parameters){
+        logic 
+    }
+    
+ 6. Function without returnType and without parameters
+        void functionName(){
+    
+        }
+    
+    Example 1: create a function show 
+                void show(){
+    
+                }
+        Execution : show();
+    
+    Example 2: Create a function callMe 
+                void callMe(){
+    
+                }
+        Execution : callMe();
+    
+    Example 3: Create a function deposit 
+                void deposit(){
+    
+                }
+        Execution : deposit();
+    
+    Example 4: Create a function withdraw
+                void withdraw(){
+    
+                }
+        Execution : withdraw();
+    
+    Example 5: Create a funtcion login
+                void login(){
+    
+                }
+        Execution : login();
+    
+    Example 6: create a function setData
+                void setData(){
+    
+                }
+        Execution : setData();  
+    
+    Example 7: Create a function createAccount
+                void createAccount(){
+    
+                }
+        Execution : createAccount();
+    
+    Example 8: create a function deleteData
+    
+                void deleteData(){
+    
+                }
+    
+        Execution : deleteData();
+    
+   7. Function without returnType and with parameters 
+        void functionName(parameters){
+    
+        }
+    
+        Example 1: Create a function show with name as inputparameter 
+                void show(String name){
+                    System.debug('Name:'+name);
+                }
+    
+                Execution : show();// Error 
+    
+                Execution : show('Satish'); 
+                          : show('Ravi Kiran');
+    
+        Example 2: Create a function calculate with aval,bval as inputparameters
+                void calculate(Integer aval,Integer bval){
+                    Integer cval=aval+bval;
+                    System.debug('Caval:'+cval);
+                }
+    
+                Execution  : calculate();  //Error 
+                           : calculate(10); //Error
+                           : calculate(10,20);  
+                           : calcualte(20,90);
+    
+        Example 3: Create a function setData which will take name and rating as inputparameters 
+                void setData(String name,String rating){
+    
+                }
+            Execution : setData(); // Error 
+                      : setData(10);// Error
+                      : setData('Hot'); // Error 
+                      : setData('Ravi','Hot'); //  name as ravi and rating as Hot
+                      : setData('Hot','Ravi'); //  name as hot and rating as Ravi
+    
+        Example 4: Create a function invoke which will take the Exp and city as inputparameters 
+                void invoke(Decimal exp ,String city){
+                
+                }
+    
+                Execution  : invoke();          //Error 
+                           : invoke('Hyd',3.2);         // Error expecting decimal we gave string 
+                           : invoke(3.2,'Hyd');         // exp as 3.2 and city as Hyt
+    
+        Example 5: Create a function createContact which takes lastName,firstName,Phone ,email as 
+                   inputparameters.
+                void createContact(String lastName,String firstName,String phone,String email){
+                
+                }
+                Execution :createContact('Myla','Satish','040-1234','abc@xyz.com');
+                    lastName : Myla firstName :Satish phone :040-1234  email :abc@xyz.com         
+    
+                : createContact('Ravi','P','abc@y.com','030-1234');
+                    lastName : Ravi ,firstName=P  phone:abc@y.com   email : 030-1234
+    
+    
+        Example 6: Create a method calculate which will take exp and city name  as inputparameters 
+                   and calculate the salary and bonus 
+                   if city is Hyd and exp >3 then salary :50K and bonus 3k
+                   else : salary :30k and bonus 5k
+        <!--    
+                void calculate(Decimal exp,String city){
+                    Decimal salary,bonus;
+                    if(city=='Hyd' && exp >3 ){
+                        salary=50000;
+                        bonus=3000;
+                    }else{
+                        salary=30000;
+                        bonus=5000;
+                    }
+                    System.debug('Salary :'+salary);
+                    System.debug('Bonus:'+bonus);
+                    
+                }
+
+                calculate(4,'Ban');     // salary :30000 bonus:5000
+
+                calculate(6,'Hyd');     //  Salary :50000 bonus :3000
+                    
+                calculate(1,'Che')
+
+                calculate('Che',1); //Error 
+            -->
+            
+        Example 7: Create a method setData which will take industry and type as parameters 
+                   and set the value of rating ,ownership ,leadSource 
+                    if industry is Banking  and type is New Customer  then set 
+                                rating =Hot ownership is Public  LeadSource is Web 
+                    else 
+                                rating as warm ,ownership as private ,leadSource is Hot
+   
+        <!--
+                void setData(String industry,String type){
+                    String rating,ownership,leadSource;
+                    if(industry=='Banking' && type=='New Customer'){
+                        rating='Hot';
+                        ownership='Public';
+                        leadSource='Web';
+                    }else{
+                        rating='Warm';
+                        ownership='Private';
+                        leadSource='Hot';
+                    }
+                    System.debug('Rating:'+rating);
+                    System.debug('Ownership:'+ownership);
+                    System.debug('LeadSource:'+leadSource);
+                }
+
+                Execution :  setData('1000','20000');       //
+                          :  setData(1000,2000);//Error expected string but found integer
+                          :  setData('Banking','New Customer');
+        -->
+    
+        Example : 8
+            Create a method calculate  , which will take  two integer values and print their sum 
+            void calculate(){
+                Integer aval,bval,cval;
+                aval=10;
+                bval=20;
+                cval=aval+bval;
+                System.debug('Aval:'+aval);
+                System.debug('BVal:'+bval);
+                System.debug('Cval:'+cval);
+                
+            }
+    
+  ===> Function with returnType and without parameters 
+        
+        syntax :returnType functionName(){
+                }
+    
+        Example 1: Create a show function which will return age 
+                    Integer show(){
+                        Integer age=30;
+                        System.debug('Line one');
+                        System.debug('Line two');
+                        return age;
+                    }
+                    
+        Execution :Integer aval=show();//30
+    
+        Example 2: Create a method calculate which will return amount 
+                    Decimal calculate(){
+                        Decimal amount =10000.00;
+                        return amount;
+                    }
+    
+        Example 3: Create a method invoke which will return cityName 
+                    String invoke(){
+                        String cityName='Hyd';
+                        return cityName;
+                    }
+        Example 4: create a method setData which will return exp
+                    Integer setData(){
+                        Integer exp=2;
+                        return exp;
+                    }
+    
+        Example 5: Create a method callMe which will return boolean flag
+                    Boolean callMe(){
+                        Boolean flag=true;
+                        return flag;
+                    }         
+                
+    
+</apex:page>

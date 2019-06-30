@@ -1,0 +1,9 @@
+<apex:page controller="Dynamic_Example">
+    <apex:form >
+        <apex:selectList size="1" value="{!selectedform}">
+            <apex:selectOptions value="{!FormList}"/>
+        </apex:selectList>
+        <apex:commandButton action="{!changeForm}" value="Show Form"/><br/><br/>
+        <apex:dynamicComponent componentValue="{!formPanel}" id="formpanel"/>
+    </apex:form>
+</apex:page>

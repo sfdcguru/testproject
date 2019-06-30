@@ -1,0 +1,5 @@
+<apex:page controller="SOSL_Example">
+    <c:List_Display records="{!accounts}" fields="{!accFields}"  objName="Account" />
+    <c:List_Display records="{!contacts}" fields="{!conFields}"  objName="Contact" />
+    <c:List_Display records="{!opty}" fields="{!optyFields}"  objName="Opportunity" />
+</apex:page>

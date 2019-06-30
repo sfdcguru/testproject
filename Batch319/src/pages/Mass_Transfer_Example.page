@@ -1,0 +1,12 @@
+<apex:page standardController="Account" extensions="Mass_Transfer_Example" recordSetVar="items">
+    <apex:form >
+        <apex:commandButton value="Transfer" action="{!transferData}" />
+        <br/><br/>
+    	<apex:dataTable value="{!accounts}" var="a" frame="border" rules="rows" cellpadding="10" width="600">
+            <apex:column value="{!a.name}" headerValue="Name" />
+            <apex:column value="{!a.industry}" headerValue="Industry"/>
+            <apex:column value="{!a.rating}" headerValue="Rating"/>
+            <apex:column value="{!a.phone}" headerValue="Phone"/>
+        </apex:dataTable>
+    </apex:form>
+</apex:page>

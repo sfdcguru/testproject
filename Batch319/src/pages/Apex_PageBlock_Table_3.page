@@ -1,0 +1,46 @@
+<apex:page standardController="Account" recordSetVar="items" readOnly="true">
+    <apex:form >		
+    <apex:pageBlock title="Contats">
+    	<apex:pageBlockTable value="{!items}" var="a" rows="4" first="0" >
+            <apex:column >
+                <apex:facet name="header">
+					<apex:inputcheckbox />
+                </apex:facet>
+                <apex:inputCheckbox />
+            </apex:column>
+            <apex:column headerValue="Action">
+                <apex:commandLink value="Edit" action="{!URLFOR($Action.Account.Edit,a.id)}"/> 
+                	&nbsp;|&nbsp;
+                <apex:commandLink value="Del" action="{!URLFOR($Action.Account.Delete,a.id)}" />
+            </apex:column>
+            <apex:column headerValue="AccountName">
+                <apex:commandLink value="{!a.name}" action="/{!a.id}" />
+            </apex:column>
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.ownership}" />
+            <apex:column value="{!a.phone}" />
+        </apex:pageBlockTable>
+        <apex:pageBlockTable value="{!items}" var="a" rows="4" first="5" >
+            <apex:column >
+                <apex:facet name="header">
+					<apex:inputcheckbox />
+                </apex:facet>
+                <apex:inputCheckbox />
+            </apex:column>
+            <apex:column headerValue="Action">
+                <apex:commandLink value="Edit" action="{!URLFOR($Action.Account.Edit,a.id)}"/> 
+                	&nbsp;|&nbsp;
+                <apex:commandLink value="Del" action="{!URLFOR($Action.Account.Delete,a.id)}" />
+            </apex:column>
+            <apex:column headerValue="AccountName">
+                <apex:commandLink value="{!a.name}" action="/{!a.id}" />
+            </apex:column>
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.ownership}" />
+            <apex:column value="{!a.phone}" />
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+   </apex:form>
+</apex:page>

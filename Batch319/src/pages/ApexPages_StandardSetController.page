@@ -1,0 +1,17 @@
+<apex:page >
+    Apexpages.StandardSetController :
+    --------------------------------
+    StandardSetController : 
+    1. It is a pre-defined apex class .
+    2. This is defined under the namespace of Apexpages.
+    3. This will reffer to list of record s
+    4. Syntax : 
+    	Apexpages.StandardSetController(List of recordS)
+    
+    5. Methods : 
+    	1. getId() : This will return Id of the record
+    	2. getRecord(): This will return record.
+    	3. getRecords(): This wil return all the records that are reffered by standardSetController.
+    	4. getSelected() : This will return selected records from StandardSetController
+    	5. addFields(list of field): 
+</apex:page>

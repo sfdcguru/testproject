@@ -1,0 +1,26 @@
+<apex:page >
+    <!--
+		1. What is MVC ?
+2. VF falls under MVC
+3. Difference between VF and lightning 
+4. what is a standardController 
+5. What is a standardListController 
+6. What is a controller
+7. What is a extention
+8. Difference between inputText and inputField
+9. What are listview options 
+10.What is filterId
+11.In how many ways we can display list of records
+12.What is the difference between pageBlocktable,DataTable,DataList,repeat
+13.How many records can be displayed using pageBlocktable.
+14.How to display 10k records using pageBlockTable
+15.How to display 50k records using pageBlockTable
+===============================================================================================
+16.In how many ways we can create VF pages ?
+	a. Standard navigation 
+	b. Developer console
+	c. URL 
+	4. Eclipse 
+	===> Salesforce DX ==> Visual Studio Code : Editor ( Scracth Org,DevHub, git, GitHub.....)
+	-->
+</apex:page>

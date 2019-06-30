@@ -1,0 +1,191 @@
+<apex:page >
+    Set: 
+    ====
+    1.Set is a collection of simillar elements .
+    2.Where size can grow or decrease based on run time requirement.
+    3.Set will not accept duplicate elements
+    4.Set will not maintain insertion order
+    5.Syntax : 
+    	<!--
+			Set<DataType> setName =new Set<DataType>();
+			Set<DataType> setName =new Set<DataType>(List/set);
+		-->
+    Example : 
+    	1. Create a set to store studentNames 
+    		<!--
+				Set<String> students =new Set<String>();
+			-->
+    	2. Create a set to store cityNames 
+    		<!--
+				Set<String> cityNames =new Set<String>();
+			-->
+    	3. Create a set to store Account 
+    		<!--
+				Set<Account> accounts =new Set<Account>();
+			-->
+    	4. Create a set to store Contact 
+    		<!--
+				Set<Contact> contacts =new Set<Contact>();
+			-->
+    	5. Create a set to store Customer__c
+    		<!--
+				Set<Customer__c> customers =new Set<Customer__c>();
+			-->
+    	6. Create a Set which will store list of names 
+    		<!--
+				List<String> names =new List<String>{'Sam','Ram','Kiran'};
+				Set<String> myNames =new Set<String>(names);
+				System.debug(myNames);	// sam,ram,kiran
+			-->
+    	7. Create a set which will store list of Accounts 
+    		<!--
+				List<Account> accounts =new List<Account>();
+				Set<Account> accSet =new Set<Account>(accounts);
+			-->
+    	8. Create a set which will store set of cityNames 
+    		<!--
+				Set<String> cityNames =new Set<String>{'Hyd','Ban','Che'};
+				Set<String> myNames =new Set<String>(cityNames);
+			-->
+    	9. Create a set which will store set of Accounts 
+    		<!--
+				Set<Account> accounts =new Set<Account>();
+				Set<Account> myAccounts =new Set<Account>(accounts);
+			-->
+    
+    Methods : 
+    1. add(ele) : This method is used to add new element to the set 
+       Example :
+    	<!--
+			Set<Integer> myAges =new Set<Integer>();
+			myAges.add(90);
+			myAges.add(10);
+			myAges.add(80);
+			myAges.add(40);
+			myAges.add(40);
+			System.debug(myAges); 	// 10,40,80,90
+		-->
+    
+    2. addAll(set)  :This method is used to add set of elements to a set 
+    	Example :
+    	<!--
+			Set<Integer> myvalues =new Set<Integer>{10,90,30};
+			Set<Integer> ages =new Set<Integer>();
+			ages.addAll(myValues);
+			System.debug(ages);	// 10,30,90
+		-->
+    
+    3. addAll(list) : This method is used to add list of elements to a set 
+    	<!--
+			List<Integer> myvalues =new List<Integer>{10,90,30};
+			Set<Integer> ages =new Set<Integer>();
+			ages.addAll(myValues);
+			System.debug(ages);	// 10,30,90
+		-->
+    
+    4. remove(ele) : This method will remove the given element from the set 
+    	<!--
+				Set<Integer> ages =new Set<Integer>{10,40,20,90};
+				  0		1	  2    3 
+				----------------------
+				| 10  | 20  | 40 | 90 |
+				-----------------------
+				ages.remove(20);
+
+				  0		1	  2    
+				-----------------
+				| 10  | 40 | 90 |
+				------------------
+
+				ages.remove(90);
+				  0		1	    
+				------------
+				| 10  | 40 | 
+				------------
+			-->
+    
+    5. removeAll(list/set) : From the set remove all the elements in which are in the given list.
+    	 Example :	
+    	 <!--
+			List<Integer> myList =new List<Integer>{10,90,30};
+			Set<Integer> mySet =new Set<Integer>{90,10,40,30,50};
+			mySet.removeAll(myList); // This will remove all the elements which are in myList from set
+			System.debug(mySet);		// 40,50
+		-->
+		
+    6. contains(ele) : This method will return true ,if the set contains given element
+    		<!--
+				Set<Integer> ages =new Set<Integer>{10,20,40,90};
+				Boolean flag1 =ages.contains(20); // if the set contains 20 ,it will return true
+				Boolean flag2 =ages.contains(50); // if the set contains 50 ,it will return true, else false
+			-->
+    
+    7. containsAll(set): This method will return you true, if the set contains all elements in the givne set.
+    		<!--
+				Set<Integer> myData =new Set<Integer>{10,20,40,50};
+				Set>Integer> myAges =new Set<Integer>{10,30,90,20,50};
+				myAges.containsAll(myData); // if myages contain all the elements in the myData then it will return true
+			-->
+        
+   8.containsAll(list): This method will return you true, if the set contains all elements in the givne set.
+    		<!--
+				List<Integer> myList =new List<Integer>{10,20,40,50};
+				Set>Integer> myAges =new Set<Integer>{10,30,90,20,50};
+				myAges.containsAll(myList); // if myages contain all the elements in the myList then it will return true
+			-->
+    
+   9. size() : This will return count of no of elements in the set .
+    		<!--
+				Set<Integer> myAges =new Set<Integer>{10,20,30,40};
+				Integer count myAges.size();
+				System.debug('Count:'+count);	4
+			-->
+    
+    10.clear() : This will remove all the elements from the set 
+    		<!--
+				Set<Integer> myAges =new Set<Integer>{10,20,30,40};
+				myAges.clear();
+			-->
+    
+    Examples : 
+    1. Create a set and insert  Sam,Ram,Kiran,Prasad
+    	<!--
+				Set<String> names =new Set<String>();
+				names.add('Sam');
+				names.add('Ram');
+				names.add('Kiran');
+				names.add('Prasad');
+		-->
+    2. Create a set and insert 1000.00,90000.00,34000.00
+    	<!--
+				Set<Decimal> salaries =new Set<Decimal>();
+				salaries.add(1000.00);
+				salaries.add(90000.00);
+				salaries.add(34000.00);
+		-->
+    3. Create a set and insert Wipro--Banking 
+    						   TCS  --Energy
+    						   Dell	--Education
+    
+    	<!--
+			Set<Account> accounts =new Set<Account>();
+			Account a1 =new Account();
+			a1.Name='Wipro';
+			a1.Industry='Energy';
+			accounts.add(a1);
+			Account a2 =new Account();
+			a2.Name='TCS';
+			a2.Industry='Energy';
+			accounts.add(a2);
+		-->
+    
+    4. Create a set and insert M	Praveen
+    						   N	Ravi
+    						   S 	Prasad
+    
+    
+    7:00 : Thur: Dev: 
+    
+    10:30 AM : Admin 
+    
+</apex:page>

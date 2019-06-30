@@ -1,0 +1,18 @@
+<apex:page controller="Pagination_Example">
+    <apex:form id="fm">
+        <apex:commandButton value="First" action="{!controller.first}" rendered="{! controller.hasPrevious}" reRender="fm" />
+        <apex:commandButton value="Prev"  action="{!controller.previous}" rendered="{! controller.hasPrevious}"  reRender="fm" />
+        <apex:commandButton value="Next" action="{!controller.next}" rendered="{! controller.hasNext}"  reRender="fm" />
+        <apex:commandButton value="last" action="{!controller.last}" rendered="{! controller.hasNext}" reRender="fm" />
+        <br/><br/>
+        <apex:dataTable value="{!optyList}" var="a" width="600" cellpadding="10" rules="rows" frame="border">
+            <apex:column value="{!a.name}" headerValue="Name" />
+            <apex:Column value="{!a.stageName}" headerValue="StageName" />
+            <apex:column value="{!a.closeDate}" headerValue="Closedate" />
+        </apex:dataTable>
+    	 {! controller.pageNumber}   of {!pages} pages  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        		{! controller.pageNumber*5} of {!total} records
+       
+    </apex:form>
+  
+</apex:page>

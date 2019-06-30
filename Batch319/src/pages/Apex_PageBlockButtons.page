@@ -1,0 +1,68 @@
+<!--
+apex:pageBlockButtons : 
+1. This is a child component of pageBlock.
+2. Body of the pageBlockButtons will be displayed on the header and footer of the pageBlock
+3. Attributes : 
+	1. location : 
+		a. This will specify the location where the body of the pageBlockbuttons should be displayed.
+		b. Possible values are top/bottom/ all
+		c. default value is all
+
+	2. dir     :
+		a. This will specify the direction of the content 
+		b. Possible values are RTL/LTR
+		c. Default value is LTR 
+	
+	3. rendered : 
+		a. it is a boolean value .
+		b. When set as false ,content will be hidden from the page .
+		c. Possible values are true, false,
+
+-->
+
+
+<apex:page >
+    <apex:form >
+    <apex:pageBlock title="Example">
+    	<apex:pageBlockButtons >
+            <apex:commandButton value="Save" />
+            <apex:commandButton value="Cancel" />
+        </apex:pageBlockButtons>
+        This is example <br/>
+        This is example 
+    </apex:pageBlock>
+    <apex:pageBlock title="Example">
+    	<apex:pageBlockButtons location="top">
+            <apex:commandButton value="Save" />
+            <apex:commandButton value="Cancel" />
+        </apex:pageBlockButtons>
+        This is example <br/>
+        This is example 
+    </apex:pageBlock>
+   <apex:pageBlock title="Example">
+    	<apex:pageBlockButtons location="top" dir="RTL">
+            <apex:commandButton value="Save" />
+            <apex:commandButton value="Cancel" />
+        </apex:pageBlockButtons>
+        This is example <br/>
+        This is example 
+    </apex:pageBlock>
+    <apex:pageBlock title="Example">
+    	<apex:pageBlockButtons location="bottom" dir="RTL">
+            <apex:commandButton value="Save" />
+            <apex:commandButton value="Cancel" />
+        </apex:pageBlockButtons>
+        This is example <br/>
+        This is example 
+    </apex:pageBlock>
+    <apex:pageBlock title="Example">
+    	<apex:pageBlockButtons location="top" dir="RTL">
+            <apex:commandLink value="Save" /> &nbsp;
+            &nbsp;
+            Testing 
+        </apex:pageBlockButtons>
+        This is example <br/>
+        This is example 
+    </apex:pageBlock>
+   </apex:form>
+</apex:page>

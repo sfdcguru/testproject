@@ -1,0 +1,7 @@
+<apex:page >
+    <apex:sectionHeader title="Customer" rendered="true" subtitle="New customer" />
+    Customer Name  <br/>
+    Customer Phone <br/>
+    Customer Age 
+   
+</apex:page>

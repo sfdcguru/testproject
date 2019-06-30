@@ -1,0 +1,10 @@
+<apex:page controller="Apex_Set_Example">
+    <apex:form id="fm">
+        Enter Name : <apex:inputText value="{!name}" />
+        <apex:commandButton value="Submit" action="{!setData}"  reRender="fm"/>
+        <br/><br/>
+        Amount :{!amount} <br/>
+        <br/>
+        Salary:{!salary}
+    </apex:form>
+</apex:page>

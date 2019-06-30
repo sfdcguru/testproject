@@ -1,0 +1,31 @@
+<apex:page controller="Action_Function_Example" id="page">
+    <apex:form id="fm">
+        <br/><br/>
+        <br/><br/>
+       
+        <apex:actionFunction name="fun" action="{!callMe}" reRender="fm" >
+            <apex:param name="name" assignTo="{!name}" value="" />
+            <apex:param name="city" assignTo="{!city}" value="" />
+        </apex:actionFunction>
+       
+                     <script>
+                function show(){
+                    var name =document.getElementById('{!$Component.name}').value;
+                    var city=document.getElementById('{!$Component.city}').value;
+                    if(city!='' && name!=''){
+                        fun(name,city);
+                    }else{
+                        alert('Enter Name and city');
+                    }
+                }
+            </script>
+            Enter Name : <br/>
+            <apex:inputText id="name" onchange="show()"/>
+            <br/><br/>
+            Enter City : <br/>
+            <apex:inputText id="city" onchange="show()"/>
+            <br/><br/>
+            <apex:outputLabel value="{!result}" />
+       
+    </apex:form>
+</apex:page>

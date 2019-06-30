@@ -1,0 +1,17 @@
+<apex:page controller="Action_Support">
+    <apex:form >
+        <apex:outputPanel id="pb">
+            Accounts : <br/>
+            <apex:selectList size="1" value="{!selected}" >
+                <apex:selectOptions value="{!accNames}" />
+                <apex:actionSupport event="onchange" action="{!getData}" reRender="pb" />
+            </apex:selectList>
+            <br/><br/>
+            Contacts : <br/>
+            <apex:selectList size="1" style="width:250px;" >
+                <apex:selectOptions value="{!conNames}" />
+            </apex:selectList>
+            
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,474 @@
+<apex:page >
+   -
+</apex:page> <!--
+    1. Create a function callMe which takes name ,age as parameters and return salary 
+    if age is above 30years then salary is 50k 
+    if age is less than or equals to 30 then salary 30k
+Solution:
+    Integer callMe(String name,Integer age){
+        Integer salary;
+        if(age > 30 ){
+            salary=50000;
+        }else{
+            salary=30000;
+        }
+        return salary;
+    }
+    
+==> Improve : 
+       Integer callMe(String name,Integer age){
+        Integer salary;
+        if(age>30)
+           salary=50000;
+        else 
+          salary=30000;
+
+        return salary;
+
+       }
+
+2. create a function invoke which takes industry and rating as parameters then return 
+   ownership
+    if industry is Education and rating is cold then set ownership as public 
+    else set ownership as private
+Solution:
+        String invoke(String industry ,String rating){
+        String ownership;
+        if(industry=='Education' && rating=='Cold'){
+            ownership='Public';
+        }else{
+            ownership='Private';
+        }
+        return ownership;
+    }
+
+Improved : 
+     String invoke(String industry,String rating){
+        String ownership;
+        if(industry=='Education' && rating='Cold')
+            ownership='Public';
+        else
+            ownership='Private';
+        
+        return ownership;
+     }
+
+3. Create a function create which will take  price and quantity as inputparameter and return total
+    total is price *quantity
+    tax is 20%  of total
+    total is sum of total +tax 
+
+    Decimal create(Decimal price ,Integer quantity){
+        Decimal total,tax;
+        total=price*quantity;
+        tax=total*0.20;
+        total=total+taxl
+        return total;
+    }
+
+
+4. create a function invoiceData which will take invoiceDate and quantity as inputparameters.
+   return invoiceAmount
+    if invoiceDate is before or equals 10-Mar-2019 then 
+        invoiceAmount =10000*quantity
+
+    if invoiceDate is after 10-Mar-2019 then 
+        invokceAmount=50000*quantity
+
+        Decimal invoiceData(Date invoiceDate,Integer quantity){
+
+            Decimal invoiceAmount;
+            if(invoiceDate <= Date.newInstance(2019,3,10) )
+                invoiceAmount=10000*quantity;
+            else 
+                invoiceAmount=50000*quantity;
+
+            return invoiceAmount;
+        }
+        
+        Date d=Date.newInstance(2018,2,20);
+        invoiceData(d,10);
+
+        invoiceDate(Date.newInstance(2019,4,10), 40);
+
+5. create a function getResult which will take internalMarks and externalMarks as parameters 
+   and return result 
+    
+    if totalMarks > 80 return firstClass        
+    if totalMarks > 60 return Second Class
+    if totalMarks > 40 return pass 
+    if titalMarks < 40 return fail
+
+Solution : 
+    String getResult(Integer internal,Integer external){            
+        Integer totalMarks =internal+external;               
+        String result;                                                                       
+        if(totalMarks> 80){
+
+            result='First Class';
+        }else{
+            if(totalMarks >60 ){
+
+               result='Second Class';
+            }else{
+                if(totalMarks> 40){
+                    result='Pass';
+                }else{
+                    result='Fail';
+                }
+            }
+        }
+        return result;
+    }
+
+Improved : 
+    String getResult(Integer internal,Integer external){            
+        Integer totalMarks =internal+external;               
+        String result;                                                                       
+        if(totalMarks>80)   
+           result='First Class';
+
+        else if(totalMarks>60)
+            result='Second Class';
+
+             else if (totalMarks>40 )
+             result='Pass';
+
+            else 
+              result='Fail';
+
+        return result;
+    }
+        
+    
+
+6. create a function setData which will take exp as inputparameter and return salary 
+    
+    if exp >= 10  salary as 90000
+    if exp >= 7   salary as 50000
+    if exp >= 5   salary as 30000
+    if exp< 5     salary as 10000
+    
+    Integer setData(Integer exp){
+        Integer salary;
+        
+        if(exp >= 10){
+            salary=90000;
+        }else{
+            if(exp >= 7){
+                salary=50000;
+            }else{
+                if(exp >=5){
+                    salary=30000;
+                }else{
+                    salary=10000;
+                }
+            }
+        }
+        return salary;
+    }
+
+Improved : 
+    Integer setData(Integer exp){
+        Integer salary;
+        if(exp>=10 )
+            salary=90000;
+        else if (exp>=7)
+             salary=50000;
+             else if (exp >=5)
+              salary=30000;
+              else
+               salary=10000;
+        return salary;
+    }
+    
+        
+7. create a function setOptyData which will take type as inputparameter and return stage 
+    if type as new Customer then set amount as 50000 
+                     stage as prospecting           
+                     closeDate as 15 days from today
+
+    if type as existing Customer then set amount as 30000
+                          stage as Closed Won 
+                          closeDate as 30 days from today
+
+
+    else    amount as 20000
+        stage  as closed lost
+        closeDate as today
+System.today()+15
+
+
+===> stmt1;
+     stmt2;
+     if(condition)
+    stmt3;
+     stmt4;
+     stmt5;
+
+Condition : true : 1,2,3,4,5
+Condition : false:1,2,4,5
+
+
+===>  stmt1;            ==> cond1 : true : 1,2,3,4
+      stmt2;
+      if(cond1){        ==> con1 :false ,cond2: true : 1,2,5,6
+
+      stmt3;        ==> con1 :false ,cond2: false,cond3:true : 1,2,7,8
+      stmt4;
+                ==> con1: false ,cond2: false,cond3: false : 1,2,9,10
+      }else if(cond2){
+
+        stmt5;
+        stmt6;              
+
+        }else if(cond3){
+
+             stmt7;
+             stmt8;
+
+             }else{
+
+             stmt9;
+             stmt10;
+
+              }
+
+
+    -->
+ <!--
+    1. Create a function callMe which takes name ,age as parameters and return salary 
+    if age is above 30years then salary is 50k 
+    if age is less than or equals to 30 then salary 30k
+Solution:
+    Integer callMe(String name,Integer age){
+        Integer salary;
+        if(age > 30 ){
+            salary=50000;
+        }else{
+            salary=30000;
+        }
+        return salary;
+    }
+    
+==> Improve : 
+       Integer callMe(String name,Integer age){
+        Integer salary;
+        if(age>30)
+           salary=50000;
+        else 
+          salary=30000;
+
+        return salary;
+
+       }
+
+2. create a function invoke which takes industry and rating as parameters then return 
+   ownership
+    if industry is Education and rating is cold then set ownership as public 
+    else set ownership as private
+Solution:
+        String invoke(String industry ,String rating){
+        String ownership;
+        if(industry=='Education' && rating=='Cold'){
+            ownership='Public';
+        }else{
+            ownership='Private';
+        }
+        return ownership;
+    }
+
+Improved : 
+     String invoke(String industry,String rating){
+        String ownership;
+        if(industry=='Education' && rating='Cold')
+            ownership='Public';
+        else
+            ownership='Private';
+        
+        return ownership;
+     }
+
+3. Create a function create which will take  price and quantity as inputparameter and return total
+    total is price *quantity
+    tax is 20%  of total
+    total is sum of total +tax 
+
+    Decimal create(Decimal price ,Integer quantity){
+        Decimal total,tax;
+        total=price*quantity;
+        tax=total*0.20;
+        total=total+taxl
+        return total;
+    }
+
+
+4. create a function invoiceData which will take invoiceDate and quantity as inputparameters.
+   return invoiceAmount
+    if invoiceDate is before or equals 10-Mar-2019 then 
+        invoiceAmount =10000*quantity
+
+    if invoiceDate is after 10-Mar-2019 then 
+        invokceAmount=50000*quantity
+
+        Decimal invoiceData(Date invoiceDate,Integer quantity){
+
+            Decimal invoiceAmount;
+            if(invoiceDate <= Date.newInstance(2019,3,10) )
+                invoiceAmount=10000*quantity;
+            else 
+                invoiceAmount=50000*quantity;
+
+            return invoiceAmount;
+        }
+        
+        Date d=Date.newInstance(2018,2,20);
+        invoiceData(d,10);
+
+        invoiceDate(Date.newInstance(2019,4,10), 40);
+
+5. create a function getResult which will take internalMarks and externalMarks as parameters 
+   and return result 
+    
+    if totalMarks > 80 return firstClass        
+    if totalMarks > 60 return Second Class
+    if totalMarks > 40 return pass 
+    if titalMarks < 40 return fail
+
+Solution : 
+    String getResult(Integer internal,Integer external){            
+        Integer totalMarks =internal+external;               
+        String result;                                                                       
+        if(totalMarks> 80){
+
+            result='First Class';
+        }else{
+            if(totalMarks >60 ){
+
+               result='Second Class';
+            }else{
+                if(totalMarks> 40){
+                    result='Pass';
+                }else{
+                    result='Fail';
+                }
+            }
+        }
+        return result;
+    }
+
+Improved : 
+    String getResult(Integer internal,Integer external){            
+        Integer totalMarks =internal+external;               
+        String result;                                                                       
+        if(totalMarks>80)   
+           result='First Class';
+
+        else if(totalMarks>60)
+            result='Second Class';
+
+             else if (totalMarks>40 )
+             result='Pass';
+
+            else 
+              result='Fail';
+
+        return result;
+    }
+        
+    
+
+6. create a function setData which will take exp as inputparameter and return salary 
+    
+    if exp >= 10  salary as 90000
+    if exp >= 7   salary as 50000
+    if exp >= 5   salary as 30000
+    if exp< 5     salary as 10000
+    
+    Integer setData(Integer exp){
+        Integer salary;
+        
+        if(exp >= 10){
+            salary=90000;
+        }else{
+            if(exp >= 7){
+                salary=50000;
+            }else{
+                if(exp >=5){
+                    salary=30000;
+                }else{
+                    salary=10000;
+                }
+            }
+        }
+        return salary;
+    }
+
+Improved : 
+    Integer setData(Integer exp){
+        Integer salary;
+        if(exp>=10 )
+            salary=90000;
+        else if (exp>=7)
+             salary=50000;
+             else if (exp >=5)
+              salary=30000;
+              else
+               salary=10000;
+        return salary;
+    }
+    
+        
+7. create a function setOptyData which will take type as inputparameter and return stage 
+    if type as new Customer then set amount as 50000 
+                     stage as prospecting           
+                     closeDate as 15 days from today
+
+    if type as existing Customer then set amount as 30000
+                          stage as Closed Won 
+                          closeDate as 30 days from today
+
+
+    else    amount as 20000
+        stage  as closed lost
+        closeDate as today
+System.today()+15
+
+
+===> stmt1;
+     stmt2;
+     if(condition)
+    stmt3;
+     stmt4;
+     stmt5;
+
+Condition : true : 1,2,3,4,5
+Condition : false:1,2,4,5
+
+
+===>  stmt1;            ==> cond1 : true : 1,2,3,4
+      stmt2;
+      if(cond1){        ==> con1 :false ,cond2: true : 1,2,5,6
+
+      stmt3;        ==> con1 :false ,cond2: false,cond3:true : 1,2,7,8
+      stmt4;
+                ==> con1: false ,cond2: false,cond3: false : 1,2,9,10
+      }else if(cond2){
+
+        stmt5;
+        stmt6;              
+
+        }else if(cond3){
+
+             stmt7;
+             stmt8;
+
+             }else{
+
+             stmt9;
+             stmt10;
+
+              }
+
+
+    -->

@@ -1,0 +1,78 @@
+<apex:page >
+    1. Create a apex class Employee with name ,salary,exp  
+       Create a constructor and assign the value 
+       Display the Values in the VF pages.
+    
+     Step 1: Apex class : 
+        public class Employee{
+    		public String name 		{set;get;}
+    		public Decimal salary	{set;get;}
+    		public Integer exp		{set;get;}
+    		public Employee(){
+    			name='Satish';
+    			salary=10000.00;
+    			exp=3;
+    		}
+        }
+    
+    	Step 2: Create the VF page and display 
+    
+    	<!--
+			<apex:page controller ="Employee">
+				Name : {!name} <br/><br/>
+				Salary:{!salary} <br/>
+				Exp :{!exp}
+			</apex:page>
+		-->
+    2. Create a apex class Student with lastName,firstName, phone ,city 
+       Create a constructor and assign the value 
+       Display the values in the VF page 
+    	Step 1: 
+    	public class Student{
+    		public String lastName  {set;get;}
+       		public String firstName {set;get;}
+    		public String phone  	{set;get;}
+    		public String city		{set;get;}
+    		public Student(){
+    			lastName='Myla';
+    			firstName='Satish';
+    			phone='040-1234';
+    			city='Hyd';
+    		}
+    	}
+    	Step 2: 
+    	<!--
+			<apex:page controller="Student">
+				Last Name :{!lastName} <br/><br/>
+				FirstName :{!firstName} <br/><br/>
+				Phone     :{!phone} <br/><br/>
+				City	  :{!city}
+			</apex:page>
+		-->
+    3. Create a apex class ProductInfo with name, productCode, price ,quantity
+       Create a constructor and assign the Value .
+       Display the value in the vf page.
+    
+    
+
+
+
+	4. Create a apex class Account_Details with name,industry,rating ,ownership
+    	a. Create a method setData which will set
+    		name as ReddyLabs 
+    		industry as Pharma
+    		rating as cold 
+    		ownership as Public 
+    
+    	b. create a method invoke which will set 
+    			name as Wipro
+    			industry as IT
+    			rating as Hot
+    			ownership as Private
+    
+    	c. display the data in the VF page 
+    		when we click on Show button  it will call setData 
+    		when we click on cancel button it will call invoke
+    
+    
+</apex:page>

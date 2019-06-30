@@ -1,0 +1,41 @@
+<apex:page controller="Workbench_Example">
+    <apex:form >
+    	<apex:panelGrid columns="1" id="pg" style="width:200px;border:1px;padding:10px;height:300px;">
+            <apex:outputPanel >
+                Object <br/>
+                <apex:selectList size="1" value="{!selected}">
+                    <apex:selectOptions value="{!objectsList}" />
+                    <apex:actionSupport event="onchange" action="{!getFields}" Rerender="pg" />
+                </apex:selectList>
+           </apex:outputPanel>
+           <apex:outputPanel rendered="{!fieldsList.size>1}">
+               Fields <br/>
+                <apex:selectList size="10" multiselect="true" >
+                    <apex:selectOptions value="{!fieldsList}" />
+                </apex:selectList>
+               <apex:commandButton value="FormQuery" action="{!createQuery}" reRender="pg" />
+           </apex:outputPanel>
+            <apex:inputTextArea rows="3" cols="150" value="{!query}" />
+            
+            <apex:dataTable value="{!whereList}" var="a">
+            	<apex:column >
+                	<apex:selectList size="1">
+                        <apex:selectOptions value="{!a.fields}" />
+                    </apex:selectList>
+                </apex:column>
+               
+                <apex:column >
+                	<apex:selectList size="1">
+                        <apex:selectOptions value="{!a.operators}" />
+                    </apex:selectList>
+                </apex:column>
+                <apex:column >
+                    <apex:inputText />
+                </apex:column>
+                <apex:column >
+                    <apex:commandButton value="Add" action="{!add}" reRender="pg" />
+                </apex:column>
+            </apex:dataTable>
+        </apex:panelGrid>
+    </apex:form>
+</apex:page>

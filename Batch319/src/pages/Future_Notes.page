@@ -1,0 +1,284 @@
+<apex:page >
+    <!--
+=======================================================================================	
+Future Methods : 
+========================================================================================	
+	1. If a transaction has any long running statements ,and if this 
+       statements are not having any dependency on rest of the operation then we can 
+	   run these statements independent from the rest of transaction.
+		
+		Q:: Long running Operaitons : 
+			
+			Ex: Webservice calls ,Bulk DML operations 
+		Q:: What do you mean by bulk dml 
+			performing dml on list of records;
+			
+	2. Rules to define future methods .
+	
+		1. All the future methods should have @future annotation.
+		
+			@future 
+			public static void futurecall(parameters){}
+			
+		2. All the future methods should be defined as static .
+		
+		3. All thre future methods should have void as return type .
+		
+		4. Only primitive variables  can be passed as parameters.
+		
+		5. When we invoke the future method they will be added queue and from the   
+		   queue they will be executed.
+		   
+		6.If you want to invoke webservices from the future method then define 
+			
+				@future(callout=true)
+				
+		7. Any Asyncrhronous job that is running in salesforce will be registred with 
+		   AsyncApexJob object.
+		   
+		8. How to track the status of the future method .
+		
+			a. Write a soql query on AsyncApexJob
+			
+			b. Declarative way to check the status 
+			
+				Setup
+				  |---Moniter
+					  |----Jobs 
+						   |---Apex Jobs
+								 
+		9. Future methods can be used to increase the governing limits .
+			
+				@future(limits=dml*2)
+								 
+								 
+	Example : 1
+	
+	public class FutureExample {
+		public void show(){
+			System.debug('Line one');
+			System.debug('Line two');
+			System.debug('Line three');
+			callme();
+			System.debug('Line four');
+			System.debug('Line Five');
+			callme();
+			System.debug('Line six');
+		}
+		public void callme(){
+			System.debug('Callme Line one');
+			System.debug('Callme Line two');
+			System.debug('Callme Line three');
+		}
+		public void futureCall(){
+			System.debug('Line one');
+			System.debug('Line two');
+			System.debug('Line three');
+			futuremethod();
+			System.debug('Line four');
+			System.debug('Line Five');
+			futuremethod();
+			System.debug('Line six');
+		}
+		@future
+		public static void futuremethod(){
+			System.debug('FutureMehtod Line one');
+			System.debug('FutureMethod  Line two');
+			System.debug('FutureMethod Line three');
+		}
+	}
+
+	Test the code :
+	
+	FutureExample fe=new FutureExample();
+	fe.show(); 
+	
+	O/p : Line one 
+		  Line Two
+		  Line Three
+		  Call Me one 
+		  Call Me Two
+		  Call Me Three
+		  Line Four
+		  Line Five
+		  Call Me One 
+		  Call Me Two
+		  Call Me Three
+		  Line Six
+
+	FutureExample fe=new FutureExample();
+	fe.futureCall();
+	
+	
+	O/P1 :  Line One 
+			Line Two	
+			Line Three	
+			Line Four	
+			Line Five	
+			Line Six
+			
+	O/p Future 1
+		
+			Future method  one 
+			Future method two
+			Future method three
+			
+	O/p Future 2
+		
+			Future method  one 
+			Future method two
+			Future method three
+
+
+
+	Mixed_DML_Exception : 
+
+		1. Objects are classified into two types as per dml 
+			a. Setup objects
+			b. Non-setup objects
+
+		2. Setup objects : DML operation on this sobjets will effet the record level 
+						   access for users.
+		
+						Ex :User 
+							Group
+							GroupMember
+							PermissionSet
+							ObjectPermissions
+							PermissionSet
+							UserRole
+							PermissionSetAssignment
+							QueueSObject
+							ObjectTerritory2AssignmentRule
+							ObjectTerritory2AssignmentRuleItem
+							RuleTerritory2Association
+							SetupEntityAccess
+							Territory2
+							Territory2Model
+							UserTerritory2Association
+							UserTerritory
+							Territory
+		3.Non-Setup objects : Rest of the objects are called non-setup .
+					Ex: Account 
+						Contact
+						Customer__c
+		
+		4.Mixed_DML Exception
+		
+			if you make a dml operation on setup objects and non-setup objects in  a 
+			single transaction then it throws mixed_dml_excpetion.
+		
+		
+	Example :
+	public class MixedDMLExample {
+		public void create(){
+			Profile p = [SELECT Id FROM Profile WHERE Name='Students'];
+			UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO'];
+			
+					User u = new User(alias ='students', email='capital@gmail.com', 
+					emailencodingkey='UTF-8', lastname='krian', 
+				languagelocalekey='en_US', 
+				localesidkey='en_US', profileid = p.Id, userroleid = r.Id,
+				timezonesidkey='America/Los_Angeles', 
+				username='kiran@dev1.com');
+			insert u;
+			Account acc=new Account();
+			acc.Name='MixedDMLException';
+			insert acc;
+		}
+	}
+		
+	Test The Operation :
+	
+		MixedDMLExampe me =new MixedDMLExample();
+		me.callme();
+		
+		O/P ; Mixed DML Exception ;
+		
+	Solution : 
+	
+		Put  any of the setup/ Non-setup operation in the future method and invoke the 
+		future method with in the create .
+	
+	Example 
+	
+	public class MixedDMLExample {
+		public void create(){
+			callme();
+			Account acc=new Account();
+			acc.Name='MixedDMLException';
+			insert acc;
+		}
+		@future
+		public static void callme(){
+			Profile p = [SELECT Id FROM Profile WHERE Name='Students'];
+			UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO'];
+			User u = new User(alias ='students', email='capitali@gmail.com', 
+				    emailencodingkey='UTF-8', lastname='krian', 
+				    languagelocalekey='en_US', 
+					localesidkey='en_US', profileid = p.Id, userroleid = r.Id,
+					timezonesidkey='America/Los_Angeles', 
+					username='kiran@dev1.com');
+			insert u;
+		}
+	}
+	
+	Test  :
+	
+		MixedDMLExampe me =new MixedDMLExample();
+		me.callme();
+		
+		O/P : New user kiran is created and Account is created.
+	
+		
+		
+	Drawbacks : 
+
+		1. Future method will not return jobId in the apex code.
+		
+		2. Future method cannot be called from another future method.
+		
+		3. Future method will not support sobjects as parameters .
+		
+	Limits :
+		
+		1. With in  a transaction we call 50 future methods .
+		
+	
+	UseCases : 
+		
+		1. Handle Mixed DML operations 
+		
+		2. To invoke Asyncrhronous webservices from trigger .
+		
+		3. To invoke Asyncrhronous webservices from Schedule Apex.
+		
+		4. To handle bulk dml  operations .
+		
+	WorkAround UseCases: 
+	
+		1. When we have requirement to pass sobject as parameter to future method 
+		   how will you  
+		   
+		   a. Pass RecordId instead of record .
+
+				@future
+				public static void callMe(List<Id> accIds){
+					List<Account> accounts =[select id,name,Industry from Account where id in :accIds];
+				}
+		   
+		   b. Serialize the sobject as string using JSON/XML and pass string as parameter
+		      to future method.
+
+				List<Account> accounts =[select id,name from Account];
+				String result=JSON.serialize(accounts);
+				callMe(result);
+
+				@future
+				public static void callMe(String result){
+					List<Account> accounts =(List<Account>)JSON.deserialize(List<Account>.class,result);
+				}
+		
+		
+	-->
+</apex:page>

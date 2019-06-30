@@ -1,0 +1,25 @@
+<apex:page standardController="Account" extensions="Account_Save_Controller">
+    <apex:sectionHeader title="Account" subtitle="{!Account.Name}" />
+	<apex:form >
+    	<apex:pageBlock title="{!Account.Name}" >
+        	<apex:pageBlockButtons location="top">
+                <apex:commandButton value="Save" action="{!saveMe}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account" collapsible="false">
+                <apex:inputField value="{!Account.Name}" />
+                <apex:inputField value="{!Account.Industry}" />
+                <apex:inputField value="{!Account.Phone}" />
+                <apex:inputField value="{!Account.Rating}" />
+                <apex:inputField value="{!Account.Ownership}" />
+                <apex:inputField value="{!Account.Type}" />
+            </apex:pageBlockSection>
+             <apex:pageBlockSection title="Contact" collapsible="false">
+                <apex:inputField value="{!con.LastName}" />
+                <apex:inputField value="{!con.FirstName}" />
+                <apex:inputField value="{!con.Phone}" />
+                <apex:inputField value="{!con.Email}" />
+               
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

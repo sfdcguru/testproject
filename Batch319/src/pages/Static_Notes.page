@@ -1,0 +1,35 @@
+<apex:page >
+    1. Static is a keyword.
+    2. This keyword is used along with vairables and methods
+    3. Static Variables :
+    	a. if you define any variable as static ,memory will be allocated 
+    		only once's i.e on the name of the class.
+    
+    	b. All the objects object can access static variable and modify the value.
+    	c. Changes made by one of the object on static variables will be refflected to other objects.
+    	d. Static Variables are reffered using className
+    
+    4. Static Method :
+    	a. if you define any method as static ,method can be called using className.
+    	b. Static method can use only static variables of the class
+    	c. Static Methods are accessed className 
+    		Example : 
+    			ClassName.method()
+    
+    	public class Static_Example {
+			public static Integer aval=0;
+    		public Integer bval=0;
+            public void callMe(){
+                aval=aval+10;
+                bval=bval+10;
+            }
+            public static void show(){
+    		
+                System.debug('This is a static Example');
+                aval=aval+10;
+               // bval=bval+10;
+            }
+		}
+    
+    Excute : Static_Example.show();
+</apex:page>

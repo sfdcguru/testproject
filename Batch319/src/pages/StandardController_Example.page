@@ -1,0 +1,20 @@
+<apex:page controller="StandardController_Example">
+    <apex:form >
+    	<apex:pageBlock title="StandardController">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}" />
+                <apex:commandButton value="Edit" action="{!edit}" />
+                <apex:commandButton value="Delete" action="{!deleteData}" />
+                <apex:commandButton value="Reset" action="{!resetData}" />
+                <apex:commandButton value="View" action="{!view}" />
+                
+            </apex:pageBlockButtons>
+        	<apex:pageBlockSection >
+                <apex:inputText value="{!acc.name}" />
+                <apex:inputText value="{!acc.phone}" />
+                <apex:inputText value="{!acc.industry}" />
+                <apex:inputText value="{!acc.rating}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

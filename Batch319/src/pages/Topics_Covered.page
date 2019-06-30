@@ -1,0 +1,153 @@
+<apex:page >
+    SNO     Day             Topic Covered
+    --------------------------------------
+    1       7-03-2019       1. OOPS Intro
+                            2. Lexical
+                            3. Tokens 
+                            4. Constants 
+                            5. Separators 
+    
+    2.      8-03-2019       1. Keywords 
+                            2. Identifiers 
+                            3. Naming Convenion
+                            4. Variables 
+                            5. DataTypes 
+    
+    3.      11-03-2019      1. Statements 
+                            2. Scope
+                            3. Local variables 
+                            4. Global Variables
+    
+    4.      12-03-2019      1. IF_ELSE
+    
+    5.      13-03-2019      1. Functions 
+    
+    6.      14-03-2019      1. Functions _Loops
+    
+    7.      15-03-201       1. Loops 
+    
+    8.      18-03-2019      1. Class 
+                            2. Constructor
+    
+    9.      19-03-2019      1. Object Creation 
+                            2. Constructor overloading
+    
+    10.                     1. Classes 
+    
+    11.						1. This keyword
+    						2. Static 
+                            
+    12.                     3. Interfaces  :We dont define ,we only use existing 
+    
+                            4. try_catch
+    
+    ============================================================
+    1.      26-03-2019      1. Visualforce Introduction 
+    
+    2.      27-03-2019      1. apex:page 
+                            2. apex:sectionHeader 
+                            3. apex:pageBlock
+                            4. apex:commandButton
+    
+    3.      28-03-2019      1. apex:pageBlockButtons
+                            2. apex:outputLabel
+                            3. apex:inputText 
+                            4. apex:pageBlocksection
+    
+    4.      29-03-2019      1. apex:pageBlockSectionItem
+                            2. apex:inputTextArea               
+                            3. apex:inputCheckBox
+                            4. apex:inputSecret
+                            5. apex:inputHidden
+                            6. apex:selectList
+                            7. apex:selectOption
+                            8. apex:selectRadio
+                            9. apex:selectCheckboxes
+    
+    5.      1-04-2019       1. StandardController 
+                            2. InputField
+                            3. OutputField  
+    
+    6.      2-04-2019       1. PageBlockTable 
+                            2. DataTable
+                            
+    7.      3-04-2019       3. DataList
+                            4. Repeat 
+
+	8.		04-04-2019		1. Invoking Apex class in VF 
+
+	9.		05-04-2019		1. Invoking apex class methods in VF 
+
+	10.		08-04-2019		1. PageReference
+    						2. Apexpages.Message
+
+	11.		09-04-2019		1. Sobject
+    						2. Wrapper class
+    
+    12.		10-04-2019		1.Array
+    
+    13.		15-04-2019 		1. List -1
+    
+    14		16-04-2019		2. List 
+    
+    15		18-04-2019		3. List 
+    
+    16		19-04-2019		1. Set 
+    
+    17		22-04-2019		2. Map
+    
+    18		23-04-2019		1. UseCases 
+    
+    19		24-04-2019		1. SOQL
+    
+    20		25-04-2019		2. SOQL- Where ,Order By
+    
+    21		26-04-2019		3. SOQL -IN ,Parent-Child 
+    
+    22		27-04-2019		4. SOQL -Child to Parent  and Aggregate 
+    
+    23.		29-04-2019		DML 
+    
+    24		30-04-2019		DML
+    
+    25.		1,3,			DML
+    
+    26.		6-04-2019		Email Services 
+    
+    27.		7-04-2019		Email Services 
+  
+    		
+    28.		8-05-2019		Future,Queueable	
+    
+    29		9-05-2019		Queue,Schedule
+    
+    30		10-05-2019		Governing Limits ,Batch apex
+    
+    31.		13-05-2019		Batch apex ,usecases
+    
+    32.		14-05-2019		Triggers
+    
+    33.		15-05-2019		Triggers
+    
+    34.		16-05-2019		Triggers
+     
+    35.		17-05-2019		Triggers 
+    
+    36.		16-05-2019		Custom Settings,Custommetdata ,custom component,invocable
+    	
+    37.		17-05-2019		Extentions
+    
+    38.		20-05-2019		Schema
+    
+    39.		21-05-2019		Scripting 
+    
+    40		22-05-2019		Scripting 
+    
+    41.		23-05-2019		Scripting 
+    
+    42.		24-05-2019		Flow Builder 
+    ==================================================
+    
+    
+    
+</apex:page>

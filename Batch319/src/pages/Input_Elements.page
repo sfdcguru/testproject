@@ -1,0 +1,37 @@
+<apex:page >
+    <apex:form >
+        InputSecret : <apex:inputSecret /> <!-- Data will be masked -->
+        <br/><br/>
+        InputHidden :<apex:inputHidden /> <!-- This element is not visable ,but this is available on the page
+												we can reffer to this programatically  -->
+        <br/><br/>
+        InputTextArea: <apex:inputTextArea rows="3" cols="100" /> <!-- When we want to collect data in multiple rows 
+																		then we use textArea -->
+        
+        <br/><br/>
+        InputCheckbox :<apex:inputCheckbox />  
+        <br/><br/>
+        PickList : 
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="-None-" itemvalue="none" />
+            <apex:selectOption itemLabel="Hyd"  itemValue="TG"/>
+            <apex:selectOption itemLabel="Ban" itemValue="KA" />
+            <apex:selectOption itemLabel="Che" itemValue="TN" />
+        </apex:selectList>
+        <br/><br/>
+        CheckBoxex : 
+        <apex:selectCheckboxes >
+        	 <apex:selectOption itemLabel="Hyd"  itemValue="TG"/>
+            <apex:selectOption itemLabel="Ban" itemValue="KA" />
+            <apex:selectOption itemLabel="Che" itemValue="TN" />
+        </apex:selectCheckboxes>
+        <br/><br/>
+        Radio Buttons :
+        <apex:selectRadio >
+        	  <apex:selectOption itemLabel="Hyd"  itemValue="TG"/>
+            <apex:selectOption itemLabel="Ban" itemValue="KA" />
+            <apex:selectOption itemLabel="Che" itemValue="TN" />
+        </apex:selectRadio>
+        
+    </apex:form>
+</apex:page>

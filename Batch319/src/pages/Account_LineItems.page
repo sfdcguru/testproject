@@ -1,0 +1,30 @@
+<apex:page controller="Account_LineItem" sidebar="false">
+    <apex:form >
+    	<apex:pageBlock title="Account">
+        	<apex:pageBlockTable value="{!accounts}" var="a" id="pb">
+            	<apex:column >
+                    <apex:facet name="header"><apex:inputCheckbox /></apex:facet>
+                    <apex:inputcheckbox value="{!a.flag}" />
+                </apex:column>
+                <apex:column headerValue="ComanyName">
+                    <apex:inputText value="{!a.acc.Name}" />
+                </apex:column>
+                <apex:column headerValue="Phone">
+                    <apex:inputText value="{!a.acc.Phone}" />
+                </apex:column>
+                <apex:column headerValue="Rating">
+                    <apex:inputText value="{!a.acc.Rating}" />
+                </apex:column>
+                <apex:column headerValue="LastName">
+                    <apex:inputText value="{!a.con.LastName}" />
+                </apex:column>
+                <apex:column headerValue="FirstName">
+                    <apex:inputText value="{!a.con.FirstName}" />
+                </apex:column>
+                <apex:column headerValue="Action">
+                    <apex:commandButton value="Add" action="{!add}" reRender="pb" />
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,88 @@
+<apex:page >
+   Local Variables : 
+   1. Any variable defined with in the scope is called local variable.
+   2. Local variables can be used only with in the scope where they are defined.
+   3. Local variables cannot be accesed outside the scope.
+   
+   Global Variables:
+   1. Any variable defined outside the scope are called global variables.
+   2. Global variables canbe used within the scope or outside the scope.
+  
+      Example :1
+           Integer age ;
+           String name;
+           {
+                String city;
+                String branch;
+                age=40;
+                name='Ravi';
+                city='Hyd';
+                branch='SRNagar';
+           }
+           
+          Local Variables : city,branch;
+          Global Variables: age ,name
+            
+       Example :2
+            Integer rno;
+            Integer marks;
+            {
+                String colgName;
+                String branch;
+                rno=31;
+                colgName='IIT';
+                {
+                    Integer sem=1;
+                    Integer year=2018;
+                    branch='CSE';
+                    marks=90;
+                }
+            }
+    
+    Inner Scope : 
+    Local Variables :  sem,year
+    Global variables: rno,marks,colgName,branch
+    
+    Outer scope : 
+    Local variables : colgName,branch
+    Global Variables: rno,marks
+    
+    Example :3 
+            String city ,place;
+            void show(Integer age,String name){
+                 age=40;
+                 name='Ravi';
+                 String branch='CSE';
+                 city='Hyd';
+            }
+            void callMe(){
+                place='SRNagar';
+                String colgName='CBIT';
+            }
+            
+            Show : Local variables : age,name,branch
+                 : Global variables: city,place
+            
+            callMe: Local variables : colgName;
+                  : Global variables: city,place
+    
+    
+    Example :4 
+        Show  :  name,age , colg,branch
+        callMe:  name,age , phone,city  040-1234
+        invoke:  name,age , colgName,fee
+    
+        String name;
+        Integer age;
+        show(){
+            String colg,branch;
+        }
+        callMe(){
+            String phone,city;
+        }
+        invoke(){
+            string colgName;
+            Decimal fee;
+        }
+    
+</apex:page>

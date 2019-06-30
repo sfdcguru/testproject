@@ -1,0 +1,116 @@
+<apex:page >
+    Sobject: 
+    ----------
+    1. Every table created in the salesforce database is called sobject in Apex programming
+    2. Every sobject has equilent  apex class 
+    3. We will reffer to table/sobject using the apex class 
+    	Example :
+    	Sobject Name		Apex class
+    	-------------------------------
+    	Account				Account
+    	Contact				Contact 
+    	Loan__c				Loan__c
+    	Customer__c			Customer__c
+    
+    Example : Create a instance of Account 
+    Account acc =new Account();
+    acc.Name='Wipro';
+    acc.Phone='Industry';
+    acc.Rating='Hot';
+    
+    Example : Creat the sobjectAccount  with following data 
+    
+    	Name		Rating 		Ownership		Type 	  		 Active__c 
+    	TCS			Hot			Public			New Customer	 Yes
+    
+    	Dell		Warm		Private			Existing 		 Yes
+    
+    	ReddyLab	Cold		Public 			New Customer	 No
+    
+    	Account acc =new Account();
+    	acc.Name='TCS';
+    	acc.Rating='Hot';
+    	acc.Ownership='Public';
+    	acc.Type='New Customer';
+    	acc.Active__C='Yes';
+    
+    	Second format 
+    	Account acc =new Account(Name='Dell',Rating='Warm',Type='Existing',Active__c='Yes');
+    
+    	Third Format : 
+    	Account acc =new Account();
+    	acc.put('Name','Wipro');
+    	acc.put('Rating','Hot');
+    	acc.Put('ownership','Public');
+    	acc.put('Type','New Customer');
+    
+    
+    Example : Create a sobject Opportunity  with following data 
+    	
+    	Name		StageName	CloseDate		Amount		Type
+    	Admin		Prospecting	10-2-2019		10000		New Customer
+    	
+    	Wipro		Quotation	12-5-2019		23000		Existing
+    
+    	Opportunity op =new Opportunity();
+    	op.Name='Admin';
+    	op.StageName='Prospecting';
+    	op.closeDate=Date.newInstance(2019,2,10);
+    	op.Amount=10000;
+    	op.Type='New Customer';
+    	
+    	Opportunity op =new Opportunity(Name='Admin',StageName='Prospecting', closeDate=Date.newInstance(2019,2,10),
+    									Amount=10000,type='New Customer');
+    
+    
+    	Opportunity op =new Opportunity();
+    	op.put('Name','Admin');
+    	op.put('StageName','Prospecting');
+    	op.put('CloseDate',Date.newInstance(2019,2,10);
+    	op.put('Amount',10000);
+    	op.put('Type','New Customer');
+    
+    	
+    Example : Create  sobject Customer__c with following data 
+    	
+    	LastName__c		FirstName__c	Company__c		Phone__c		City__c		 Age__c
+    	M				Satish			Wipro			020-123			Hyd			 30
+    	K				Prasad			TCS				030-1234		Ban			 45
+    
+       Customer__c cust =new Customer__c();
+       cust.LastName__c='M';
+       cust.FirstName__c='Satish';
+       cust.Company__c='Wipro';
+       cust.Phone__c='020-123';
+       cust.City__c='Hyd';
+       cust.Age__c=30;
+    
+    	Customer__c  cust =new Customer__c(LastName__c='M',FirstName__c='Satish',Company__c='Wipro',Phone__c='020-123',
+    											city__c='Hyd',Age__c=30);
+    
+    
+    	10, Satish	10-12-1999	,true
+    
+    	Object a =10;
+    	object b='Satish';
+    	Object c =Date.newInstance(2019,2,23);
+    	
+    	
+	 Integer age =(Integer)a;
+	 String name=(String)b;
+	 Date d=(Date)c;    
+    
+ 	 Sobject a =new Account();
+     sobject b =new Contact();
+     Sobject c =new Opportunity();
+    
+    Account acc =(Account)a;
+    Contact con=(Contact)b;
+    Opportunity op=(opportunity)c;
+    	
+    
+    
+    
+    
+    
+</apex:page>

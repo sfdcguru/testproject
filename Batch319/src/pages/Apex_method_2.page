@@ -1,0 +1,12 @@
+<apex:page controller="Apex_Method_Example_2">
+    <apex:form id="fm">
+        <apex:commandButton value="Show" action="{!setData}"  reRender="fm" />
+        <apex:CommandButton value="Call" action="{!invoke}" reRender="fm" />
+        <apex:commandButton value="ReLoad" />
+        <br/><br/>
+        Name : {!name} <br/><br/>
+        Industry:{!industry} <br/><br/>
+        Rating :{!rating} <br/><br/>
+        Ownership:{!ownership}
+    </apex:form>
+</apex:page>

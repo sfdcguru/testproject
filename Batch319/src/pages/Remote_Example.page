@@ -1,0 +1,14 @@
+<apex:page controller="Remote_Action_Example">
+    <apex:form >
+        <script>
+            function show(){
+                var name =document.getElementById('{!$Component.name}').value;
+                Remote_Action_Example.callMe(name,function(result,event){
+                    document.getElementById('{!$Component.res}').innerHTML=result;
+                });
+            }
+        </script>
+        <apex:inputText id="name" onchange="show()"/>
+        <apex:outputLabel id="res" />
+    </apex:form>
+</apex:page>

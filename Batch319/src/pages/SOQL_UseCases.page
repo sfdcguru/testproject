@@ -1,0 +1,186 @@
+<apex:page >
+    1. Write a query to fetch the data from Account 
+    	select Name,Phone,Industry,Rating,Ownership,AnnualRevenue from Account 
+    
+    2. Write a query to fetch data from contact 
+    	select lastName,firstName,phone,email,mobilePhone,LeadSource from Contcat 
+    
+    3. Write a query to fetch data from Opportunity 
+    	select Name,stageName,closeDate ,Amount from Opportunity
+    
+    4. Write a query to fetch data from lead 
+    	select lastName,firstName,Phone,email,company,rating from Lead
+    
+    5. Write a query to fetch data from case 
+    	Select subject,Priority,origin,Status from Case
+    
+    6. Write a query to fetch data from User 
+    	select lastName,firstName,ProfileId,UserRoleId,email from User 
+    
+    7. Write a query to fetch data from profile 
+    	select id,Name from Profile
+    
+    8. Write a query to fetch data from Group
+    	Select id,Name from Group 
+    
+    9. Write a query to fetch data from Customer__c (LastName__c,FirstName__c,Phone__c)
+    	Select LastName__c,FirstName__c,Phone__c from Customer__c 
+    
+    10. Write a query to fetch data from Payment__c (Mode__c,Amount__c,PaymentDate__c)
+    	Select Mode__c,Amount__c,PaymentDate__c from Payment__c
+    
+    
+    11. Create a apex class which will fetch list of contacts and display in the VF page
+    <!--
+		public class Example{
+			public List<Contact> contacts {set;get;}
+			public Example(){
+				contacts =[select LastName,FirstName,Phone,Email from Contact];
+			}
+		}
+
+		Example.vfp
+		<apex:page controller="Example">
+			<apex:pageBlock title="Contacts">
+				<apex:pageBlockTable value="{!contacts}" var="a">
+					<apex:column value="{!a.lastName}" />
+					<apex:column value="{!a.fistName}" />
+					<apex:column value="{!a.phone}" />
+					<apex:column value="{!a.email}" />
+				</apex:pageBlockTable>
+			</apex:pageBlock>
+		</apex:page>
+	=============================================================
+     1. Write a query to fetch the 10 records from Account 
+    	List<Account> result=[select Name,Phone,Industry from Account limit 10];
+    
+    2. Write a query to fetch 15 records  from contact 
+    	List<Contact> result=[select lastName,firstName,phone,email, from Contcat limit 15];
+    
+    3. Write a query to fetch 5recors  from Opportunity 
+    	List<Opportunity> result =[select Name,stageName,closeDate ,Amount from Opportunity limit 5];
+    
+    4. Write a query to fetch data from lead from 5th position
+    	List<Lead> result =[select lastName,firstName,Phone,email,company,rating from Lead offset 5];
+    
+    5. Write a query to fetch data from case  from 10th position
+    	List<Case> result=[Select subject,Priority,origin,Status from Case offset 10];
+    
+    6. Write a query to fetch 5 records from User  from 5th position
+    	List<user> result =[select lastName,firstName,,email from User limit 5 offset 5];
+    
+    7. Write a query to fetch 10 records  from profile  from 10 position
+    	List<Profile> result=[select id,Name from Profile limit 10 offset 10];
+    
+    8. Write a query to fetch 2 records  from Group
+    	List<Group> result=[Select id,Name from Group  limit 2];
+    
+    9. Write a query to fetch data from Customer__c (LastName__c,FirstName__c,Phone__c) from 10 position
+    	Select LastName__c,FirstName__c,Phone__c from Customer__c 
+    
+    10. Write a query to fetch data from Payment__c (Mode__c,Amount__c,PaymentDate__c) from 3 rd position
+    	Select Mode__c,Amount__c,PaymentDate__c from Payment__c
+
+
+	Account acc =[select id,Name,Rating from Account limit 1];
+    -->
+    
+  1. Write a query fetch all the leads in the descending order of createdDate 
+	 <!--
+		List<Lead> leads =[select lastname,firstName,Phone,Email from Lead order by CreatedDate desc];
+	 -->
+  2. Write a query to fetch all the Opportunities in ascending order of stageName and descenting order 
+	 of closeDate 
+	  <!--
+		List<Opportunity> optyList =[select Name,amount,StageName from Opportunity order by StageName ,CloseDate desc];
+	   -->
+  3. Write a query to fetch all the opportunities in the ascending order of closeDate
+	 <!--
+		List<Opportunity> optyList =[select id,Name,Amount,StageName,closeDate from opportunity order by closeDate];
+	 -->
+  4. Write a query to fetch last 10 leads created 
+		<!--
+			List<Lead> leads =[select lastName,firstName,Phone from Lead order by CreatedDate DESC  limit 10];
+		-->
+  5. Write a query to fetch first 10 leads created 
+  		<!--
+			List<Lead> leads [select LastName,firstName,Phone from Lead order by CreatedDate limit 10];0
+		-->
+  6. Write a query to fetch last 20 opportunities which are going to be closed 
+		<!--
+			List<Opportunity> optyList =[select Name,StageName from Opportuity  order by CloseDate DESC limit 20];
+		-->
+  7. Write a query to fetch first 10 opportunties which are going to be losed from 10 position.
+		<!--
+			List<Opportunity> optyList =[select Name,StageName from Opportuity  order by CloseDate DESC limit 10 offset 10];
+		-->
+  8. Write a query to fetch all the leads which are created in the descending of createdDate and ascending 
+	 order of lastName    
+    
+ Where :
+ =======
+    <!-- Where <FieldName>[operator]<value>
+	   Where name='Satish'
+	   Where industry='Energy'
+	   Where rating!='Hot'
+	   Where amount > 50000
+	   Where amount< 50000
+	   Operators : = ,!=,<> ,<,> ,<=,>= ,LIKE ,NOT ,IN 
+	   
+	   Where <FieldName> [Operator]<value> [and|or] <FieldName> [Operator]<value>
+	   Where name ='Satish' and age__c > 30 
+
+	   1.industry is Banking and Rating is hot 
+		 where industry ='Banking' and Rating='Hot'
+
+	   2.Industry is Energy  or Rating is warm
+		 where industry='Energy' or Rating ='Warm'
+
+       3.LeadSource is web and ownership is Hot 
+		 where leadSource ='Web' and ownership='Hot'
+
+       4.StageName is prospecting or StageName is closed won
+		 where stageName='Prospecting' or stageName='Closed won'
+
+	-->
+
+    <!--
+		1. Fetch all the accounts whose industry is Banking 
+		2. Fetch all the contacts whose accountId is in the above list.
+
+		List<Account> accounts =[select id,Name from Account where industry='Banking'];
+		List<Contact> contacts =[select id,LastName,firstName from Contact where AccountId in:accounts];
+    
+    
+    	1. Fetch all the accounts whose rating is hot and fetch their opportunities 
+    	List<Account> accounts =[select id,Name from Account where rating='Hot'];
+		List<Opportunity> optyList =[select Id,Name,Amount from Opportunity where AccountId in:accounts];
+    
+       1. Fetch phone numbers of all the accounts whose industry is energy
+	   2. Fetch the contacts whose phone number is in the above list
+    
+		List<Account> accounts =[select id,Name,Phone from Account where industry='Energy'];										
+		List<Contact> contacts =[select id,LastName,firstName from Contact where phone in:accounts]; //error
+
+		List<String> phoneList =new List<String>();
+		for(Account a: accounts){
+			phoneList.add(a.phone);
+		}
+		List<Contact> contacts =[select id,LastName,firstName from Contact where phone in :phoneList];
+
+
+	3. Write a query and fetch all the email of the leads 
+	   write a query to fetch all the contacts whose email is in the above list.
+		List<Lead> leads =[select id,email from Lead ];
+		List<String> emailList =new List<String>();
+		for(Lead l:leads){
+			emailList.add(l.email);
+		}
+		List<Contact> contacts =[select id,lastName,firstName from Contact where email in:emailList];
+
+
+   --> 
+   
+    
+    
+</apex:page>

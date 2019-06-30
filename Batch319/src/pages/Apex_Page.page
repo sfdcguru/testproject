@@ -1,0 +1,52 @@
+<!--
+    apex:page : 
+    1. Every VF page will start and end with apex:page 
+    2. Attribute : 
+       1. Id :  
+          a. It is a text value.
+          b. It is a unique string which is used to reffer to the element any where in the page .
+
+       2. showHeader : 
+          a. It is a boolean value .
+          b. By default it will be true .
+          c. When we set the value as false ,then salesforce header and sidebar component will be hidden.
+
+       3. sidebar   : 
+          a. It is a boolean value .
+          b. By default it will be true.
+          c. When we set the value as false ,salesforce sidebar component will be hidden and header will be 
+             displayed.
+
+        4.setup :
+           a. It is a boolean value .
+           b. By default it will be false.
+           c. When we set the value as true, salesforce force.com setup menu will be displayed on the sidebar
+              component.
+
+        5. renderAs  :
+            a. If you want to render the body of the page in the form of PDF then we use renderAs pdf
+
+        6. StandardController : 
+           a.Sobject : Any of the object created in the database of the salesforce is caleld Sobject 
+                     :Example : Customer__c , Account,Loan__c,Contact 
+           b.if you want to reffer to any of the sobject properties in the VF page then we define that 
+              sobject as standardController.
+
+        7. Controller  : 
+            a. if you want to use any apex class in the VF page then we define that apex class Controller 
+
+        8.  rendered  :
+            a. It is a boolean value.
+            b. When set as true, content of the element will be displayed on the page.
+            c. When set as false,content of the element will be hidden .
+            d. Default value is true.
+
+        9. contentType :
+            a. Content of the page should be rendered in the form 
+                vnd.msword: word format
+                vnd.ms-excel:excel format
+-->
+<apex:page >
+    This is example <br/>
+    This is example <br/>
+</apex:page>

@@ -1,0 +1,18 @@
+<apex:page controller="Account_List">
+    <apex:form >
+        
+        <apex:commandButton value="delete" action="{!deleteData}" reRender="pb"/>
+        <br/><br/>
+    	<apex:dataTable value="{!accounts}" var="a" frame="box" rules="rows" cellpadding="10" width="900" id="pb">
+        	<apex:column >
+                <apex:facet name="header"><apex:inputCheckbox /></apex:facet>
+                <apex:inputCheckbox value="{!a.flag}"/>
+            </apex:column>
+            <apex:column value="{!a.acc.Name}"  headerValue="LastName" />
+            <apex:column value="{!a.acc.Phone}" headerValue="FirstName" />
+            <apex:column value="{!a.acc.Industry}"  	headerValue="Rating" />
+            <apex:column value="{!a.acc.Rating}"  headerValue="Industry" />
+          
+        </apex:dataTable>
+    </apex:form>
+</apex:page>

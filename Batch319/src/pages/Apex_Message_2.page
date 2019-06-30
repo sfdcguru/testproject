@@ -1,0 +1,25 @@
+<apex:page controller="Apex_Message_2">
+    <apex:form id="one">
+        <apex:pageMessages />
+    	<apex:pageBlock title="Example">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Submit" action="{!callMe}" reRender="one" />
+            </apex:pageBlockButtons>
+        	<apex:pageBlockSection columns="1">
+            	<apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Enter Name" />
+                    <apex:inputText value="{!name}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Enter City" />
+                    <apex:inputText value="{!city}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Enter Salary" />
+                    <apex:inputText value="{!salary}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

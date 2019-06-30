@@ -1,0 +1,101 @@
+<apex:page >
+    <!--
+    Statement : 
+    -----------
+    1. Statement is an expression or line in a program that perform some logic or action.
+    2. Every statement ends with semi-colon
+    Example : 
+    integer a=b+10;
+    System.debug('Testing');
+    
+    Example:1 
+    1. What is the price of the book  : Rs.2000.00
+    2. How many books you want        : 5 
+    3. Any discount                   :  10% of total 
+    4. finaly what is the amount i have to pay : total-discount
+
+    Data Involved :  bookPrice ,numberBooks,total,discount,amount
+                     Decimal    Integer     Decimal,Decimal ,Decimal
+    
+    Source  : bookPrice     : input 
+            : numberBooks   : input 
+
+            : total         : System : numberBooks*bookPrice
+
+            : discount      : System : total *0.10
+
+            : amount        : System : total-discount;
+
+        Decimal bookPrice,total,discount,amount;
+        Integer numberBooks;
+        bookPrice=2000.00;
+        numberBooks=5;
+        total=numberBooks*bookPrice;
+        discount=total*0.10;
+        amount=total-discount;
+
+
+    Example :2 
+    1. What is your Name : Ravi 
+    2. What is your age  : 33
+    3. Which course your are taking : Development 
+    4. what is the fee              : 10000
+    5. What is gst                  : 18% of fee 
+    6. What is the totalPrice       : fee+gst
+
+    DataSource :    
+    name            : String        : Input
+    age             : Integer       : Input 
+    courseName      : String        : Input
+    fee             : Integer       : Input 
+    gst             : Decimal       : System    : fee*0.18
+    totalPrice      : Decimal       : System    : fee+gst
+
+    String name,courseName;
+    Integer age,fee;
+    Decimal gst,totalPrice;
+    name='Ravi';
+    age=33;
+    courseName='Development';
+    fee=10000;
+    gst=fee*0.18;
+    totalPrice=fee+gst;
+
+    Example:3 
+    1. tell me your companyName     : wipro
+    2. How many laptops you want    : 20
+    3. What is the price of laptop  : Rs.40000.00
+    4. Any discount on laptop       : 20% on totalLaptop price 
+    5. How many phone you want      : 10
+    6. What is the price            : 10000.00
+    7. Discount on phone            : 10% 
+    8. What is total amount i have to pay
+    
+    DataSource : 
+    company             :  String           : Input
+    noLaptops           :  Integer          : Input
+    laptopPrice         :  Decimal          : Input
+    noPhones            :  Integer          : Input
+    phonePrice          :  Decimal          : Input
+    laptopDiscount      :  Decimal          : System   : laptopTotal*0.20
+    phoneDiscount       :  Decimal          : System   : phoneTotal*0.10
+    phoneTotal          :  Decimal          : System   : phonePric*noPhones;
+    laptopTotal         :  Decimal          : System   : laptopPrice*noLaptops
+    price               :  Decimal          : System
+    
+    String company;
+    Integer noLaptops,noPhone;
+    Decimal laptopPrice,phonePrice,laptopTotal,phoneTotal,laptopDiscount,phoneDiscount,price;
+    company='Wipro';
+    noLaptops=20;
+    noPhones=10;
+    laptopPrice=40000.00;
+    phonePrice=10000.00;
+    laptopTotal=laptopPrice*noLaptops;
+    phoneTotal=phonePrice*noPhones;
+    laptopDiscount=laptopTotal*0.20;
+    phoneDiscount=phoneTotal*0.10;
+    total=phoneTotal-phoneDiscount+laptopTotal-laptopDiscount;
+    
+    -->
+</apex:page>

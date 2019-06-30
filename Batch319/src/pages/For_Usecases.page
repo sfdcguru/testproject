@@ -1,0 +1,140 @@
+<apex:page >
+  <!--
+    1. create a for loop to print values from 1 to 10 
+    
+    for(Integer i=1;i<=10;i++){
+        System.debug('Value:'+i);
+    }
+2. create a for loop which will print values from 51 to 60
+    for(Integer i=51;i<=60;i++){
+        System.debug(('Values:'+i);
+    }
+
+3.  Create a for loop to print the values from 100 to 90
+    for(Integer i=100;i>=90;i--){
+        System.debug('Value:'+i);   // 
+    }
+
+4. Create a for loop to print all the even numbers between 1 to 50
+        Math.mod(integer1,integer 2) ;// if you divide the integer1 by integer2 then remainder will be returend 
+    
+        Math.mod(15,2);     //1
+        Math.mod(27,5);     //2
+                              
+        for(Integer i=1;i<=50;i++){
+             Integer a =Math.mod(i,2);      i=1     i=2 i=3 ....i=50        5%2 == 1 ==Odd 
+             if(a==0)                                                       4%2 == 0 ==Even
+                System.debug('Even Number'+i);
+            
+        }
+5. Create a for loop to print all the odd numbers between 1 to 50 
+        for(Integer i=1;i<=50;i++){
+            Integer a =Math.mod(i,2);
+            if(a==1)
+                System.debug('Odd Number'+i);
+        }
+
+6. Create a for loop to print sum of all the numbers between 1 to 50
+    1+2+3+4+5+6.......+49+50
+
+        Integer sum=0;                          Sum=0           sum=1       Sun=3       sum=6
+        for(Integer i=1;i<=50;i++){             i=1             i=2         i=3         i=4
+                sum =sum+i;                     sum=0+1         sum=1+2;    sum=sum+3   sum=sum+4
+        }                                       
+        System.debug('Sum :'+sum);
+
+    ==> for(Integer i=1;i<=50;i++){          i=1;           i=2
+            Integer sum=0;                   Sum=0          sum=0
+            sum=sum+1;                       Sun=0+1        Sum=0+2
+        }
+
+7. Create a for loop to print sum of all the even numbers between 1 to 50 
+        Integer sum=0;                      sum=0       Sun=0
+        for(Integer i=1;i<=50;i++){         i=1         i=2
+            Integer a=Math.mod(i,2);        a=1         a=0
+            if(a==0){               
+                sum=sum+i;                              Sum=0+2
+            }
+        }
+
+8. Create a for loop to print sum of all the odd numbers between 1to 10
+
+    Integer sum=0;                      
+        for(Integer i=1;i<=10;i++){         
+            Integer a=Math.mod(i,2);        
+            if(a==1){               
+                sum=sum+i;                              
+            }
+        }
+
+9. Create a for loop which sum all the even numbers  and sum all the odd numbers between 1 to 50
+        Integer evenSum=0;
+        Integer oddSum=0;       
+        for(Integer i=1;i<=50;i++){
+            Integer a =Math.mod(i,2);           
+            if(a==0){
+                evenSum=evenSum+i;
+            }else{
+                oddSum=oddSum+i;
+            }
+        }
+        System.debug('Even Sum:'+evenSum);
+        System.debug('Odd Sum:'+oddSum);
+
+10. Create a for loop to print following output
+    1
+    12
+    123
+    
+    for(Integer i=1; i<=3;i++){     i=1 :logic -1       i=2 : logic :2      i=3 : logic :3
+        for(Integer x=1;x<=i;x++){
+            System.debug(x);        
+        } 
+    }           
+    
+10. Create a for loop to print                                          
+
+    123
+    12
+    1
+    
+    for(Integer i=3;i>=1;i--){              i=3             i=2         i=1
+        for(Integer x=1;x<=i;x++){          3>=1            2>=1        1>=1
+            System.debug(x);                x=1; x<=3       x=1;x<=2    x=1;x<=1
+        }                                   1               1           1
+                                            x=2 : x<=3      x=2;x<=2
+    }                                       2               2
+                                            x=3 :x<3
+                                            3
+    11. Create a loop to  print     
+    1
+    22
+    333
+    
+    for(Integer i=1;i<=3;i++){          i=1;            
+        for(Integer x=1;x<=i;x++){      x=1;x<=1
+            System.debug(i);            System.debug(i); //1
+        }                               x=2;x<=1     :false 
+    }
+                                        i=2 ;
+                                        x=1;x<=2 :true
+                                        System,debug(i); 2
+                                        x=2;x<=2 :true
+                                        System.debug(i); 2
+                                        
+-->   
+    
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</apex:page>

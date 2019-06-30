@@ -1,0 +1,15 @@
+<!--
+DescribeFieldResult : 
+---------------------
+1. This is pre-defined apex class 
+2. This is defined under the namespace of schema
+3. This will contain all the methods required to return the description/
+
+-->
+<apex:page controller="Schema_Example_2">
+    <apex:pageBlock >
+    	<apex:pageBlockTable value="{!fieldNames}" var="a">
+            <apex:column value="{!a}" />
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,62 @@
+<apex:page standardController="Account" recordSetVar="items">
+    <apex:form >
+    	<apex:dataTable value="{!items}" var="a" rows="3" width="900" border="frame" cellpadding="10" cellspacing="10">
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+            <apex:column value="{!a.ownership}" />
+        </apex:dataTable>
+        <br/><br/>
+    	<apex:dataTable value="{!items}" var="a" rows="3" width="900" cellpadding="10" rules="rows" >
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+            <apex:column value="{!a.ownership}" />
+        </apex:dataTable>
+         <br/><br/>
+    	<apex:dataTable value="{!items}" var="a" rows="3" width="900" cellpadding="10" rules="cols" >
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+            <apex:column value="{!a.ownership}" />
+        </apex:dataTable>
+         <br/><br/>
+    	<apex:dataTable value="{!items}" var="a" rows="3" width="900" cellpadding="10" rules="rows" border="box">
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+            <apex:column value="{!a.ownership}" />
+        </apex:dataTable>
+         <br/><br/>
+    	<apex:dataTable value="{!items}" var="a" rows="3" width="900" cellpadding="10" rules="cols" border="box">
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+            <apex:column value="{!a.ownership}" />
+        </apex:dataTable>
+        <style>
+        	.header{
+            	background:#808080;
+            }
+            .even{
+            	background:#c0c0c0;
+            }
+            .odd{
+            	background:white;
+            }
+        </style>
+        <br/><br/>
+    	<apex:dataTable value="{!items}" var="a" rows="5" width="900" cellpadding="10" rules="rows" headerClass="header" rowClasses="odd,even">
+            <apex:column value="{!a.name}" headerValue="Account Name"/>
+            <apex:column value="{!a.industry}" headerValue="Industry"/>
+            <apex:column value="{!a.rating}" headerValue="Rating"/>
+            <apex:column value="{!a.phone}" headerValue="Phone"/>
+            <apex:column value="{!a.ownership}" headerValue="Ownership" />
+        </apex:dataTable>
+    </apex:form>
+</apex:page>

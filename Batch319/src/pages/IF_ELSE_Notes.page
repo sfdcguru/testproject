@@ -1,0 +1,269 @@
+<apex:page >
+    Stmt1;
+    stmt2;
+    stmt3;
+    stmt4;
+    Execution :  1,2,3,4
+    
+    
+Example :1
+    stmt1;
+    stmt2;
+    if(condition)
+    {
+        stmt3;
+        stmt4;
+    }
+    stmt5;
+    stmt6;
+    
+ If condition  :true 
+ 1,2,3,4,5,6  
+ 
+ IF condition : false 
+ 1,2,5,6
+    
+    
+Example :2      Con1 :true ,con2 :true  :1,2,3,4,5,6,7,8,9,10,11,12
+stmt1;          Con1 :true ,con2 :false :1,2,3,4,5,6,7,8,11,12
+stmt2;          Con1 :false ,con2:true  :1,2,3,7,8,9,10,11,12
+stmt3;          Con1 : false,cons:false :1,2,3,,7,8,11,12
+if(cond1){
+    stmt4;
+    stmt5;
+    stmt6;    
+}
+stmt7;
+stmt8;
+if(cond2){
+    stmt9;
+    stmt10;    
+}
+stmt11;
+stmt12;
+ 
+Example :3 
+stmt1;          Con1:true,con2:true,con3:true    : 1,2,3,4,5,6,7,8,9,10
+stmt2;          Con1:false,con2:true,con3:true   : 1,2,5,6,7,8,9,10
+if(cond1){      Con1:false ,con2:true,con3:false : 1,2,5,6,,9,10
+    stmt3;
+    stmt4;
+}
+if(cond2){
+    stmt5;
+    stmt6;    
+}
+if(cond3){
+    stmt7;
+    stmt8;    
+}
+stmt9;
+stmt10;
+    
+===> Condition:
+    Operators :  == ,
+    lhs == rhs : if both values are same then it will return true
+    Example 1: Check weather city is hyd
+                city == 'Hyd'
+    Example 2: Check weather industry is Banking 
+                industry == 'Banking'
+    
+    Example 3: check weather rating is hot 
+                rating =='Hot'
+    
+    Example 4: Check weather leadSource is web
+                leadSource=='Web'
+    
+    Example 5: Check weather annualRevenue is 30k
+                annualRevenue == 30000
+    
+    Example 6 : Check weather flag is true
+                flag == true
+    
+    Example 7: Check weather amount is null
+                amount == null 
+    
+    Example 8: Check weather name is Blank
+                name == ''
+    
+==>relational operators 
+     <!--   < --Less Than 
+            > --Greater 
+            <= less than or equal
+            >= Greater than or equal
+            != not equals 
+    -->
+    Example:1 Check weather name is not ravi
+            name !='Ravi'
+    Example 2: Amount greather than 50k
+            amount > 50000
+    Example 3: name is not Blank
+             name !=''
+    Example 4: city is not null
+            city!=null
+    Example 5 :salary less than 20k
+        <!--    salary < 20000   -->
+    Example 6: size greater than or equals to 10
+                size > = 10
+    Example 7: CloseDate is today 
+                closeDate == System.today()
+    
+    Example 8: dob is less than 10-Nov-1987
+    <!--            dob < Date.newInstance(1987,11,10)  -->
+    
+==> Logical operators : 
+    <!--
+            &&  ====> AND   :When you want to check two or more conditions then we use and 
+                            :When all the conditions are true ,it will return true
+            Syntax :  condition1 && condition2 
+            
+            ||  ====> OR   :When you want to check two or more conditions then we use and 
+                           ::When one ore more conditions are true ,it will return true
+
+            Syntax : condition1 || condition2 
+
+            !   ===> NOT    : It will return true ,if the condition is false 
+                            : It will return false,if the condition is true
+
+            Syntax : ! Condition
+
+
+        Example 1: if city is Hyd and place is srnagar
+                city=='Hyd' && place=='SRNagar'
+
+        Example 2: Exp is more than 3 years and salary 50K
+                exp > 3 && salary == 50000
+
+        Example 3: leadSource is web and email is blank
+                    leadSource =='Web' && email ==''
+
+        Example 4: leadSource is web or email
+                    leadSource =='Web' || leadSource=='Email'
+
+        Example 5: name is not blank and not null
+                    name!='' && name!=null
+
+        Example 6: stageName is prospecting or type is new customer
+                    stageName=='Prospecting' || type=='New Customer'
+
+    -->
+   Example 1:  
+   1. if industry is Banking then set rating as hot and leadSource as web
+      
+      if(industry=='Banking'){
+            rating='Hot';
+            leadSource='Web';
+      }
+        
+  2. if exp is more than 3 years and city is Ban then set salary as 50k and bonus as 3k 
+    <!--
+     if(exp > 3 && city =='Ban'){
+            salary=50000;
+            bonus=3000;
+     }
+     -->
+    
+  3. if  type is new Customer then set stageName as prospecting and closeDate as 15 days from today
+        if(type=='New Customer'){
+            stageName='Prospecting';
+            closeDate=System.today()+15;
+        }
+    
+  4. If name is not blank and not null then set Phone as 040-1234 and ownership as private
+    <!--
+        if( name !='' && name!=null){
+            phone ='040-1234';
+            ownership='Private';
+        }
+    -->
+ Example 1: 
+ <!--
+    1.Take the values of empName ,city ,exp,salary ,bonus 
+2. if city is Hyd and exp is greather than or equals to 5 years then 
+    set salary as 50k and bonus as 3k 
+    
+3. Print the output in this structure 
+        Name : Sam
+        City : Hyd 
+        Exp  : 6
+        Salary:50000
+        Bonus :3000
+            
+ String name='SAM';
+ String city ='Ban';
+ Decimal exp,salary,bonus;
+ exp =6;
+if(city=='Hyd' && exp >= 5 ){
+    salary=50000;
+    bonus=3000;
+}
+System.debug('Name :'+name);
+System.debug('City :'+city);
+System.debug('Exp:'+exp);
+System.debug('Salary:'+salary);
+System.debug('Bonus:'+bonus);
+
+-->
+
+===================================================================================================
+    IF_ELSE
+================================================================================================
+stmt1;
+stmt2;
+if(condition){
+    stmt3;
+    stmt4;
+    stmt5; 
+    
+}  else{
+    stmt6;
+    stmt7;
+    stmt8;
+}
+    stmt9;
+    stmt10;
+    
+Condition : true : 1,2,3,4,5,9,10
+Condition : false: 1,2,6,7,8,9,10
+    
+    
+Example 2: 
+stmt1;          Condition : true :1,2,3,4,5,8,9,10
+stmt2;          Condition : false:1,2,6,7,8,9,10
+if(cond){
+    stmt3;
+    stmt4;
+    stmt5;    
+}else{
+    stmt6;
+    stmt7;    
+}    
+stmt8;
+stmt9;
+stmt10;
+    
+Example : 1
+if industry is Banking then set rating as Hot and ownership as public 
+if industry is other than banking then set rating as warm and ownership as private   
+    
+if(industry =='Banking'){
+    rating='Hot';
+    ownership='Public';    
+} else{
+    rating='Warm';
+    ownership='Private';
+ }  
+    
+
+Example :2 
+ if the type is new Customer then set stageName as prospecting and closedate as 15 days from today
+ if the type is other than new Customer then set stagename as closed won and closeDate as today
+  
+    if(type =='New Customer'){
+        stageName='Prospecting';
+        closeDate=System.today()+15;
+    }else{
+        stageName='Closed Won';
+        closeDate=System.today();
+    }
+</apex:page>

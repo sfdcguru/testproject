@@ -1,0 +1,46 @@
+<apex:page standardController="Account">
+    <!--
+    Global Actions:
+    -----------------
+    1. Salesforce on every sobject defined some standard actions 
+    	a. save 
+    	b. quicksave
+    	c. create 
+    	d. delete 
+    	e. edit 
+    	f. cancel	
+    	g. view
+    	h. list
+		save,quicksave,crate ,cancel,list : 
+		delete ,edit ,view: we need to pass the Id of the record.
+
+	How to pass the parameters in the URL :
+1. https://ap8.salesforce.com/apex/pageName
+	
+https://ap8.salesforce.com/apex/pageName?name=satish
+
+Multiple parameters 
+https://ap8.salesforce.com/apex/pageName?name=satish&age=34&city=hyd
+
+	-->
+     <apex:form >
+          
+    <apex:pageBlock title="Account">
+       
+    	<apex:pageBlockButtons location="top">
+            <apex:commandButton value="Save" action="{!save}" />
+            <apex:commandButton value="QuickSave" action="{!quicksave}" />
+            <apex:commandButton value="Cancel" action="{!cancel}" />
+            <apex:commandButton value="Edit" action="{!edit}" />
+            <apex:commandButton value="Delete" action="{!delete}" />
+            <apex:commandButton value="View" action="{!view}" />
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection >	
+            <apex:inputField value="{!Account.Name}" />
+            <apex:inputField value="{!Account.Industry}" />
+            <apex:inputField value="{!Account.rating}" />
+            <apex:inputField value="{!Account.Ownership}" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

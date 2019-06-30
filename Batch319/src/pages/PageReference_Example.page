@@ -1,0 +1,20 @@
+<!--
+PageReference : 
+1. It is a pre-defined apex class.
+2. it is used to reffer to a page .
+3. Example  : 
+	a. if you want to reffer to a particular VF page 
+		PageReference p=Page.VF_PageName;
+
+	b. If you want to reffer to a page based on url
+		PageReferene p =new PageReference(url_of_page);
+-->
+<apex:page controller="PageReference_Example">
+    <apex:form >
+        <apex:commandButton value="Page" action="{!callMe}" />
+        <apex:commandButton value="Invoke" action="{!invoke}" />
+        <apex:commandButton value="VF_Param" action="{!show}" />
+        <apex:commandButton value="Record" action="{!getInfo}" />
+         <apex:commandButton value="Home" action="{!testMe}" />
+    </apex:form>
+</apex:page>

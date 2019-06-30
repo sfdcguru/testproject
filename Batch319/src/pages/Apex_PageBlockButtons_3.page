@@ -1,0 +1,13 @@
+<apex:page >
+    <apex:sectionHeader title="Student" subtitle="New Student" help="/apex/Topics_Covered" />
+    <apex:form >
+    	<apex:pageBlock title="Student" tabStyle="Student__C">
+        	<apex:pageBlockButtons location="top" dir="RTL" >
+                <apex:commandButton value="Edit" />
+                <apex:commandButton value="Save" />
+            </apex:pageBlockButtons>
+            Student Name : <br/><br/>
+            Student Age   :
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,383 @@
+<apex:page >
+<!--
+trigger triggername on sobject(trigger event){
+	logic
+}
+
+==> trigger example on Account(before insert){
+
+    }
+
+1. Write before update trigger on contact 
+	trigger example on Contact (before Update){
+
+	}
+2. write after delete trigger on opportunity 
+	trigger demo on Opportunity(after delete){
+		
+	}
+
+3. Write after insert trigger on Customer__c
+	trigger example on Customer__c(after insert){
+
+	}
+
+4. Write before insert and after update on Loan__c
+	trigger demo on Loan__c(before insert ,after update){
+
+	}
+
+5. Write after insert and after delete on Account 
+	trigger example on Account(after insert ,after delete ){
+
+	}
+
+
+
+
+
+
+1. When ever a new s lead is created with leadSource as Web 
+  then set rating as Hot  and Industry as Banking 
+	trigger example on Lead(before insert){
+		// fetch the new records which we are inserting 
+		List<Lead> leads =Trigge.new;
+		// Take on by one new lead and check the leadsource value 
+		for(Lead l:leads){
+			if(l.leadSource=='Web'){
+				l.rating='Hot';
+				l.industry='Banking';
+			}
+		}
+	}
+	
+
+2. When ever a new Opportunity is Created then Set StageName as Prospecting and closeDate as 15 days from today 
+   and Type as new Customer
+	trigger example on opportunity(before insert){
+		//fetch all the new opportunities 
+		List<Opportunity> optyList =Trigger.new;
+		for(Opportunity  op:optyList){
+			op.stageName='Prospecting';
+			op.closeDate=System.today()+15;
+			op.type='New Customer';
+			
+		}
+	}
+
+3. When ever a new Account is created with industry as Energy set wilson as owner
+	trigger example on Account(before Insert){
+		List<Account> accounts=Trigger.new;
+		User u =[select id from user where firstName='Wilson'];
+		for(Account a :accounts){
+			if(a.industry =='Energy'){
+				a.ownerId=u.Id;
+			}
+		}
+		
+	} 
+
+
+4. When a new Lead is Created with leadSource as web and city as Hyd then set HydTeam as Owner 
+   else set BanTeam as owner 
+
+	List<Group> group =[select id,Name from Group where type='Queue' and name in('HydTeam','BanTeam') ]
+
+1. Create a  queue on Lead object: HydTeam ,BanTeam
+
+	trigger example on Lead( before insert){
+
+		Group hyd =[select id,Name from Group where type='Queue' and name in='HydTeam' ];
+		Group ban =[select id,Name from Group where type='Queue' and name in='BanTeam' ];
+
+		List<Lead> leads =Trigger.new;
+		for(Lead l:leads){
+			if(l.city=='Hyd')
+				l.ownerId=hyd.Id;
+			else 
+				l.ownerId=ban.Id;
+		}
+		
+	}
+
+
+===> trigger example on Lead(before insert){
+
+         List<Group > groups =[ select id,Name from Group where type='Queue' and name in('HydTeam','BanTeam')];
+
+	 // Creat a Map with CityName as key and GroupName value 
+	 Map<String,String> cityMap =new Map<String,String>();
+
+	 // Create a Map with GroupName as key and groupId as value 
+	 Map<String,Id> groupMap =new Map<String,Id>();
+
+
+	 for(Group g: groups){
+		if(g.name=='HydTeam')	  
+			cityMap.put('Hyd',g.name);
+		else 			   
+			cityMap.put('Ban',g.name);
+
+		 groupMap.put(g.name,g.id);
+	 }
+
+	 for(Lead l :leads){
+		// based on the city get the group name 
+		String groupName =cityMap.get(l.city);
+		
+		// based on the groupName get groupId
+		Id groupId=groupMap.get(groupName);
+		l.ownerId=groupId;
+	  }
+    }
+
+===================================================================================================
+1. Customer__c 
+    1. FirstName__c 
+    2. LastName__c
+    3. Phone __c
+    4. Email__c 
+    5. TotalAmount__C
+   
+
+2. Payment__c
+    1. Mode__c
+    2, Amount__c
+    3. Customer__C : Lookup(customer)
+
+
+1. Every customer should have maximum two payment child records 
+
+2. When ever new payment is made for the customer update the customer TotalAmount__c as TotalAmount__c+Amount__c
+
+3. When ever the new payment is made for the customer then send email to the Customer with 
+   payment details .
+
+
+
+UseCase :2 
+Loan__c
+	1. Customer__c : Lookup(Customer)
+	2. Type	       : Education /Housing 
+	3. AppliedAmount:
+	4. Applieddate  :
+
+
+==> a. When ever new Loan is created without Customer__c detail throw error 
+
+==> b. When ever a new Loan is Created then send email to customer__c with the loan details 
+
+==> c. When loanType is Education then send the record to  Customers owners Manager for Approval
+
+==> d. When LoanType is Housing  Sharet the record with Housing Team 
+
+==> E. When a loanType is Education then share the record with  EducationTeam
+
+=========================================
+Date: 16-05-2019
+==============================================
+1. When ever new Customer is Created then set status as pending and rating as cold.
+
+trigger example on Customer__c (before Insert){
+
+	List<Customer__c> customers =Trigger.new;
+	for(Customer__c c: Customers){
+		c.Status__c='Pending';
+		c.Rating__c='Cold';
+	}
+}
+
+2. When ever new Cusutomer__c is Created with Rating as Hot then share the record with 
+   Agent  on the Customer
+
+	Customer__c 
+		Agent__c : Lookup(user)
+
+	trigger example on Customer__c (after insert){
+		List<Customer__c> customers =Trigger.new;
+		List<Customer__Share> share =new List<Customer__Share>();
+		for(Customer__c c:customers){
+			if(c.Rating__c=='Hot'){
+				Customer__Share cs =new Customer__Share();
+				cs.ParentId=c.Id;
+				cs.UserOrGroupId=c.Agent__c;
+				cs.Accesslevel='Edit';
+				cs.Rowcause='Manual';
+				share.add(cs);
+			}
+		}
+		insert share;
+	}
+
+3.  Customer__c : 
+	Total_Amount__C : 
+
+    Payment __c : 
+	Amount__c 
+	Customer__C :
+
+    a. When ever new payment is made add the amount to total_Amount of corresponding customer.
+
+	 
+	P03---C01---12000
+	P04---C02---2000
+	P04---C02---10000
+	P05---C02---5000
+
+	trigger example on Payment__c(after insert){
+		List<Payment__c> payments =Trigger.new;
+		Map<Id,Decimal>  custMap =new Map<Id,Decimal>();	Key		value
+		for(Payment__c p : payments){				-------------------------
+			Id custId =p.customer__c;			C01		18000
+			Boolean b =custMap.contains(custId);		C02		17000
+			if(b==true){
+				Decimal amount =custMap.get(custId);
+				amount=amount+p.Amount__c;
+				custMap.put(custId,amount);
+			}else{
+				custMap.put(custId,p.Amount__c);
+			}
+			
+		}
+		Set<Id> custIds =custMap.keySet();
+		List<Customer__c> customers =[select id,Total_Amount__c from Customer__c where Id in :custIds];
+		for(Customer__c c: Customers){	
+						     // customerId	// total new Amount's collected from payments
+			Decimal amount =custMap.get(c.Id);
+			c.Total_Amount__C =c.Total_Amount__c+amount;
+		}
+		update customers;
+	}
+
+
+
+Example 4: When a new Opportunity is created with stageName as Prospect then 
+		add opportunity amount to Account Pipeline__c
+Note :  Create  a field PipeLine__c in Account object with currency datatype: 
+
+
+
+trigger example on Opportunity (after insert){
+	// fetch all the new Opportunity 
+	List<Opportunity> optyList =Trigger.New;
+
+	// Create a Map with AccountId as key and Correpondning optyAmount as value
+	Map<Id,Decimal> accMap =new Map<Id,Decimal>();
+	// Take one by one opportunity 
+	for(Opportunity op : optyList){
+		// get the parent AccountId from the opportunity 
+		Id accId =op.AccountId;
+		// check this accountId is available in the keySet of Map 
+		Boolean b =accMap.contains(accId);
+		
+		// if flag is true 
+		if(b ==true){
+			// get the amount from accMap for the given accountId
+			Decimal amount =accMap.get(accId);
+			// Add new opportunity amount to the amount 
+			amount =amount+op.Amount;
+			// put the value back to map
+			accMap.put(accId,amount);
+		}else{
+			// make the new entry 
+			accMap.put(accId,op.amount);
+		}
+	}
+	// fetch all the accountId's from the map 
+	Set<Id> keys =accMap.keySet();
+	
+	// write a soql query on Account and fetch all those accounts whose ids are in keys 
+	List<Account> accounts =[select id,PipeLine__c from Account where Id in:keys];
+
+	// take one by one account 
+	for(Account a: accounts){
+		// fetch optyAmount from Map based on AccountId
+		Decimal value =accMap.get(op.AccountId);
+		// Add this value Account PipeLine
+		a.PipeLine__c =a.PipleLine__c+value;
+	}
+	update accounts;
+}
+
+
+Example 5:  When ever new Payment is made send email notification to email of the Customer with list of 
+	    payment.
+Customer__c : 
+ Email__C : 
+
+Payment__c : 
+	Mode__c
+	Amount__c
+	Customer__c:
+
+
+
+==> 
+trigger example on Payment__c (after insert){
+	// fetch all the payments 
+	List<Payment__c> payments =Trigger.new;
+	// Create a Map with CustomerId as key and List of Payments as a value.
+	Map<Id,List<Payment__c>> payMap =new Map<Id,List<Payment__c>>();
+
+	for(Payment__c p: payments){
+	// get the customerId
+		Id custId =p.Customer__c;
+	// Check the customerId in the map
+		Boolean b =payMap.containsKey(custId);
+		List<Payment__C> payList;
+		if(b==true){
+			 payList =payMap.get(custId);
+			payList.add(p);	
+		}else{
+			payList =new List<Payment__c>();
+			payList.add(p);
+		}
+		payMap.put(custId,payList);
+	}
+	// Get all the customers 
+	List<Id> cusIds =payMap.keySet();
+	// fetch all the customer email
+	List<Customer__c > customers =[select id,Email__c from Customer__c where id in:custIds];
+	// Create a Map with customerId as key and Customer Email as value
+	Map<Id,String> emailMap =new Map<Id,String>();
+	
+	// take one by one customer put in the map
+	for(Customer__c c:customers){
+		emailMap.put(c.Id,c.Email__c);
+	}
+
+	for(Id cId:custid){
+		// fetch email 
+		String email =emailMap.get(cid);
+		List<Payment__c> pays=custMap.get(cid);
+		Messaging.SingleEmailMessage msg =new Messaging.SingleEmailMessage();
+		String[] toadd=new String[]{email};
+		msg.setToAddresses(toadd);
+		msg.setSubject('Payments');
+		String body='Dear Customer,<br/>';
+		for(Payment__c p: pays){
+			body=body+' PaymentId:'+p.id+' Amount :'+p.amount__c+'<br/>';
+		}
+		msg.setHtmlBody(body);
+		
+
+	}
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+</apex:page>

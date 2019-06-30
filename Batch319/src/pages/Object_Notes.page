@@ -1,0 +1,87 @@
+<apex:page >
+    Boolean,Blob,Integer,Long,Decimal,String ,Double ,Time ,Date,DateTime,Id,Object 
+    
+    					DataType   	Type			Variable		 variable Type  
+    					-----------------------------------------------------
+    Integer age;		Integer 	Primitive		age				Primitive Variable
+    
+    String  name;		String 		Primitive		name			Primitive variable
+    
+    Account acc;		Account		Non-Primitive	acc				Refference variable
+    
+    Contact con;		Contact 	Non-Primitive	con				Refference variable
+    
+    Decimal amount;		Decimal		Primitive		amount			Primitive variable
+    
+    Boolean flag;		Boolean		primitive		flag			Primitive variable
+   
+    Student std;		Student 	Non-Primitive	std				Refference variable	
+    
+    College colg;
+    
+    ==> Integer age=10;
+    	String name='Satish';
+    	Boolean flag=false;
+    
+    ==> Refference variables they store location where the data is stored.
+   
+    	new ==> New is a keyword which will allocate new memory for datamembers of the class .
+    
+    object: 
+    1. it is a instance of a class.
+    2. Syntax : 
+    	ClassName refVaraible =new ClassName(parameters);
+    	|		  |				|	|
+    	3		  4				1   2
+    
+    	1.new : it is a keyword ,it is used to allocate new memory or instance for datamebers of a class.
+    
+    	2. Constructor : Once the object is Created,Constructor is automatically fired and it will 
+    					 initialize the datamembers 
+    
+    	  Note : if the class doesnt have anyd constructor ,compiler will create  dummy constructor.
+    
+    	3. ClassName : it will be used as datatype 
+    
+    	4. refVariable : This variable will reffer to instance of memory created by new keyword.
+    
+    	5. All the  members of the class are accessed outside the class using object,
+    		
+    		Syntax : objectName.variableName 
+    			   : objectName.methodName()
+    
+    
+    Example :1 
+    Create a apex class Employee with name,salary,bonus ,exp
+    Create a constructor and assign the value name,exp
+    Create a method calculate which will calculate salary,bonus
+    	if exp more than 5 years then salary =50k and bonus as 3k
+    	else salary as 30k and bonus as 5k
+
+    Create a object and print the values 
+ 
+	public class Employee{
+    	public String name;
+    	public Decimal salary;
+    	public Decimal bonus,exp;
+    	public Employee(){
+    		name='Hemanth';
+    		exp=7;
+    	}
+    	public void calculate(){
+    		if(exp > 5){
+    			salary=50000;
+    			bonus=3000;
+    		}else{
+    			salary=30000;
+    			bonus=5000;
+    		}
+    		
+    	}
+    }
+   
+    ===> Employee emp =new Employee();
+    	 emp.calculate();
+    	 System.debug('name:'+emp.Name);
+    	 
+</apex:page>

@@ -1,0 +1,62 @@
+<apex:page >
+    Wrapper Class: 
+    1. it is a apex class .
+    2. it contains only datamembers 
+    3. It is used to create user defined datatypes.
+    Example : 
+    global/public class ClassName{
+    	datamembers
+    }
+    1. Create a wrapper class Student with name ,age ,dob
+    	public class Student{
+    		 public String name;
+    		 public Integer age;
+    		 public Date dob;
+    	}
+    
+    2. Create a wrapper class ProductInfo with  name,quantity,price
+    	public class ProductInfo{
+    		public String name;
+    		public Integer quantity;
+    		public Decimal price;
+    	}
+    3. Create a wrapper class QuoteDetails with  instance ofAccount ,contact
+    	public class QuoteDetails{
+    		public Account acc;
+    		public Contact con;
+    	}
+    4. Create a wrapper class College with name,code, fee, no_of_students
+    	public class College{
+    		public String name;
+    		public String code;
+    		public Decimal fee;
+    		public Integer no_of_Students;
+    	}
+    5. Create a wrapper class AccountData with name,industry,rating,
+    		public class AccountData {
+    			
+    		}
+    
+    6. Create a wrapper class which will take account ,contact and opportunity
+    		public class Example{
+    			public Account acc;
+    			public Contact con;
+    			public Opportunity opt;
+    		}
+    
+    7. Create a wrapper class which will take Customer__c ,loan__c ,payment__c
+    		public class Example{
+    			public Customer__c cust;
+    			public Loan__c loan;
+    			public Payment__c pay;
+    
+    		}
+    
+    8. Create a wrapper class which will take Account and boolean value,
+    
+    		public class Example{
+    			public Sobject acc ;
+    			public Boolean flag;
+    		}
+    
+</apex:page>

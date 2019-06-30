@@ -1,0 +1,18 @@
+<apex:page controller="SOQL_Order_By_Example">
+    <apex:form >
+    <apex:pageBlock title="Accounts" id="one">
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton value="SortByName" action="{!sortByName}" reRender="one" />
+             <apex:commandButton value="SortByNamePhone" action="{!sortByNamePhone}" reRender="one" />
+            			
+        </apex:pageBlockButtons>
+        
+    	<apex:pageBlockTable value="{!accounts}" var="a">
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

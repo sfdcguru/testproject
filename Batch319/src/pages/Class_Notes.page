@@ -1,0 +1,260 @@
+<apex:page >
+    Class:
+    ---------
+    Syntax: 
+    global/public class ClassName{
+        dataMembers;
+        methods;
+    }
+    Example1: Create a apex class Student 
+    public class Student{
+    
+    }
+    Example 2:Create a apex class Employee 
+    public class Employee{
+    
+    }
+    Example 3:Create a apex class ProductInfo
+    public class ProductInfo{
+    
+    }
+      
+Constructor :
+-------------
+    
+   1. Constructor is a special method defined in the class.
+   2. This method will have same name as class name .
+   3. Constructor will not have any return type
+   4. Constructor will be used to initialize the datamembers of the class or any initial operations.
+   5. Constructor can be called only once at the time of creating a object.
+   6. Syntax : 
+         public class className{
+                public className(parameters){
+    
+                }
+    
+        }
+    
+ Example 1: Create a class Student with a constructor
+        public class Student{
+            public Student(){
+    
+            }
+        }
+    
+    
+    
+   
+Apex class Use Cases 
+---------------------
+1. Create a apex class Student with data members name ,age ,city ,place
+    public class Student{
+        String name;
+        Integer age;
+        String city;
+        String place;
+    }
+    
+2. Create a apex class Employee with data members lastName  ,firstName,exp,salary
+     public class Employee{
+            String lastName;
+            String firstName;
+            Decimal exp;
+            Decimal salary;
+     }
+
+3. Create a apex class ProductInfo with data members prodName,prodCode,price,quantity
+        public class ProductInfo{
+            String prodName;
+            String prodCode;
+            Decimal price;
+            Integer quantity;
+        }
+
+4. Create a apex class College with datamembers  colgName,city,noStudents,fee, phone
+        public class College{
+            public String colgName;
+            public String city;
+            punlic Integer noStudents;
+            public Decimal fee;
+            public String phone;
+        }
+
+5. Create a apex class Company_Data with datamembers  name,location,phone
+
+6. Create a apex class Student with a constructor.
+    public class Student{
+            public Student(){
+    
+            }
+    }
+7. Create a apex class Employee with a constructor
+    public class Employee{
+        public Employee(){
+    
+        }
+    }
+8. Create a apex class ProductInfo with a constructor
+        
+
+9.Create a apex class Account_Line_Items with a constructor
+
+10.Create a apex class InvoiceData with a constructor.
+
+11.Create a apex class Student with a constructor, which takes 
+   name and age as paramters 
+    public class Student{
+        public Student(String name,Integer age){
+    
+        }
+    }
+12.Create a apex class Employee with constructor ,which takes
+   exp and city as parameters
+    
+    public class Employee{
+        public Employee(Decimal exp,String city){
+    
+        }
+    }
+
+13.Create a apex class ProductInfo with Constructor which takes
+   quantity and price as parameters 
+    public class ProductInfo{
+        public ProductInfo(Integer quantity,Decimal price){
+    
+        }
+    }  
+
+14.Create a apex class AccountInfo with constructor which takes 
+   names as parameters
+    
+    public class AccountInfo{
+        public AccountInf(String name){
+    
+        }
+    }
+   
+15.Create a apex class Student  with 
+    a. name,phone,city as datamembers 
+    b. Create a constructor which will assign name as Satish,
+           phone as 040-123 and city as Hyd 
+    
+    public class Student{
+        public String name,phone,city;
+        public Student(){
+            name='Satish';
+            phone='040-123';
+            city='Hyd';
+        }
+    }
+
+16.Create a apex class Employee with 
+    a. exp ,salary ,city as data members    
+    b. Create a constructor which will assign exp as 3  salary as 10000, city as Hyd 
+    public class Employee{
+        public Decimal exp,salary;
+        public String city;
+        public Employee(){
+            exp=3;
+            salary=10000;
+            city='Hyd';
+        }
+    }
+17. Create a apex class ProductInfo with
+    a. prodName,price,quantity,total as data members.
+    b. Create a constructor which will assign names as IPhone quantity as 10 and price 
+                as 10000
+    
+    public class ProductInfo{
+        public String prodName;
+        public Decimal price,total;
+        Integer quantity;
+        public ProductInfo(){
+            prodName='IPhone';
+            quantity=10;
+            price=10000;
+        }
+    }
+
+18. Create a apex class AccountInfo with 
+    a. industry,rating,ownership ,annualRevenue as data members
+    b. Create a constructor with assign industry as  Banking 
+    c. Create a method callMe which will assign the value of rating ,ownership and  
+                 annualRevenue 
+              Logic : if industry is banking then set rating as hot ,ownership as Public and 
+                   annualRevenue as 50K
+    
+                : if industry is not banking then set rating as warm ,ownership as ABC and 
+          annualRevenue as 30k 
+    d. Create a method show which will print industry ,rating,ownership and 
+               annualRevenue
+    
+    public class AccountInfo{
+        String industry,rating,ownership;
+        Decimal annualRevenue;
+        public AccountInfo(){
+            industry='Banking';
+        }
+        public void callMe(){
+            if(industry=='Banking'){
+                rating='Hot';
+                ownership='Public';
+                annualRevenue=50000;
+            }else{
+                rating='Warm';
+                ownership='ABC';
+                annualRevenue=30000;
+            }
+        }
+        public void show(){
+            System.debug('Industry:'+industry);
+            System.debug('Rating:'+rating);
+            System.debug('Ownership:'+ownership);
+            System.debug('AnnualRevenue:'+annualRevenue);
+        }
+    }
+
+19. Create a apex class Invoice_Details  with 
+    a. InvoiceNo ,invoiceDate ,invoiceAmount,quantity 
+           b. Create a constructor which will take no_of_Products as parameter and 
+               assign to quantity
+           c. Create a method calculate which will set value of dataMembers 
+        invoiceDate as today,invoiceNo as ICI0001 and invoiceAmount as 500*quantity
+     
+    d. Create a method show which will display the datamembers invoiceNo,invoiceDate
+       quantity,invoiceAmount.
+    
+    public class Invoice_Details{
+        public String invoiceNo;
+        public Date invoiceDate;
+        public Integer quantity,invoiceAmount;
+        public Invoice_Details(Integer no_of_Products){
+            quantity=no_of_Products;
+        }
+        public void calculate(){
+            invoiceDate =System.today();
+            invoiceNo='ICI001';
+            invoiceAmount=quantity*500;
+        }
+        public void show(){
+            System.debug('InvoiceNo:'+invoiceNo);
+            System.debug('InvoiceDate:'+invoiceDate);
+            System.debug('InvoiceAmount:'+invoiceAmount);
+        }
+    }
+        
+
+20. Create a apex class Company_Info with 
+    a. companyName, no_of_Employees , phone ,city ,branch
+     b.Create a constructor which will assign the value of data members 
+    c. Create a method show which will print all the data members 
+    d. Create a method cancel which will reset the data members of the class.
+    
+    public void cancel(){
+        companyName=null;
+        phone=null;
+    }
+    
+
+
+</apex:page>

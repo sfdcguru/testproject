@@ -1,0 +1,7 @@
+<apex:page controller="First_Page">
+    <apex:form >
+        <apex:inputText value="{!name}" /> 
+        <apex:commandButton value="Next" action="{!next}"/> <br/><br/>
+        {!city}
+    </apex:form>
+</apex:page>

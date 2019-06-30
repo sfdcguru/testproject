@@ -1,0 +1,38 @@
+<apex:page >
+    Apexpages.StandardController :
+    ------------------------------
+    1. StandardController is a pre-defined apex class 
+    2. It is defined in the namespace of Apexpages.
+    3. This will reffer to instance of sobject 
+    4. Syntax : 
+    	Apexpages.StandardController(Sobject obj)
+    5. Example : 
+    	Account acc =[select id,Name,Phone from Account limit 1];
+    	Apexpages.StandardControllre controller =new Apexpages.StandardController(acc);
+    
+    6. Methods : 
+    	
+		a. cancel()
+			1. This will return to the cancel page of the the given sobject
+    
+		b. delete()
+			Deletes record reffered by standardController and returns the PageReference of the delete page.
+    	
+    	c. edit()
+				Returns the PageReference of the standard edit page.
+    	d.getId()
+			Returns the ID of the record that is currently reffer by Apexpages.StandardController.
+   
+		e.getRecord()
+			Returns the record that is currently in context, based on the value of the id query 
+    		string parameter in the Visualforce page URL.
+    	
+		f.reset()
+			1. This will discard the changes we have made on the StandardController fields 
+    	
+		g. save()
+				Saves changes and returns the updated PageReference.
+    
+		h.view()
+				Returns to the detail page of the record reffered by StandardController
+</apex:page>

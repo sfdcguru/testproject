@@ -1,0 +1,20 @@
+<apex:page controller="DML_Example_2">
+    <apex:form >
+        <apex:selectList size="1" value="{!selected}" style="width:120px">
+            <apex:selectOptions value="{!options}" />
+        </apex:selectList>
+        <apex:commandButton value="Update" action="{!updateRating}" reRender="pb"/>
+        <br/><br/>
+    	<apex:dataTable value="{!leads}" var="a" frame="box" rules="rows" cellpadding="10" width="900" id="pb">
+        	<apex:column >
+                <apex:facet name="header"><apex:inputCheckbox /></apex:facet>
+                <apex:inputCheckbox value="{!a.flag}"/>
+            </apex:column>
+            <apex:column value="{!a.newLead.LastName}"  headerValue="LastName" />
+            <apex:column value="{!a.newLead.FirstName}" headerValue="FirstName" />
+            <apex:column value="{!a.newLead.Rating}"  	headerValue="Rating" />
+            <apex:column value="{!a.newLead.Industry}"  headerValue="Industry" />
+            <apex:column value="{!a.newLead.LeadSource}"  headerValue="LeadSource" />
+        </apex:dataTable>
+    </apex:form>
+</apex:page>

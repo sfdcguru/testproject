@@ -1,0 +1,50 @@
+<apex:page >
+    Aggregate functions:
+    ---------------------
+    1. count() : This will return count of no of records returned by soql 
+    Integer count =[select count() from Account ];
+    
+    2. count(fieldName): This will return count of no of records which contains the value in givenField
+    	AggregateResult result =[select count(rating) from Account ];
+    
+    3. sum(fieldName) : This will return summarized value of given field from the queryResult.
+    
+    4. min(fieldName) : This will return minimum value of a given field from the queryResult
+    
+    5. max(fieldName) : This will return maximum value of the given field from the queryResult
+    
+    6. avg(fieldName) : This will return average value of the given field from the queryResult.
+    <!--
+        AggregateResult result =[select sum(amount)total,min(amount)minval,max(amount)maxval,avg(amount)avgvalue from opportunity];
+        Decimal total =(Decimal)result.get('total');
+        Decimal maxval=(Decimal)result.get('maxval');
+        Decimal minval=(Decimal)result.get('minval');
+        Decimal avgval=(Decimal)result.get('avgvalue');
+        System.debug('Total :'+total);
+        System.debug('Maxval:'+maxval);
+        System.debug('Minval:'+minval);
+        System.debug('AvgVal:'+avgval);  
+
+	-->
+    Group By : when we group the data in the soql we get List of Aggregate functions
+    <!--
+		List<AggregateResult> myList =[select stageName,sum(amount)total,min(amount)minval,max(amount)maxval,avg(amount)avgvalue from opportunity group By StageName];
+        for(AggregateResult result:myList){
+            String stage=(String)result.get('stageName');
+            Decimal total =(Decimal)result.get('total');
+            Decimal maxval=(Decimal)result.get('maxval');
+            Decimal minval=(Decimal)result.get('minval');
+            Decimal avgval=(Decimal)result.get('avgvalue');
+            System.debug('Stage=======>'+stage);
+            System.debug('Total :'+total);
+            System.debug('Maxval:'+maxval);
+            System.debug('Minval:'+minval);
+            System.debug('AvgVal:'+avgval);
+        }
+		Note : When we are using group by ,every field we query should be a part of Group by or Aggreage function
+			  
+
+	-->
+    
+    
+</apex:page>

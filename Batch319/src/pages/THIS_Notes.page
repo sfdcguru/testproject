@@ -1,0 +1,37 @@
+<apex:page >
+    1. "this" is a keyword .
+    2. When we have local variables and class variables with same name ,local variables 
+       will dominate the global variables.
+    3. If you want to reffer to the global variables when there is a conflict between local and global
+       then we use a keyword called "this"
+      this.variable : this will reffer to the variable from the object 
+      variable      : this will reffer to the local variable
+    
+    Example : 
+    public class This_Example {
+        public Integer age;
+        public String name;
+        public Decimal exp;
+        public This_Example(String empName,Integer age,Decimal exp){
+            name=empName;
+            this.age=age;
+            exp=exp;
+            System.debug('=====Local Variables ====');
+            System.debug('EmpName :'+Name);
+            System.debug('EmpAge :'+Age);
+            System.debug('EmpExp:'+Exp);
+        }
+    }
+   
+    ===>This_Example te =new This_Example('Satish',34,4);
+        System.debug('=====Class Variables ====');
+        System.debug('Name :'+te.Name);
+        System.debug('Age :'+te.Age);
+        System.debug('Exp:'+te.Exp);
+    
+ Example : 2
+    Create a apex class Employee with name,city,salary as datamembers 
+    Create a constructor which will take name ,city ,salary as parameters and assign them to class variables
+    Create a method show which wil print the name ,city,salary
+    Create a object and invoke the show method.
+</apex:page>

@@ -1,0 +1,48 @@
+<apex:page >
+    1. Visualforce page definition consists of two elements 
+    	a. Visualforce Markup
+    	b. Visualforce Controller 
+    2. Visualforce Markup
+    	a. Any thing that is supported by browser is also supported by visualforce.
+    	b. Visualforce markup is a tag based programming 
+    	c. Visualforce markup consists of 
+    		1. Visualforce tags 	:
+    			These are the tags defined by the salesforce to support creation of UI
+    			apex:page ,apex:pageBlock
+    		2. Scripting elements 
+    			javascript,Ajax,Jquery,Backbone.js,node.js,html......'
+    
+    3. Visualforce Controller : 
+    	a. When user interacts with any of the element on the visualforce page ,what is the operation
+       	   that should be performed on the server -side is defined by visualforce controllers
+    
+    	b. We have four types of visualforce controllers 
+    		a. Standard Controller 
+    		b. Custom Controller 
+    		c. Extentions 
+    		d. StandardList Controller 
+    
+    	c. StandardController : 
+    		a. In the VF page if we want to use exact properties of any one the object defined in the 
+    			database then we use that objects StandardController .
+    
+    	d. Custom Controller : 
+    		a. If we want to define custom logic based on your business needs then we define apex class 
+    			and use it as Custom Controller.
+    
+    	e. Extentions : 
+    		a. If we want to use both standardController and customController together then we use exetentions
+    
+    	f. Standard List Controller : 
+    		a. Reffering to the list of records from the any one the standardController is called StandardList
+     		   controller 
+    
+    
+    Visualforce pages can be used ??
+    1. To create custom tabs 
+    2. To override standard buttons and  standard pages 
+    3. To create Custom buttons and links on standard pages 
+    4. To create custom side-bar components
+    
+    		
+</apex:page>

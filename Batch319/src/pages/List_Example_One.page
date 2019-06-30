@@ -1,0 +1,19 @@
+<apex:page controller="List_Example_1">
+    <apex:form >
+        <apex:pageBlock title="Names" id="pb">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Add" action="{!addEle}" reRender="pb" />
+                <apex:commandButton value="AddAt2" action="{!addAt2}" reRender="pb" />
+                <apex:commandButton value="AddAt3" action="{!addAt3}" reRender="pb" />
+                <apex:commandButton value="Remove1" action="{!remove1}" reRender="pb" />
+                <apex:commandButton value="Remove2" action="{!remove2}" reRender="pb" />
+                <apex:commandButton value="Sort" action="{!sortData}" reRender="pb" />
+                <Apex:commandButton value="Clear" action="{!deleteAll}" reRender="pb" />
+            </apex:pageBlockButtons>
+            Enter Name : <apex:inputText value="{!value}" /> <br/><br/>
+            <apex:pageBlockTable value="{!names}" var="a">
+                <apex:column value="{!a}" headerValue="Names" />
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,30 @@
+<apex:page controller="Render_Example">
+    <apex:form >
+    	<apex:pageBlock title="Example" id="pb">
+        	<apex:selectList size="1" value="{!selected}">
+                <apex:selectOption itemLabel="-None-" itemValue="none" />
+                <apex:selectOption itemLabel="Account" itemValue="Account" />
+                <apex:selectOption itemLabel="Contact" itemValue="Contact" />
+                <apex:selectOption itemLabel="Opportunity" itemValue="Opportunity" />
+            </apex:selectList>
+            <apex:commandButton value="Go" action="{!invoke}" reRender="pb"/>
+            <br/><br/>
+            <apex:pageBlockSection title="Account" collapsible="false" rendered="{! count==1}">
+                Account Name : 	<br/><br/>
+                
+                Account Phone :	<br/><br/>
+            </apex:pageBlockSection>
+             <apex:pageBlockSection title="Contact" collapsible="false" rendered="{! count==2}">
+            	Last Name : 	<br/><br/>
+                
+                FirstName:	<br/><br/>
+            </apex:pageBlockSection>
+             <apex:pageBlockSection title="Opportunity" collapsible="false" rendered="{! count==3}">
+            	Opportunity Name : 	<br/><br/>
+                
+                Opportunity Amount :	<br/><br/>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

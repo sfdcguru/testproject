@@ -1,0 +1,20 @@
+<apex:page controller="SOQL_Limit_Offset">
+    <apex:form >
+      
+    <apex:pageBlock title="Accounts" id="pb">
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton value="Limit" action="{!myLimit}" rerender="pb"/>
+            <apex:commandButton value="DLimit" action="{!myDLimit}" rerender="pb"/>
+             <apex:commandButton value="Offset" action="{!myOffset}" rerender="pb"/>
+            <apex:commandButton value="DOffset" action="{!myDOffset}" rerender="pb"/>
+            <apex:commandButton value="LimitOffset" action="{!myLimitoffset}" rerender="pb"/>
+        </apex:pageBlockButtons>
+    	<apex:pageBlockTable value="{!accounts}" var="a">
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+     </apex:form>
+</apex:page>

@@ -1,0 +1,7 @@
+<apex:page >
+    <c:Example background="yellow" color="red" message="This is an example" title="Demo" />
+    <br/><br/>
+    <c:Example background="grey" color="red" message="This is an example" title="Demo" />
+    <br/><br/>
+     <c:Example background="green" color="red" message="This is an example" title="Demo" />
+</apex:page>

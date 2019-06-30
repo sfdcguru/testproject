@@ -1,0 +1,309 @@
+<apex:page >
+ <!--
+==========================================================================================
+Governing Limits :
+=========================================================================================
+	1. Salesforce by default on every apex functionailty imposed some limits 
+	   to obey multi-tenant architechture
+	  
+	2. Governing Limits :
+		a. In every transaction Maximum no of soql Statments : 100
+		b. In every transaction Maximum no of DML statements : 150
+		c. In every transaction Maximum no of records on Which DML can be performed:10000
+		d. Every Soql query can return Maximum  : 50,000 recordds
+		e. In every transaction Maximum no of sosl statments  :20
+		f. In every transaction Maximum no of future method   :50 
+		g. In every transaction Maximum no of Queueable Call  :50
+		h. In every transaction Maximum no of callouts 		  :100
+		i. In every transaction Maximum no of Email Invocation:10
+		
+Example : SoqlLimits:
+
+public class SoqlGoverning {
+    public void soqlCall(){
+        Account acc=[select id from Account limit 1];//1
+        List<Contact> cons=[select id from Contact];//1
+        for(Integer i=0;i<70;i++){  //70
+            List<Opportunity> opt=[select id,name from Opportunity];
+        }
+        call(); //21
+        testme();//21
+    }
+    public void call(){
+        for(Integer i=0;i<=20;i++){
+            List<User> users=[select id from User];
+        }
+    }
+    public void testme(){
+        for(Integer i=0;i<=20;i++){
+            List<Lead> leads=[select id from Lead ];
+        }
+    }
+}		
+
+DML Governing Limits ;
+
+public class DMLGoverning {
+    public void dmlcall(){
+        Account acc=new Account();
+        acc.Name='Testing';
+        acc.Industry='Energy';
+        acc.Phone='123';
+        insert acc;  //1
+        acc.phone='8888';
+        update acc; //2
+        delete acc;  //3
+        undelete acc; //4 
+        for(Integer i=0;i<100;i++){  //100
+            Contact c=new Contact();
+            c.accountId=acc.id;
+            c.lastname='aaa';
+            c.phone='1233';
+            insert c;
+        }
+        call();   //30
+        testme(); //30
+    }
+    public void call(){   //30 
+        for(Integer i=0;i<30;i++){
+           Opportunity op=new Opportunity();
+            op.name='Testing';
+            op.stageName='Prospect';
+            op.amount=10000;
+            op.closeDate=System.today()+15;
+            insert op;
+        }
+    }
+    public void testme(){
+        for(Integer i=0;i<30;i++){   //30
+            Account acc=new Account();
+            acc.Name='Testing';
+            acc.Phone='8888';
+            insert acc;
+        }
+    }
+}
+
+
+DMLROWS: 
+public class DMLRowsLimits {
+    public void dmlRowsCall(){
+        Account acc=new Account();
+        acc.Name='Testing';
+        acc.Industry='Banking';
+        acc.Phone='123';
+        insert acc; //  DML performed on one record
+        update acc; // DML performed on one record 
+        delete acc; // DML performed on one record
+        List<Contact> cons=new List<Contact>();
+        for(Integer i=1;i<=5000;i++){
+           Contact c=new Contact();
+            c.LastName='Tsting';
+            c.firstname='Satish';
+            cons.add(c);
+        }
+        insert cons; // no DML statemets :1 , no of records on which DML is performed : 5000
+        delete cons; // no DML statments :1 , no of records on whcih DML is performed : 50000
+    }
+}		
+==============================================================================================
+Batch Apex
+================================================================================================
+	1.When you want to process large number of records on daily basis or nightly basis or 
+	 specific time of interval then  there is a possibilty of encountering 
+	 the governing limits .
+	
+	2.To resolve the governing limits issue ,we will run the operation as asynchronous
+	  operation using batch apex .
+	
+	3.Batch Apex is exposed as an interface that must be implemented by the developer. 
+	  Batch jobs can be programmatically invoked at runtime using Apex. 
+	  
+	4.Batch Apex  will break the larger set of records into no of batches with small set
+	  of data and every batch will run independent from each other with fresh set of 
+	  governing limits. 
+	
+	5. If you want any Apex class to run like Batch Apex ,That Apex class has to implement
+	   an Interface database.Batchable interface .
+	   
+	6. Any Apex class which implements Database.Batchable interaface should define three	
+		methods 
+		a.start 
+		b.execute
+		c.finish
+		
+	7.start  :
+		a. This method will be called at the starting of the Batch Job and collects 
+	       the data on which the Batch job need to be operated.
+			 
+		b.Syntax : Database.QueryLocator |Iterable<SObject> start(Database.BatchableContext bc){}
+		
+		c.Database.QueryLocator : When you’re using a simple query (SELECT) to generate
+		  the scope of records on which batch job should run, use the Database.QueryLocator
+		
+		d.If you use a QueryLocator object, the governor limit for the total number of 
+		  records retrieved by SOQL queries is bypassed and we can fetch upto 50 Million records 
+		  in soql query.
+		  
+		e.Use the iterable to create a complex scope for the batch job. You can also use the 
+		   iterable to create your own custom process for iterating through the list.
+		f.If you are using iterable all governing limits will be still enforced.
+
+		g.Start method will break the list of records into no of batches and invoke	
+		  the execute method on every batch
+	
+	8. execute: 
+		a. This method will be invoked by the start method on every batch of recods.
+		b. This method will contain business logic that need to performed on the records	
+		   fetched from the start method .
+		   
+		c.Syntax : void execute(Database.BatchableContext bc,List<Sobject> scope)
+		
+		d.List<Sobject> contains the list of records in the batch job on which this 
+		  execute method is running .
+		 
+		e. Example : If the start method fetched 1000  records and divided them into	
+			  five batches with 200 records in each batch.Then execute method will be 
+			  called on every batch separatly(execute method will be called 5 times);
+			  
+			  
+	9.finish :
+		a. This method will be called after executing all the execute method .
+		b. This method is used to send confirmation emails or post batch operations
+		c. Syntax :  void finish(Database.BatchableContext)
+		
+	
+	Example 1: Fetch all the opportunity which are created today and with with 
+			   stagename as closed won and update their closeDate as closed won.
+	Note :  As Per my organization in day 15,000 to 20,000 opportunity records 
+			which will be closed.
+			According to governing limits we can only perform DML operation on 10,000
+			records with in a transaction ,so we are choosing batch apex to handle 
+			this operation.
+
+		global class OptyBatch implements Database.Batchable<Sobject>{
+			global Database.QueryLocator start(Database.BatchableContext bc){
+				return Database.getQueryLocator('select id,closeDate from Opportunity 
+						where stageName='Closed won' and createdDate=Today);
+			}
+			global void execute(Database.BatchableContext bc,List<Opportunity> scope){
+				for(Opportunity op: scope){
+					op.closeDate=System.today();
+				}
+				update scope;
+			}
+			global void finish(Database.batchableContext bc){
+				Messaging.SingleMessaging email1=new Messaging.SingleEmailMessage();
+				String[] toadd=new String[]{'abc@gmail.com'};
+				email1.setToAddresses(toadd);
+				email1.setSubect('Batch Completion Alert');
+		email1.setPlainTextBody('Batch Job '+bc.getJobId()+' iS processed successfuly');
+				Messaging.Email[] emails=new Messaging.Email[]{email1};
+				Messaging.sendEmail(emails);
+			}
+		}
+		   
+	10. Steps to execute batch apex .
+		a. Create a object for the Apex class which implemented the Database.Batchable	
+		   interface.
+		   Example :
+		   OptyBatch op=new OptyBatch();
+		   
+		b. Invoke Database.executeBatch(object,batchsize);
+			BatchSize can be any thing from 1 to 2000 .If you dont define batch size 
+			by default it take 200.
+			
+			Id jobId=Database.executeBatch(op,300);
+			
+	11. we can track the status of the batch job in two ways .
+			a. Soql on AsyncApexJob
+				AsyncApexJob job=[select type,status from AsynApexJob where id=:jobId];
+			b. Jobs under Monitor
+				Setup	
+				|----Monitor	
+						|---Jobs		
+							  |---Apex Jobs.
+							  
+
+	12. How to abort the batch job that is running .
+		System.abortJob(jobId);
+	
+	13. Stateful interface :
+		a.Changes made by one execute will not  be transfered to another execute in the 
+		  batch apex .
+		
+		b.If you want to transfer  the state of the data from batch to another batch
+		  we need to implement Database.Stateful interface.
+		  
+		c.When a batch apex class implements Database.stateful interface state of the 
+		  non-static data will be transfered  one execute to another execute method.
+		 
+	Example :
+		1. Create a custom Object OptyTemp with Custom Field : Amount  
+		2. Summarize the Amount of the All the opportunity records 
+		3. create new OptyTemp record with Amount as Summarized value of opportunity
+		
+		global class OptyBatch implements Database.Batchable<Sobject>,Database.Stateful{
+			global Decimal total=0;
+			global Database.QueryLocator start(Database.BatchableContextt bc){
+				return Database.getQueryLocator('select amount from Opportuntity 
+														where closeDate=TODAY');
+			}
+			global void execute(Database.BatchableContext bc,List<Opportunity> scope){
+				for(Opportunity op: scope){
+					total=total+op.amount;
+				}
+			}
+			global void finish(Database.BatchableContext bc){
+				OptyTemp__c ot=new OptyTemp__c();
+				ot.Name='Date:'+System.today();
+				ot.Amount__c=total;
+				insert ot;
+			}
+		}
+	
+	14. Limits :
+		a. At a time only 5 batch jobs will run .
+		
+		b. At a time 100 jobs can be added to flexqueue.
+		
+	15.	In a batch job if any of the batch fails ,only that batch will fail rest 
+		of the batch will execute normally.
+		
+	16.If the finish method fails,only finish method will fail and changes made 
+	   by the all the execute methods will be commited.
+	   
+	17.We cannot call future method from the batch apex .
+
+	18.We can call batch job from finish method of another batch job.
+
+	19.If we want to call webservices from the batch apex batch apex ,Apex class has to 
+	    implements Database.AllowCallouts interface.
+		
+	20.Future method cannot be called from Batch Apex .
+	
+	21.We can call batch apex from finish method another batch apex .
+    
+    
+    
+    
+--------------------------------------------------------------------------
+ Operation		Future		Queueable	BatchApex	Schedule 
+----------------------------------------------------------------------------
+
+Future			No		Yes		No		Yes 
+
+Schedule		Yes		Yes		Yes		Yes
+
+Queueable		Yes		Yes		Yes		Yes
+
+============================================================================
+Batch Apex : 
+Start 	: 		No		Yes		No		Yes
+
+Execute :		No		Yes		No		Yes	
+
+Finish	:		No		Yes		Yes		Yes
+
+-->
+</apex:page>

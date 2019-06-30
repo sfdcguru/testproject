@@ -1,0 +1,132 @@
+<apex:page >
+    <!--
+	===========================================================================================		
+Queuable Apex :
+============================================================================================
+	1. If we want to run Apex class Asynchornously  ,Then we use the 
+	   concept of the Queueable apex .
+	  
+	2. These are used to run the long running operations like external 
+	   webservice call, Bulk Database operations asychronously.
+	   
+	3. If you want to run apex class as Quaueable apex then ,Apex class has
+	   to implement queuable interface.
+	   
+	4. Any Apex class which implements Queueable  interface has to  
+	   define execute  method.
+	   
+	   Syntax : 
+	   
+		public void execute(QueueableContext qc){}
+		
+	5. Business Logic which we want to run  asynchronous is defined  
+	   within the execute method.
+	   
+	6. When we invoke the queueable job using System.enqueueJob() method ,This will 
+	   return Id of the asynchronous job .Using which we can track the status of the job.
+	   
+	   Note :Future method will not return the Id of the Job ,when we invoke it.
+	   
+	7.Using non-primitive types: Your queueable class can contain member variables 
+	  of non-primitive data types, such as sObjects or custom Apex types. 
+	  
+	  Note : Future method will not accept non-primitive dataTypes as parameters.
+	  
+	8.Chaining jobs: We can invoke queable Apex from Other queable Apex .
+				
+				   : We can order the execution by invoking Queueable2 from
+					 queueable 1
+					 
+	  Note : Future method cannot be called from another future method.
+	
+	
+	
+	9. Example 
+	 public class QueueableExample implements Queueable{
+	 
+		public void execute(QueueableContext  qc){
+			System.debug('Queue one');
+			System.debug('Queue two');
+			System.debug('Queue Three');
+			System.debug('JobId:'+qc.getJobId());
+		}
+		public void show(){
+			System.debug('Show One');
+			System.debug('Show Two');
+			System.debug('Show Three');
+		}
+	}
+		Note : Only execute method will run asychronously, other methods 
+			   defined in this class will run Synchronously.
+			   
+		Note : execute method will run asychronously only if it the method 
+		      is invoked from System.enqueueJob() method.
+			  
+			  
+			  
+	10. How to invoke the execute method asychronously
+	
+		1. Create a object for the apex class which implemented Queueable interface.
+		
+		   QueuableExample q1=new QueueableExample();
+		   
+		2. Invoke the System.enqueueJob method with object of the class which 
+		   implemented queueable interface.
+		   
+		   Id jobId= System.enqueueJob(q1); //When we invoke this method 
+								execute method will run as asychronously.
+								
+								
+	11. How to track the status of the job.
+	
+		1. Write a soql on AsyncApexJob using  the jobId returned by 
+		   System.enqueueJob.
+		   
+		2. Declarative foramt .
+		
+			Setup
+			   |---Moniter
+						|---Jobs
+							  |---ApexJobs
+							  
+	Example 2: Chaining of Jobs .
+
+			public class SecondQueue implements Queueable{
+				public void execute(QueueableContext qc){
+					System.debug('Line Three');
+					System.debug('Line Four');
+        
+				}
+			}
+				
+
+					
+			public class FirstQueue  implements Queueable{
+			
+				public void execute(QueueableContext qc){
+				
+					System.debug('Line one');
+					System.debug('Line two');
+					SecondQueue qe=new SecondQueue(); // Queue is called from queue.
+					Id jobId=System.enqueueJob(qe);
+				}
+			}
+			
+	 Advantages 
+	 
+		1. Returns the JobId when invoked .
+		
+		2. Supports Primitive and Non-Primitive
+		
+		3. Supports chanining of jobs (Queue can be called from Queue)
+		
+	 Drawbacks :
+	 
+		1. For every queue apex we need to define the separate apex class.
+		
+	  Limits :
+	  
+		1. Maximum  50 Queuables jobs can be called from transaction.
+
+	-->
+</apex:page>

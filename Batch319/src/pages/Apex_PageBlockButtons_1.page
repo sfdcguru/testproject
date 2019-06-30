@@ -1,0 +1,12 @@
+<apex:page >
+    <apex:form >
+    <apex:pageBlock title="Example">
+    	<apex:pageBlockButtons location="top">
+            <apex:commandButton value="Save" />
+            <apex:commandButton value="Cancel" />
+        </apex:pageBlockButtons>
+        Student Name  : <br/> 
+        Student Age   :
+    </apex:pageBlock>
+   </apex:form>
+</apex:page>

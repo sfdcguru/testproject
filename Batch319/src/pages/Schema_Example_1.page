@@ -1,0 +1,29 @@
+<!--
+SobjectType  :
+1. This will specify what type of sobject we are using 
+2. Example : 
+	Account.SobjectType
+	Contact.SobjectType
+	Case.SobjectType
+	Loan__c.SobjectType
+
+DescribeSobjectResult:
+1. This is pre-defined apex class.
+2. This is defined under the namespace of schema
+3. This class contains all the methods required to fetch details about sobject 
+	Example :
+	isCustom()
+	isCUstomSetting()
+
+getDescribe() :
+1. This method will return description about the sobject 
+2. This method will return all the properties of the sobject.
+-->
+<apex:page controller="Schema_Example" >
+    <apex:pageBlock >
+    	<apex:pageBlockTable value="{!resMap}" var="a">
+            <apex:column value="{!a}" headerValue="Key"/>
+            <apex:column value="{!resMap[a]}" headerValue="Properties"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

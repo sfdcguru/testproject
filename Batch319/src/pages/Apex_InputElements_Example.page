@@ -1,0 +1,69 @@
+<apex:page >
+    <apex:sectionHeader title="Student" subtitle="New Student" help="/apex/Topics_Covered" />
+    <apex:form >
+    	<apex:pageBlock title="Student Edit">
+        	<apex:pageBlockButtons location="top">
+                <apex:commandButton value="Save" />
+                <apex:commandButton value="Edit" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Basic Details" collapsible="false">
+                
+            	<apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Name" />
+                    <apex:inputText />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Active" />
+                    <apex:inputCheckbox />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Password" />
+                    <apex:inputSecret />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Gender" />
+                    <apex:selectRadio >
+                        <apex:selectOption itemLabel="Male" itemValue="Male" />
+                        <apex:selectOption itemLabel="FeMale" itemValue="FeMale" />
+                    </apex:selectRadio>	
+                </apex:pageBlockSectionItem>
+            
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Communication Details" collapsible="false">
+            	<apex:pageBlockSectionItem >
+                    <apex:outputLabel value="City" />
+                    <apex:selectList size="1">
+                        <apex:selectOption itemLabel="-None-" itemValue="none" />
+                        <apex:selectOption itemLabel="Hyd" itemValue="Hyd" />
+                        <apex:selectOption itemLabel="Bang" itemValue="Bang" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Languages" />
+                    <apex:selectCheckboxes >
+                        <apex:selectOption itemLabel="Telugu" itemValue="Telugu" />
+                        <apex:selectOption itemLabel="Hindi" itemValue="Hindi" />
+                        <apex:selectOption itemLabel="English" itemValue="English" />
+                    </apex:selectCheckboxes>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Address" />
+                    <apex:inputTextArea rows="3" cols="20" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Email" />
+                    <apex:inputText />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    
+    
+    
+    </apex:form>
+</apex:page>

@@ -1,0 +1,20 @@
+<!--
+PageBlockTable : 
+----------------
+1. It is used to display list of records in the VF page.
+2. It can display 1000 records
+3. PageBlockTable is a child of pageBlock/pageBlockSection
+
+-->
+<apex:page standardController="Account" recordSetVar="items">
+    <apex:pageBlock >
+    	<apex:pageBlockTable value="{!items}" var="a">
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+        
+        </apex:pageBlockTable>
+    
+    </apex:pageBlock>
+</apex:page>

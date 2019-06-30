@@ -1,0 +1,44 @@
+<apex:page >
+    Scope : {}
+    Scope will wrap group of statements under one name.
+    Example : 
+    class Example{
+    // scope of class Example 
+    }
+    
+    Example : 
+    interface Example{
+    // scope of interface 
+    }
+    
+    Example : 
+    void show(){
+    // scope of method show 
+    }
+    
+    Example : 
+    if(logic){
+    // scope of if 
+    }
+    
+    Example : 
+    for(stmt1;stmt2;stmt3){
+    // scope of for 
+    }
+    
+    Example :
+    if(){
+    // scope of if 
+    }else{
+    
+    // scope of else 
+    }
+    
+    Example : 
+    try{
+    // scope of try
+    
+    }catch(Exception e){
+    // scope of catch
+    }
+</apex:page>

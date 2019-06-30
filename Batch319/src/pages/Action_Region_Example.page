@@ -1,0 +1,27 @@
+<apex:page controller="Action_Region_Example">
+    <Apex:form >
+        <apex:outputPanel >
+            Name : <br/>
+            <apex:inputText value="{!name}" />
+            <br/><br/>
+            Phone :<br/>
+            <apex:inputText value="{!phone}" /><br/><br/>
+            <apex:actionRegion >
+            Account <br/>
+           
+            <apex:selectList size="1" value="{!selected}">
+                <apex:selectOptions value="{!accounts}" />
+                <apex:actionSupport event="onchange" action="{!callMe}" reRender="op" />
+            </apex:selectList>
+           </apex:actionRegion>
+            <br/><br/>
+            Contact <br/>
+            <apex:selectList size="1" id="op">
+                <apex:selectOptions value="{!contacts}" />
+            </apex:selectList>
+            
+           
+        </apex:outputPanel>
+    
+    </Apex:form>
+</apex:page>

@@ -1,0 +1,8 @@
+<apex:page controller="Action_Pooler_Example">
+    <apex:form id="fm">
+        <!-- <apex:actionPoller action="{!callMe}" interval="5" reRender="one"/> -->
+        <apex:actionStatus startText="Loading...." stopText="Success" id="msg" /> 
+        <apex:commandButton value="Submit" action="{!invoke}" status="msg" reRender="fm" />
+        <apex:outputLabel value="{!result}" id="one" />
+    </apex:form>
+</apex:page>

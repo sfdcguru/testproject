@@ -1,0 +1,71 @@
+<apex:page >
+      1. Standard Navigation :
+    	Setup
+    	|--- > Build
+    		   |--- > Develop
+    				  |--- > Lightning Components 
+    						 |--- >visualforce page 
+    							    |--- > New 
+    
+     	Step  1: Enter Name 
+    	Step  2: Enter Body of page 
+    	Step  3: Save 
+    
+    2. Developer Console : 
+    	User Name 
+    	|--- > Developer Console 
+    		   |--- > File 
+    				  |--- > New 
+    						 |--- > Visualforce Page
+    								|--- > New 
+    
+    	Step  1: Enter Name 
+    	Step  2: Enter Body of page 
+    	Step  3: Save 
+    
+    3. Using URL : 
+    
+    https://ap8.salesforce.com/apex/PageName
+    
+    	1. Enable Development Mode : 
+    		Setup
+    		|--- > Adminster
+    			   |--- > Manage Users
+    					  |--- >  User 
+    							  |--- > Edit 
+    									 |--- > Enable Development Mode     
+    
+    	2. https://serverinstance.salesforce.com/apex/pageName : 
+    		if the page exists ,then the will be opened, if the page doesnt exits then it throw error message 
+    		with link to create a page.
+
+
+	4. Eclipse :    
+    
+    
+    5.Visualforce page will have an extention of ".vfp"
+    6.Version of API is 45.0
+    7. Visualforce page should obey strict xml format.
+    	a. Every opening element should have corresponding closing elements 
+    		<!-- <Name> Satish Myla</Name> 
+    				<Name />
+			 -->
+    	b. Inner elements should be closed first then outer elements 
+    		<!--
+				<Employee>
+					<Name>
+						<LastName> Myla</LastName>	
+						<FirstName> Satish</FirstName>
+					</Name>
+				</Employee>
+			-->
+    
+    	c. Opening element and closing element should be case -sensitive 
+    		<!--
+					<apex:page > </apex:page>
+					<apex:Page>   </apex:Page>
+					<apex:PAGE> </apex:PAGE>
+			-->
+    
+    
+</apex:page>

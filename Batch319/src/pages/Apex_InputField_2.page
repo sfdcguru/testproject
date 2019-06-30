@@ -1,0 +1,24 @@
+<apex:page standardController="Opportunity">
+    <apex:sectionHeader title="Opportunity" subtitle="New Opportunity" help="/apex/pages" />
+    <apex:form >
+    	<apex:pageBlock title="Opportunity Edit" tabStyle="opportunity">
+        	<apex:pageBlockButtons location="top">
+                <apex:commandButton value="Save" />
+                <apex:commandButton value="Cancel" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Basic Details" collapsible="false">
+                <apex:inputField value="{!Opportunity.Name}" />
+                <apex:inputField value="{!Opportunity.StageName}"  />
+                <apex:inputField value="{!Opportunity.Type}"  />
+                <apex:inputField value="{!Opportunity.CloseDate}"  />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="other Details" collapsible="false">
+                <apex:inputField value="{!Opportunity.Amount}" />
+                <apex:inputField value="{!Opportunity.LeadSource}" />
+                <apex:inputField value="{!Opportunity.NextStep}" />
+                <apex:inputField value="{!Opportunity.AccountId}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    
+    </apex:form>
+</apex:page>

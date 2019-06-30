@@ -1,0 +1,705 @@
+<apex:page >
+    <!--
+    ======================================================================================  
+Triggers  : Triggers are the automated actions which are performed when 
+ever dml operations ar performed on the object .
+====================================================================================
+1. Triggers are classified into two types 
+
+    a. Before Triggers 
+
+    b. After  Triggers 
+
+2. Before Triggers  : These triggers are fired before the new data is saved
+                      to database .
+
+3. After Triggers   : These triggers are fired after the records are saved 
+                      to database.
+    
+4. Trigger Events   : These are the events that will fire the triggers when 
+                      DML is performed .
+
+    1. Before Insert 
+
+    2. Before Update 
+
+    3. Before Delete 
+
+    4. After Insert
+
+    5. After Update 
+
+    6. After Delete 
+
+    7. After Undelete
+
+5. Trigger Context Variables :
+
+    1. There are the varaibles which are defined in the Trigger class of System name space .
+
+    2. These variables are used to hold data required during the run time of the operation .
+
+        a. isInsert : This will return true , if the trigger is fired due to the DML 
+                      operation of Insert .
+
+        b. isUpdate : This will return true ,if the trigger is fired due to the DML 
+                      operation of Update .
+
+        c. isDelete : This will return true ,if the trigger is fired due to the DML 
+                      operation of Delete .
+
+        d. isBefore : This will return true ,If the trigger is fired due to the 
+                      before event .
+
+        e. isAfter  : This will return true ,If the trigger is fired due to 
+                      after event .
+
+        f. new      : This will return list of new version of records on which dml 
+                      is performed .
+
+        g. newMap   : This will return Map of new version of records with record id 
+                      as a key and record as value .
+
+        h. old      : This wll return list of old version of records on which dml is performed.
+
+        i. oldMap   : This will return map of old version of records with record is 
+                            as key and record as value .
+
+        j.isUndelete: This will return true if the DML is performed due the DMl operarion of 
+                      undelete .
+
+6.  Insert   :
+
+    1. These triggers are fired  when we are making  DML operation of Insert .
+
+    2. These insert operation can be performed from Apex class ,VF page ,
+       standardpages, DataLoder,Trigger or any where from salesforce UI
+
+    3. When we write soql query ,data which is successfully saved to sobject 
+       will be retrived.
+
+    4. If you want to modify the data which is successfully saved to sobject ,
+       we need to make DML operation .
+
+    5. Before Insert : 
+
+        a. Trigger.new  :The list of new records which are trying to insert 
+                         are stored in Trigger.new.
+
+        b. In the before insert ,new records which we are trying insert cannot
+           fetched using soql's as the records are not at saved .
+
+        c. If we want to modify the records which are in Trigger.new we can perform 
+           write operation .
+
+    6. After Insert : 
+
+        a. Trigger.new  : The list of new records which are successfully saved to 
+                          sobject are are in Trigger.new 
+
+        b. We can write a soql to fetch the new records which are in Trigger.New
+
+        c. If we want to modify the records which are in Trigger.new we can perform 
+           DML operations.
+
+        d. Trigger.NewMap : The List of new version of records which are saved to 
+           sobject are stored in trigger.newmap with recordId as key and record as 
+          value.
+
+        Syntax :    
+            
+            trigger triggername on sobject( trigger events) {
+
+
+            }
+
+-------------------------------------------------------------------------------------------------
+Scenario 1:  When  ever a new Account is created  with Indsutry as Banking then set 
+             ownership as public .
+
+        trigger AccountHandler on Account (before insert) {
+                for(Account  a: Trigger.new){
+
+                    if(a.industry=='Banking'){
+
+                            a.ownership='Public';
+                    }  
+                 }
+        }           
+            
+--------------------------------------------------------------------------------------------------
+Scenario 2: When ever new Opportunity is created with stageName as closed won or closed lost ,
+            then set closeDate as  today otherwise set closed date as 15 days from today.
+
+        trigger  optyTrigger on Opportunity ( before Insert ){
+            
+            for(Opportunity op : Trigger.New){
+                
+                if(op.stageName=='Closed Won' ||op.stageName== 'Closed Lost' ){
+
+                    op.closeDate=System.today();
+                }else{
+                        
+                    op.closeDate=System.today()+15;
+                }
+
+            }
+
+        }   
+-----------------------------------------------------------------------------------------       
+
+Scenario 3:  When ever new Account is created  with AnnualRevenue more than five lackhs 
+             then add wilson as AccountTeamMember .
+
+      Note : First Enable AccountTeams .
+
+         setup
+           |---Build
+             |---Customize 
+                   |----Accounts 
+                         |----AccountTeamMembers 
+                                 |---Enable the settings 
+                                             |---Add it PageLayouts.
+
+
+     Note :  Field in AccountTeamMemeber 
+
+         1. AccountId       : Id of the record on which you want to add TeamMember 
+
+         2. UserId          : Id of the  user whom you want to add as teammember 
+
+         3. TeamMemberRole  : Role of the teammember 
+
+         4. AccountAccessLevel  : This will specify the level access that is provided 
+                                  on Account for the AccountTeammember 
+
+        trigger AccountHandler on Account (after Insert) {
+
+                List<AccountTeamMember> teams=new List<AccountTeamMember>();
+
+                User u=[select id from User where alias='stud'];
+
+                for(Account a: Trigger.new ){
+
+                    if(a.AnnualRevenue > 500000){
+
+                            AccountTeamMember atm=new AccountTeamMember();
+
+                            atm.AccountId=a.id;
+
+                            atm.UserId=u.id;
+
+                            atm.TeamMemberRole='Account Manager';
+
+                        atm.AccountAccessLevel='All';
+
+                            teams.add(atm);       
+                    }
+                }
+                insert teams;
+        }
+---------------------------------------------------------------------------------------
+Scenario 4:  When ever a new contact is created submit the record for approval 
+
+        1. Create new Approval Process on Contact Object
+
+         Process Name       : Web Contact Approval
+
+         Entry Condition    : Leadsource =web
+
+         AutoManted Approver    : None  
+
+         Record Editability : Admin
+
+         Intital Submiter   : Wilson 
+
+         Approval Step      : 1
+
+         Which Records should   : All 
+
+         Who is the approver    : Satish 
+
+        trigger ContactApprovals on Contact (after insert) {   
+
+                for(Contact c: Trigger.new){
+
+                Approval.ProcessSubmitRequest req1 = new Approval.ProcessSubmitRequest();
+
+                    req1.setObjectId(c.id);  // id of the record which you want to submit
+     
+                User user1=[select id from User where firstname='Wilosn'];
+
+                    req1.setSubmitterId(user1.Id);// id of the submiter
+
+                    Approval.ProcessResult result = Approval.process(req1);
+                }
+        }
+
+------------------------------------------------------------------------------------------                  
+UseCases :
+
+    1. When  a new Lead is created with LeadSource as 'Web' then make the wilson as the 
+       owner of the record.
+
+    2. When  a new Contact is contact is created for a existing account then set Contact 
+       otherphone as Account Phone 
+
+    3. When a new Opportuntiy is creatd with  amount more than 50Lacs add the Wilson as 
+       OpportuntiyteamMember 
+
+    4. When a New Case is Creatd with origin as Email add the Satish as CaseTeamMember 
+
+    5. Create a new Approval process on Account and Submit the record for Approval when 
+       industry is Energy.          
+
+Update Triggers : 
+
+        1. Trigger.Old    : List of records on which update is performed ,Those records 
+                            with old version of values ,stored in Trigger.old 
+
+                      : On Trigger.Old we can always perform read operation .
+
+        
+        2. Trigger.OldMap : List of records on which update is performed ,Those list of records 
+                            ,with old versionof values are stored in the map with recordId as 
+                            key and record as value.
+
+
+        3. Trigger.New    : List of records on which update performed ,those list of records 
+                            with new version of values is stored in Trigger.new 
+
+        4. Trigger.NewMap : List of records on which update is performed ,Those list of records ,
+                            with new versionof values are stored in the map with recordId as key 
+                            and record as value.
+
+-----------------------------------------------------------------------------------------------------
+Scenario 1:  When  ever the stageName is modified to  closedWon then set the closeDate as today.
+
+        a. Create a apex class 
+
+        public class OptyTriggerHandler {
+
+          public static void beforeUpdate(Map<Id,Opportunity> oldMap, Map<Id,Opportunity> newMap){
+
+                        for(Id key : oldMap.keySet()){
+
+                                Opportunity old=oldMap.get(key);
+
+                                Opportunity newOpt=newMap.get(key);
+
+                                if(old.stageName!='closed won' && newopt.stageName=='closed won'){
+
+                                    newOpt.closeDate=System.today();
+                                }
+                        }
+                    }
+            }
+
+        
+        b. Create Trigger :
+
+            trigger optyUpdate on Opportunity (before Update) {
+
+                OptyTriggerHandler.beforeUpdate(Trigger.oldMap,Trigger.NewMap);
+            }
+---------------------------------------------------------------------------------------------------
+Sceanaro  2:  
+        1.Set the owd on the opportunity as Private .
+
+        2.Remove Modify all permission on wilson's profile .
+
+        3.When ever the opportunity stageName is modified to Closed won and Amount is more than 
+          10 Lacs share the record with wilson.
+          
+    a.. Create a apex class 
+
+    public class OptyTrigger {
+    
+            public static void afterUpdate(Map<Id,Opportunity> oldMap, Map<Id,Opportunity> newMap){
+                List<OpportunityShare> share =new List<OpportunityShare>();
+                User u=[select id from user where alias='stud'];
+                for(Id key : oldMap.keySet()){
+                        Opportunity old=oldMap.get(key);
+                        Opportunity newOpt=newMap.get(key);
+                        if(old.stageName!='closed won' && newopt.stageName=='closed won'){
+                            if(newOpt.Amount > 1000000){
+                                    OpportunityShare os=new OpportunityShare();
+                                    os.OpportunityId=key;
+                                    os.UserOrGroupId=u.id;
+                                    os.OpportunityAccessLevel='Read';
+                                    os.RowCause='Manual';
+                                    share.add(os);
+                            }
+                        }
+                }
+                insert share;
+            }
+    }
+
+
+    b. Create a Trigger 
+
+    trigger optyUpdate on Opportunity (after update ) {
+            
+            OptyTrigger.afterUpdate(Trigger.oldMap,Trigger.NewMap); 
+        }
+
+
+---------------------------------------------------------------------------------------------------
+ Scenario 3: When ever a Account phone number is modified ,update all the contacts of the Account   
+
+        a. Contacts otherPhone as Old phone no of account 
+
+        b. Contacts mobilePhone as New phone no of Account.
+
+    
+    a. Create a Apex class 
+
+      public class AccountUpdatehandeler {
+            public static void afterUpdate(Map<Id,Account> oldMap, Map<Id,Account> newMap){
+
+                List<Id> accs=new List<Id>();
+
+                for(Id key : oldMap.keySet()){
+
+                        Account old=oldMap.get(key);
+                        Account newAcc=newMap.get(key);
+
+                        if(old.Phone!=newacc.Phone){
+                            accs.add(key);  
+                        }
+                }
+                List<Contact> contactList=[select OtherPhone,MobilePhone,AccountId from Contact 
+                                        where accountId in:accs];
+
+                for(Contact c: contactList){
+                        c.otherPhone=newMap.get(c.accountId).Phone;
+                        c.mobilePhone=oldMap.get(c.accountId).phone;
+                }
+                update contactList;
+            }
+      }
+
+    b. Create a Trigger 
+
+        trigger accUpdateTrigger on Account (after Update) {
+            AccountUpdatehandeler.afterUpdate(Trigger.oldMap,Trigger.newMap);
+        }
+ -----------------------------------------------------------------------------------------------  
+        
+Delete Triggers : 
+
+    1. These trigger are fired  when we make a DML operation of delete .
+
+    2. Trigger.old : This will contain all the list of records which we are deleting .
+
+    3. Trigger.oldMap : This will contain all the list of records which we are deleting
+
+               in the form of Map where record id is the key and record is the 
+               value .
+
+
+    Example 1: Create two objects  
+
+            Object Name : Customer 
+
+            FieldName   DataType
+            -----------------------------
+            Name        Text
+
+            Phone       Phone
+
+            Active      CheckBox
+
+
+            Object Name : Payments 
+
+            FieldName   DataType
+            ------------------------------
+            Name        AutoNumber
+
+            Amount      Currency
+
+            Mode        PicKList (Cash /Online)
+
+            Customer    Lookup(Customer)
+
+
+Scenario : When ever Active Customers are deleted  ,all the corresponding payments should be deleted .
+
+         : When ever In Active Customers are delete ,all the corresponding online payment records 
+           should be deleted.
+
+
+    1 . trigger customerdelete on Customer__c (before delete ){
+
+            List<Id> active =new List<Id>();
+            List<id> inactive=new List<Id>();
+
+            for(Customer__c c: Trigger.old){
+
+                if(c.active__c ==true){
+
+                    active.add(c.id);
+                }else{
+                    
+                    inactive.add(c.id);
+                }
+            }
+            List<Payment__c> payments =[select id from Payment__c where Customer__c in :active];
+            List<Payment__c> onlines=[select id from Payment__C where Customer__c in :Inactive 
+                                                                           and Mode__c='Online'];
+
+            delete payments ;
+
+            delete onlines;
+
+        }
+
+            
+
+
+    Undelete Triggers: 
+
+        1. These are fired when we undelete the  records from recycle bin.
+
+        2. There is only after undelete trigger. 
+
+        3. Trigger.new : The list of records which are undeleted from the recylebin are stored
+                        in Trigger.new
+
+        4. Trigger.newMap: The list of records which are undeleted they are stored in the map ,
+           with recordid as key and record as value .
+        
+
+Before insert
+
+                    Trigger.New (Records in Trigger.new)
+                   ----------------------------------------
+                    Read    Write     Soql     DML
+                   ----------------------------------------
+
+    Trigger.New     Yes     Yes       No       No
+
+    Trigger.newMap  -------------No----------------
+
+    Trigger.old     -------------No----------------
+
+    Trigger.oldMap  -------------No---------------
+
+
+After insert
+=============
+                    Trigger.New (Records in Trigger.new)
+                    -----------------------------------------
+                    Read    Write     Soql     DML
+                    -----------------------------------------
+
+    Trigger.New     Yes     No          Yes         Yes
+
+    Trigger.newMap  Yes     No          Yes         Yes
+
+    Trigger.old     -------------No----------------------
+
+    Trigger.oldMap  -------------No----------------------
+
+
+before update
+=============
+            
+                    ---------------------------------------
+                    Read    Write     Soql     DML
+                    ---------------------------------------
+
+    Trigger.New     Yes     Yes         No      NO
+
+    Trigger.newMap  Yes     Yes         No      No
+
+    Trigger.old Yes No      Yes         No      No
+
+    Trigger.oldMap  Yes     No          Yes     No
+
+
+after update
+=============
+            
+                    ---------------------------------------
+                    Read    Write     Soql     DML
+                    ---------------------------------------
+
+    Trigger.New     Yes     No        Yes      Yes
+
+    Trigger.newMap  Yes     No        Yes      yes
+
+    Trigger.old     Yes     No        No       No
+
+    Trigger.oldMap  Yes     No        No       No
+
+
+before Delete
+=============
+            
+                    --------------------------------------
+                    Read    Write     Soql     DML
+                    --------------------------------------
+
+    Trigger.New     -----------No----------------------
+
+    Trigger.newMap  -----------No----------------------
+
+    Trigger.old     Yes     Yes      Yes        No
+
+    Trigger.oldMap  Yes     yes      Yes        No
+
+
+after Delete
+=============
+            
+                    ------------------------------------
+                    Read    Write     Soql     DML
+                    ------------------------------------
+
+    Trigger.New     -----------No-------------------
+
+    Trigger.newMap  -----------No-------------------
+
+    Trigger.old     Yes        No       No      No
+
+    Trigger.oldMap  Yes        No       No      No
+
+
+After UnDelete
+==============
+            
+                    ------------------------------------
+                    Read    Write     Soql     DML
+                    ------------------------------------
+
+    Trigger.New     Yes     No        Yes       Yes
+
+    Trigger.newMap  Yes     No        Yes       Yes
+
+    Trigger.old     ------------No-----------------
+
+    Trigger.oldMap  --------------No---------------
+
+Recurisve Triggers :
+    1. if the trigger call itself we call it as recurisve trigger .
+    
+    2. Recursive Triggers can be handled using Boolen static variable ,
+    
+    3.if the value of flag variable is true run the logic other wise stop the operation.
+    
+    Example : 
+    
+    public class RecursiveExample {
+        public Static Boolean flag=true;
+        public static void beforeInsert(){
+            if(flag==true){
+                flag=false;
+                Account acc=new Account();
+                acc.Name='Testing';
+                acc.Phone='1234';
+                insert acc;
+            }
+        
+        }
+    }
+    
+    trigger RecTrigger on Account (before insert) {
+        RecursiveExample.beforeInsert();
+    }
+
+Question & Answers :
+
+    01.  How to convert a trigger  into bulk trigger?
+
+        ANS: By Defulat every trigger is bulk trigger we need not do any thing to 
+                make it bulk.
+
+    02. Can i write more than one trigger on the  same object with same event?
+
+        ANS:Yes we can write ,but it not a good practise as we can not controll the 
+            order of execution.
+
+    03.If we insert 100 records how many times trigger will be fired ?
+
+        ANS: Only once with in the trigger logic is implemented on every record
+
+    04.If we can achive logic with before trigger or after trigger which you prefer?
+
+        ANS: before triggers as any changes made in the before trigger are write operations 
+             and they dont count against  governing limits.
+
+    05. Can we call future methods in the trigger?
+
+        ANS: Yes we can call future methods with in trigger 
+             1. To resolve Mixed DML excetion
+
+             2. To invoke webservice calls from  Trigger (As trigger doesnt support 
+                                                                    synchronos webservices);
+
+    06. Can we call batch apex and schedule apex in the trigger ?
+
+        ANS: Yes we can call but ensure that it wont hit governing limits .
+
+    07.What are recursive triggers?
+
+        ANS: If the trigger calll itself we call it as recursive triggers.
+
+    08.How do you handle recursive triggers?
+
+        ANS: By using boolean static variables /
+
+    09.What are circular trigger ?
+
+        ANS: If a trigger call another trigger which leads invocation of first trigger 
+             is called circular 
+
+    10.How to handle circular triggers?
+
+        ANS:using Boolean static varibales 
+
+    11. Good practices while writing a trigger?
+
+        ANS: 
+            1. Write trigger logic with in the Apex class and invoke it in trigger
+
+            2. Avoid soql and a DML with in a loop
+
+            3. Avoid writting multiple trigger on same object  instead use Apex class 
+               with methods 
+    12. Order of execution of triggers
+
+        1. Fetch the data 
+
+        2. System validation rules (required fields ,data types)
+
+        3. before triggers
+
+        4. Validations (Custom and standard)
+
+        5. Save record 
+
+        6. after triggers 
+
+        7.Assignment rules 
+    
+        8. AutoResponse rules 
+    
+        9. workflow rules 
+
+        10. Workflow field update and goto step no 3.
+
+        11. Rollup summary fields 
+
+        12. Criteria based sharing rule 
+
+        13. Commit record 
+
+        14 .send Emails
+
+
+
+    -->
+</apex:page>

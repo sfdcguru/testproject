@@ -1,0 +1,58 @@
+<!--
+apex:pageBlock : 
+1. This will create block on the page.
+2. Attributes : 
+	1. title : 
+	   a. It is a text value.
+	   b. This will be displayed on left corner of the header 
+
+	2. dir  :
+	   a. This will specify the direction of the content 
+	   b. Possible values are RTL (Right to Left ) LTR(Left to Right)
+	   c. Default value is LTR 
+
+	3. tabStyle : 
+	   a. This will specify name of the object whose tabstyle should be applied on pageblock
+
+	4. rendered : 
+	   a. it is a boolean value .
+	   b. When set as false ,content of the block will not be displayed.
+
+	5. helpTitle : 
+	   a. It is a text value .
+	   b. This will be displayed on the right corner of the header 
+
+	6. helpURL  : 
+	   a. It is a url of the page.
+	   b. When we click on the helpText which page should be opened is given as helpText
+
+
+
+-->
+
+<apex:page >
+    <apex:pageBlock >
+        Employee Name : <br/>
+        Employee Age :
+    </apex:pageBlock>
+    <apex:pageBlock title="Employee">
+        Employee Name : <br/>
+        Employee Age :
+    </apex:pageBlock>
+    <apex:pageBlock title="Employee" dir="RTL">
+        Employee Name : <br/>
+        Employee Age :
+    </apex:pageBlock>
+    <apex:pageBlock title="Employee" tabStyle="Lead">
+        Employee Name : <br/>
+        Employee Age :
+    </apex:pageBlock>
+    <apex:pageBlock title="Employee Block" rendered="false">
+        Employee Name : <br/>
+        Employee Age :
+    </apex:pageBlock>
+    <apex:pageBlock title="Employee" helpTitle="needHelp??" helpUrl="/apex/Apex_Page">
+        Employee Name : <br/>
+        Employee Age :
+    </apex:pageBlock>
+</apex:page>

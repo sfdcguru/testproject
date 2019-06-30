@@ -1,0 +1,70 @@
+<!--
+apex:pageBlockSection : 
+1. This is a child component of pageBlock.
+
+2. This will divide the row into no of columns 
+
+3. In each column one component will be displayed.
+
+4. One component means once's you open ,till you close it is called one component.
+
+5. Attributes 
+    1. title : 
+       a. it is a text value 
+       b  This will be printed on the header of the section.
+
+    2. columns :
+       a. It is a integer value .
+       b. This will specify how many columns per row.
+       c. If you dont mention number of columns then by default it will take two.
+
+    3. collapsible: 
+       a. it is a boolean value
+       b. When set as false, collapisble will be hidden.
+
+
+
+-->
+
+<apex:page >
+    <apex:form >
+        <apex:pageBlock title="Example">
+            <apex:pageBlockSection title="Section-1" >
+                Last Name : <br/>
+            First Name :<br/>              
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Section-2" collapsible="false">
+                Last Name : <br/>
+                First Name :<br/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Section-3" columns="2" collapsible="false" >
+                <apex:outputLabel value="Enter Name" />
+                <apex:inputText />
+                <apex:outputLabel value="Enter Age" />
+                <apex:inputText />
+            
+            </apex:pageBlockSection>
+             <apex:pageBlockSection title="Section-4" columns="4" collapsible="false" >
+                <apex:outputLabel value="Enter Name" />
+                <apex:inputText />
+                <apex:outputLabel value="Enter Age" />
+                <apex:inputText />
+            
+            </apex:pageBlockSection>
+             <apex:pageBlockSection title="Section-4"  collapsible="false" >
+               <apex:pageBlock title="CustomerReports">
+                   Testing  <br/>
+                    Testing <br/>
+                    Testing <br/>
+               </apex:pageBlock>
+                <apex:pageBlock title="Monthly Report">
+                   Testing  <br/>
+                    Testing <br/>
+                    Testing <br/>
+               </apex:pageBlock>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    
+    </apex:form>
+</apex:page>

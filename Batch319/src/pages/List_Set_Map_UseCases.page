@@ -1,0 +1,169 @@
+<apex:page >
+    Example :1
+    1. Create a List  which will store cityNames 
+    2. Take one by one cityName and add it set
+    	<!--
+			List<String> cityNames =new List<String>();
+			cityNames.add('Hyd');
+			cityNames.add('Ban');
+			cityNames.add('Che');
+
+			Set<String> cities =new Set<String>();
+			for(String s:cityNames){
+				cities.add(s);
+			}
+		-->
+    
+    Example :2
+    1. Create a list off Accounts 
+    	Name		Phone 		Rating
+    	TCS			040-123		Hot
+    	Dell		020-123		Warm
+    
+    2. Create a list which will store Account names 
+    3. Create a set which will store Phone numbers 
+    	
+    <!--
+			List<Account> accounts =new List<Account>();
+			Account a1 =new Account();
+			a1.Name='TCS';
+			a1.Phone='040-123';
+			a1.Rating='Hot';
+			accounts.add(a1);
+			Account a2 =new Account(Name='Dell',Phone='020-123',Rating='Warm');
+			accounts.add(a2);
+
+			List<String> accNames =new List<String>();
+			for(Account a :accounts){		a: Name : TCS 	Phone 040-123	Rating :Hot 
+				accNames.add(a.name);
+			}
+
+			Set<String> phones =new Set<String>();		
+			for(Account a: accounts){
+				phones.add(a.phone);
+			}
+		
+	-->
+    
+    Example :3 
+    1. Create a List of Student  
+    		Name		Age 		Qualification
+    		Sam			40			BTech
+    		Ram			50			MTech
+    		Kiran		30			BTech
+    	
+    2. Create a Map with student name as key and age as value 
+    3. Create a Map with Student name as key and Qualification as value 
+    4. Create a Map with student name as key Map with Student name and qualification as value 
+    
+    <!--
+		List<Student> students =new List<Student>();
+		Student s1 =new Student();
+		s1.Name='Sam';
+		s1.Age=40;
+		s1.Qualification='BTech';
+	
+		Student s2 =new Student();
+		s2.Name='Ram';
+		s2.Age=50;
+		s2.Qualification='MTech';
+		
+		Student s3= new Student();
+		s3.Name='Kiran';		
+		s3.Age=30;
+		s3.Qualification='BTech';
+
+		students.add(s1);
+		students.add(s2);
+		students.add(s3);
+		Map<String,Integer> stdMap =new Map<String,Integer>();
+
+		for(Student s :students){
+			stdMap.put(s.name,s.age);
+		}
+
+		Map<String,String> qualMap =new Map<String,String>();
+		for(Student s: students){
+			qualMap.put(s.name,s.qualification);
+		}
+
+		Map<String,Map<String,String>> stdMap =new Map<String,Map<string,String>>();
+		for(Student s :students){
+			Map<String,String> qualMap =new Map<String,String>();
+            qualMap.put(s.name,s.qualification);
+            
+            stdMap.put(s.name,qualMap);
+		}
+		System.debug(stdMap);
+
+	-->
+    Example :4 
+    1. We have a list of Accounts :accounts 
+    2. create a map with accountId as key and account as value 
+    3. Take one by one account from the list if the rating is hot then put them in map.
+    
+    <!--
+    		Map<Id,Account> accMap =new Map<Id,Account>();
+			for(Account a: accounts){
+				if(a.rating=='Hot'){
+					accMap.put(a.Id,a);
+				}
+			}
+    -->
+    Example :5 
+    1. We have a list of Opportunities : optyList 
+    2. Create map with OpportuntiyName as key and Opportunity closedate as value .
+    3. Take one by one opportunity from the list ,if the stagename is closed won put them in map
+    <!--
+		Map<String,Date> optyMap =new Map<String,Date>();
+		for(Opportunity op :optyList){
+			if(op.stageName=='Closed Won'){
+				optyMap.put(op.name,op.closeDate);
+			}
+		}
+
+	-->
+    
+    Example : 6
+    
+    City		Places
+    =================================
+    Hyd			SRNagar,LBNagar
+    Ban			Marthali,ECity
+    Che			TNagar,Chromepet
+    
+    <!--
+		Map<String, List<String> > cityMap =new Map<String,List<String>>();
+		List<String> hplaces =new List<String>{'SRNagar','LBNagar'};
+		cityMap.put('Hyd',hplaces);
+
+		cityMap.put('Ban',new List<String>{'Marthali','ECity'});
+
+		List<String> cplaces =new List<String>{'TNagar','Chromepet'};
+		cityMap.put('Che',cplaces);
+
+	-->
+    
+    Example 8:
+    1. We have list of Opportunties :optyList 
+    2. Create a Map with Owner+Id as key and list of Opportunities as value 
+    3. Group of opportunities based on the owner and insert in the map.
+    
+    <!--
+		Map<Id,List<Opportunity>> optyMap =new Map<Id,List<Opportunity>>();
+		for(Opportunity p:myList){
+			Boolean flag =optyMap.get(p.ownerId);
+			if(flag == false){
+				List<Opportunity> otpyList =new List<Opportunity>();
+				optyList.add(p);
+				optyMap.put(p.ownerId,p);
+			}else{
+				List<Opportunity> optyList =optyMap.get(p.ownerId);
+				optyList.add(p);
+				optyMap.put(p.ownerId,p);
+			}
+		}
+
+	-->
+    
+</apex:page>

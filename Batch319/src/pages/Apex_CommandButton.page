@@ -1,0 +1,38 @@
+<!--
+apex:commandButton : 
+1. This will create button on the page.
+2. This is a child component of apex:form
+3. Attributes : 
+	1. value : 
+	   a. it is a text value .
+	   b. This will be displayed as label on the button
+
+	2. disabled :
+	   a. it is a boolean value
+	   b. When set as true ,button will be disabled
+	   c. default value is false.
+
+	3. rendered : 
+	   a. It is a boolean value
+	   b. When set as false, button will be hidden
+	   c. default value is true
+	
+	4. action : 
+	   a. When we click on the button what is the action that should be performed is given 
+	   b. It can call method form apex class or url of page
+
+	5. Style : 
+	   a. if you want to apply csS then we style 
+-->
+
+
+<apex:page >
+    <apex:form >
+        <apex:commandButton />
+        <apex:commandButton value="CallMe" />
+        <apex:commandButton value="Submit" disabled="true" />
+         <apex:commandButton value="Cancel" rendered="false"/>
+        <apex:commandButton value="Invoke" action="/apex/Apex_Page" />
+        <apex:commandButton value="MyStyle" style="width:150;background:yellow;color:red" />
+    </apex:form>
+</apex:page>

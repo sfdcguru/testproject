@@ -1,0 +1,156 @@
+<apex:page >
+    <!--
+    Identifiers:
+------------
+1. It is a name given to a Class/Interface/Method/Variable/Constant  in the program to
+   recognize them uniquely in the program.
+
+2. Identifiers names can contain 
+    a. Digits    :  0-9
+    b. Alphabets :  A-Z ,a-z
+    c. Underscore:  _ 
+    d. Dollar    :  $
+    Note : Name should not start with digit
+    Note : No white spaces are accepted
+
+    Example : 
+    AccountWrapper 
+    age 
+    a1
+    Student_Marks
+    acc1
+    stud_124
+
+    Errors : 
+    Student Name : // Spaces are not accepted 
+    1student      // Name should not start with digit
+    Student?age   // Special symbols are not accepted
+    Stdent*marks  // Error 
+
+3. We have follow naming convensions 
+    a. Upper Camel : 
+       1.Every word first letter should be capital 
+       2.This naming convension is used while defining names for classes or interface.
+
+    Example : 
+    StudentData 
+    AccountWrapper 
+    InvoicePage
+    Quote_Line_Items
+
+    b. Lower Camel  : 
+       1. first word first letter should be small.
+       2. Remaining words first letter should be captial.
+       3. We use this naming convension for defining names for Variables and methods.
+
+    Example : 
+
+    getName
+
+    stdMarks 
+
+    invoiceDate 
+
+    stdSemesterMarks
+
+    createAccountRecords
+
+    show
+
+   c. Upper Case : 
+      1. Every word every letter should be capital.
+      2. This is used to define names for constants 
+    
+      Example : 
+    MAX_AMOUNT
+    MIN_SALARY
+    
+
+   d. Lower Case : 
+      1. Every word every letter should be small.
+      2. This naming convention is used to define names for Packages  and keywords
+    
+      Example : 
+    capital
+    demo
+
+
+    -->
+      <!--
+    Identifiers:
+------------
+1. It is a name given to a Class/Interface/Method/Variable/Constant  in the program to
+   recognize them uniquely in the program.
+
+2. Identifiers names can contain 
+    a. Digits    :  0-9
+    b. Alphabets :  A-Z ,a-z
+    c. Underscore:  _ 
+    d. Dollar    :  $
+    Note : Name should not start with digit
+    Note : No white spaces are accepted
+
+    Example : 
+    AccountWrapper 
+    age 
+    a1
+    Student_Marks
+    acc1
+    stud_124
+
+    Errors : 
+    Student Name : // Spaces are not accepted 
+    1student      // Name should not start with digit
+    Student?age   // Special symbols are not accepted
+    Stdent*marks  // Error 
+
+3. We have follow naming convensions 
+    a. Upper Camel : 
+       1.Every word first letter should be capital 
+       2.This naming convension is used while defining names for classes or interface.
+
+    Example : 
+    StudentData 
+    AccountWrapper 
+    InvoicePage
+    Quote_Line_Items
+
+    b. Lower Camel  : 
+       1. first word first letter should be small.
+       2. Remaining words first letter should be captial.
+       3. We use this naming convension for defining names for Variables and methods.
+
+    Example : 
+
+    getName
+
+    stdMarks 
+
+    invoiceDate 
+
+    stdSemesterMarks
+
+    createAccountRecords
+
+    show
+
+   c. Upper Case : 
+      1. Every word every letter should be capital.
+      2. This is used to define names for constants 
+    
+      Example : 
+    MAX_AMOUNT
+    MIN_SALARY
+    
+
+   d. Lower Case : 
+      1. Every word every letter should be small.
+      2. This naming convention is used to define names for Packages  and keywords
+    
+      Example : 
+    capital
+    demo
+
+
+    -->
+</apex:page>

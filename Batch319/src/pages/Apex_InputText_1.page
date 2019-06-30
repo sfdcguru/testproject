@@ -1,0 +1,23 @@
+<apex:page >
+    <apex:sectionHeader title="Student" subtitle="New Student" help="/apex/apex_InputText" />
+    <apex:form >
+    	<apex:pageBlock title="Student" >
+        	<apex:pageBlockButtons location="top">
+                <apex:commandButton value="Save" />
+                <apex:commandButton value="Cancel" />
+            </apex:pageBlockButtons>
+            <apex:outputLabel value="LastName" />
+            <apex:inputText />	<br/><br/>
+            
+            <apex:outputLabel value="FirstName" />
+            <apex:inputText /> <br/><br/>
+            
+            <apex:outputLabel value="City" />
+            <apex:inputText /><br/><br/>
+            
+            <apex:outputLabel value="Age" />
+            <apex:inputText />
+        </apex:pageBlock>
+    
+    </apex:form>
+</apex:page>

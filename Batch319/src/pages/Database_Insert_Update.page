@@ -1,0 +1,150 @@
+<apex:page >
+    Database.Error :
+    1.Database is a namespace
+    2.Error is a pre-defined apex class in Database namespace.
+    3.This class will contain the all information about errors that occurred during dml operation.
+    4. Methods : 
+    	a. getFields() : 
+    	   This will give list of fields on which error occured 
+    
+    	b. getMessage(): 
+    	   This will return the error message 
+    
+    Database.SaveResult :
+    1.Database is a namespace.
+    2.SaveResult is a pre-defined apex class.
+    3.This class contain the information about status of the DML operation
+    4. Methods : 
+    	a. getId(): 
+    		This will return Id of the record on the which DML operation of insert /update is performed.
+    
+    	b. isSuccess():
+    		This will return if the dml operation is successfull.
+    
+    	c. getErrors(): 
+    		This will return list of errors that occured during dml operation
+    
+    
+    Database.insert(sobject,allornone)
+    1. This will insert new records in the database.
+    2. This will run as atomic or non-atomic based on flag value 
+    	allornone :if you give this as true, operation will run like atomic
+    	allornone :if you give this a false, operation will run as non-atomic
+  <!--  
+    Account a1 =new Account();
+    a1.Name='DML_One';
+    a1.Phone='050-1234';
+    Account a2 =new Account();
+    a2.Phone='040-1234';
+    a2.Industry='Energy';
+    List<Account> accounts =new List<Account>{a1,a2};
+    List<Database.SaveResult> result=Database.insert(accounts,false);
+    for(Database.SaveResult r:result){
+        if(r.isSuccess()){
+            System.debug('Insertion Success :'+r.getId());
+        }else{
+            Database.Error[] errors =r.getErrors();
+            for(Database.Error er:errors){
+                System.debug('Fields:'+er.getFields());
+                System.debug('Message:'+er.getMessage());
+            }
+        }
+    }
+   --> 	
+   Database.update(sobjects[] ,allornone);
+    1. This will update the existing records in the database.
+    2. This will run as atomic or non-atomic based on flag value 
+    	allornone :if you give this as true, operation will run like atomic
+    	allornone :if you give this a false, operation will run as non-atomic
+ <!--   
+           List<Account> accounts =[select id,name,rating from Account where createdDate=THIS_WEEK];
+        
+        for(Account a:accounts){
+            a.rating='Hot';
+        }
+        Database.SaveResult[] result=Database.update(accounts,false);
+        for(Database.SaveResult sr:result){
+            if(sr.isSuccess()){
+                System.debug('Record Updated Successfull'+sr.getId());
+            }else{
+                Database.Error[] errors =sr.getErrors();
+                for(Database.Error er :errors){
+                    System.debug('Fields:'+er.getFields());
+                    System.debug('Message:'+er.getMessage());
+                }
+            }
+        } 
+	-->
+    Database.delete(sobject[] ,allornone)
+    1. This is used to delete the data  from the sobject
+    2. Database.DeleteResult 
+    	a. isSuccess()
+    	b. getId()
+    	c. getErrors()
+    <!--
+		Fetch all the records which are created today and delete 
+		List<Account> accounts =[select id from Account where createdDate=TODAY];
+		Database.DeleteResult[] result=Database.delete(accounts,false);
+	-->
+    
+    Upsert : 
+    1. This is a combination of insert and update 
+    2. if the record exists ,then update the record.
+    3. If the record doesnt exit ,then create the record.
+    4. We can perform upsert based on externalId or salesforceId
+    5. ExternalId field can be email or text or number field.
+    6. Syntax: 
+    	upsert sobjects[] externalId
+    
+    Database.UpsertResult[] result=Database.upsert(sobject[],externalId,allornone)
+    Database.UpsertResult:
+    	a. isSuccess()
+    	b. isCreate()		: This will return true, if the upsert operation is create
+    	c. getId()
+    	d. getErrors()
+    
+    merge :
+    -------
+    1. This will join two or more records into single record.
+    2. merge parent1 parent2
+       child records of parent2 are re-assigned to parent1
+       and parent2 is deleted
+    
+        Account a1 =new Account();
+        a1.Name='FirstParent';
+        a1.Industry='Energy';
+        a1.Phone='040-1234';
+        insert a1;
+        Contact c1=new Contact();
+        c1.LastName='K';
+        c1.FirstName='Satish';
+        c1.AccountId=a1.Id;
+        insert c1;
+        Account a2 =new Account();
+        a2.Name='Second parent';
+        a2.Rating='Hot';
+        insert a2;
+        Contact c2 =new Contact();
+        c2.LastName='P';
+        c2.FirstName='Praveen';
+        c2.AccountId=a2.Id;
+        insert c2;
+        merge a1 a2;
+    
+    	Database.MergeResult[] result =Database.merge(parent1,parent2,allornone)
+    
+    Undelete : 
+    ----------
+    This will undelete the records from recyclebin
+    <!--
+		List<Account> accounts =[select id from Account where isDeleted=true ALL ROWS];
+		undelete accounts;
+	-->
+    
+    Database.emptyRecyclebin(sobject[]) : Thsi will delete records from recyclebin: 
+    									Hard delete
+    	<!--
+			List<Account> accounts =[select id from Account where isDeleted=true ALL ROWS];
+			Database.emptyRecyclebin(accounts);
+		-->
+</apex:page>

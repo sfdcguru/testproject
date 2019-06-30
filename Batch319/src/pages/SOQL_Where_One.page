@@ -1,0 +1,16 @@
+<apex:page controller="SOQL_Where_Example">
+    <apex:form id="fm">
+        <apex:inputText value="{!searchText}" />
+        <apex:commandButton value="Go" action="{!search}" reRender="fm" />
+        <br/>
+        <br/>
+        <apex:dataTable value="{!accounts}" var="a" cellpadding="10" frame="border" rules="rows" rendered="{!!ISNULL(accounts)}" width="500">
+        	 <apex:column value="{!a.name}" headerValue="Name"/>
+            <apex:column value="{!a.industry}" headerValue="Industry"/>
+            <apex:column value="{!a.rating}" headerValue="Rating"/>
+            <apex:column value="{!a.phone}" headerValue="Phone"/>
+        
+        </apex:dataTable>
+           
+    </apex:form>
+</apex:page>

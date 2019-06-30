@@ -1,0 +1,60 @@
+<apex:page >
+    <!--
+    System.debug() : 
+    1.This method is used to print the message in log file .
+    2.Syntax: 
+        System.debug(object);
+
+        Navigation : 
+            User Name 
+              |---Developer Console
+                  |--- Debug
+                       |---Execute Anonymous window
+                          
+              Step 1: Write the code 
+               
+                    System.debug('Line one');
+                    System.debug('Line two');
+                    System.debug('===============');
+                    System.debug('*****************');
+
+               Step 2: Enable : Open Log check box 
+               Step 3:Click on Execute 
+               Step 4: Open the log file 
+                     : Select Debug only and view the output
+
+Example :1
+        Integer age =30;
+        String name='Ravi';
+        String branch='SRNagar';
+        System.debug(age);
+        System.debug(name);
+        System.debug(branch);
+
+Concatination
+        Integer +Integer ==> Integer 
+        Integer +Decimal ==> Decimal 
+        Decimal +Integer ==> Decimal
+        
+        String+ String ==> String 
+        String+ Integer==> String 
+        Integer+String ==> String 
+        
+        String+anyThing==> String 
+        AnyThing+ String ==>String  
+            
+        Integer age=30;
+        System.debug('My Age'); //My Age 
+        System.debug('My Age'+age); // My Age 30 
+        
+        String name='Ravi';
+        Integer age=40;
+        Date dob=System.today();
+        
+        System.debug('My Name :'+name);
+        System.debug('My Age:'+age);
+        System.debug('Dob:'+dob);
+    
+    
+    -->
+</apex:page>

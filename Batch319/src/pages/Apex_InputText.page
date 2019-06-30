@@ -1,0 +1,42 @@
+<!--
+apex:inputText : 
+1. This will create inputText box 
+2. Attributes : 
+	1. maxlength: 
+	    a. it is a numerical value .
+		b. This will specify the maximum length of the input we can enter 
+
+	2. Size  : 
+		a. It is a numerical value .
+		b. This will specify the maximum lenght of the inputText box 
+
+	3. disabled : 
+		a. it is a boolean value .
+		b. When set as true ,inputText is hidden
+		c. Default value is false 
+
+	4. required : 
+		a. it is a boolean value.
+		b. When set as true ,form cannot be submitted without entering this value
+
+	5. direction : 
+		a. This will specify the direction of the data 
+		b. Possible values are RTL ,LTR 
+
+ -->
+<apex:page >      
+    <apex:form >
+        Enter Name : <apex:inputText /> <br/><br/>
+        Max Length : <apex:inputText maxlength="5" /><br/><br/> <!-- Max length : Maximum length of the input we can enter -->
+        Max Size   : <apex:inputText size="5" /><br/><br/> <!-- Maximum size of the box -->
+        Disabled   : <apex:inputText disabled="true" /><br/><br/> <!-- This will disable the inputTextbox 
+																		default value is false -->
+        required   : <apex:inputText required="true" /> <br/><br/> <!-- this will specify that form can not be 
+																		submitted without entering the data -->
+        
+        direction  : <apex:inputText dir="RTL" /> <br/> <br/> <!-- This will specify the direction of data -->
+        
+        Styles 	   : <apex:inputText style="Color:red;background:yellow;" />
+    	
+    </apex:form>
+</apex:page>

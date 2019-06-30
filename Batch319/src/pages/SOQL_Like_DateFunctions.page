@@ -1,0 +1,51 @@
+<apex:page >
+     where fieldName like expression
+    
+     _ : any one character 
+    
+    %  : Any number of character
+    
+    1. fetch all the records whose name starts with S
+    
+    	where name like 's%'
+    
+    2. fetch all the accounts whose name end nair 
+    	where name like '%nair'
+    
+    3. Fetch all the accounts which has second character as 'a'
+    
+    	where name like  '_a%'
+    
+     4. fetch all the accoutns whose name contains sm 
+    	where name like '%sm%'
+    
+    
+    Date Keywords :
+    TODAY 
+    Tomorrow
+    LAST_WEEK
+    THIS_WEEK
+    NEXT_WEEK
+    NEXT_N_WEEKs:n
+    LAST_N_WEEKS:n
+    THIS_MONTH
+    NEXT_MONTH
+    LAST_MONTH
+    LAST_N_DAYS:n
+    NEXT_N_DAYS:n
+    
+    1. Write a query to fetch all the leads created today 
+      <!--
+			List<Lead> leads =[select lastName,firstName from Lead where createdDate=TODAY];
+	   -->
+    
+    2. Write a query to fetch all the leads which are created in last 20 days 
+    	<!--
+			List<Lead> leads =[select lastName,firstName from Lead where createddate=LAST_N_DAYS:20 ];
+		-->
+    
+    3. Write a query to fetch all the opportunities which  closeDate in  next month
+    	<!--
+			List<Opportunity> optyList =[select Name,Amount from Opportunity where closeDate =NEXT_MONTH];
+		-->   
+</apex:page>

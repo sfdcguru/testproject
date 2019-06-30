@@ -1,0 +1,14 @@
+<apex:page controller="Action_Support_1">
+    <apex:form id="one">
+        <apex:selectList size="1" value="{!selected}" >
+            <apex:selectOptions value="{!options}" />
+            <apex:actionSupport event="onchange" action="{!search}" reRender="one" />
+        </apex:selectList> <br/><br/>
+        <apex:dataTable value="{!accounts}" var="a" cellpadding="10" rules="rows" frame="border" width="600">
+            <apex:column value="{!a.name}" headerValue="Name" />
+            <apex:Column value="{!a.industry}" headerValue="Industry" />
+            <apex:Column value="{!a.rating}" headerValue="Rating" />
+            <apex:column value="{!a.phone}" headerValue="Phone" />
+        </apex:dataTable>
+    </apex:form>
+</apex:page>

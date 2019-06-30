@@ -1,0 +1,304 @@
+<apex:page >
+    List: 
+    -----
+    1. It is a collection of simillar elements .
+    2. Size of the list can grow or decrease based on run time requirement.
+    3. List will maintain insertion order.
+    4. List will accept duplicate values.
+    5. Elements in the list are reffered using index 
+    6. Index value will start with zero.
+    7. Syntax  :
+    <!--
+		List<DataType> listName;
+		Example : 
+		List<String> names ;
+		List<Account> accounts;
+		List<Decimal> salaries;
+		List<Contact> contacts;
+		List<Customer__c> customers;
+	-->
+    
+    8. In the salesforce concept of the list is implemented using a Apex class "List"
+    9. Constructor :
+    	<!--
+			 List<DataType>()
+			 List<DataType>(set/list)
+		-->
+    10. Initialize the list 
+    	<!--
+			List<Integer> ages =new List<Integer>();
+			List<String> names =new List<String>();
+			List<Decimal> salaries =new List<Decimal>();
+		-->
+    
+    11. Methods : 
+    	a. add(ele) : 
+    	   1. This method is used to insert new elements at the last position.
+    		<!--
+				List<Integer> ages =new List<Integer>();
+				ages.add(10);
+				ages.add(20);
+				ages.add(30);
+					0	  1		 2
+				----------------------
+				|  10  |  20  | 30   |
+				----------------------
+
+				Example 2: Create a list and insert names  (sam,Ram,Kiran,Prasad)
+				List<String> names =new List<String>();
+				names.add('Sam');
+				names.add('Ram');
+				names.add('Kiran');
+				names.add('Prasad');
+			
+				-----------------------------------
+				| Sam |  Ram  | Kiran   | Prasad |
+				----------------------------------
+
+				Example 3: Create a list to store cityNames : Hyd,Ban,Che,Pune
+				List<String> places =new List<String>();
+				places.add('Hyd');
+				places.add('Ban');
+				places.add('Che');
+				places.add('Pune');
+
+		
+				Example 4:  Create  a list to store Account  records 
+					Name		Phone 		Rating
+					-------------------------------
+					Wipro		040-123		Hot
+					TCS			020-111		Warm
+					Dell		040-123		Cold
+
+				List<Account> accounts =new List<Account>();
+				Account a1 =new Account();
+				a1.Name='Wipro';
+				a1.Phone='040-123';
+				a1.Rating='Hot';
+				accounts.add(a1);
+
+				Account a2 =new Account(Name='TCS',Phone='020-111',Rating='Warm');
+				accounts.add(a2);
+			
+				Account a3 =new Account();
+				a3.put('Name','Dell');
+				a3.put('Phone','040-123');
+				a3.put('Rating','Cold');
+				accounts.add(a3);
+						0				1					2
+				-------------------------------------------------------
+				| Name = Wipro	 |	 Name =TCS		|  Name = Dell    |
+				| Rating=Hot     |   Rating='Warm'  |  Rating=Cold 	  |
+				| Phone =040-123 |	 Phone =020-111 |  Phone =040-123 |
+				--------------------------------------------------------
+
+				Example 4: Create List to store student Data   // Wrapper 
+					LastName		FirstName		City
+					M				Satish			Hyd
+					Y				Pramod			Ban
+					K				Prasad			Che
+					public class Student{
+						public string lastName;
+						public String firstName;
+						public string city;
+					}
+
+				 List<Student> students =new List<Student>();
+
+				 Student s1 =new Student();
+				 s1.LastName='M';
+				 s1.FirstName='Satish';
+				 s1.City='Hyd';
+				 students.add(s1);
+					
+				 Student s2 =new Student();
+				 s2.LastName='Y';
+				 s2.FirstName='Pramod';			
+				 s2.City='Ban';
+				 students.add(s2);
+		
+				 Student s3 =new Student();
+				 s3.LastName='K';
+				 s3.FirstName='Prasad';
+				 s3.City='Che';
+				 students.add(s3);
+			-->
+    	b. add(index,ele) : 
+    	   This method will add new element at the given index
+    	   <!--
+				List<Integer> ages =new List<Integer>();
+				ages.add(10);
+				ages.add(20);
+				    0	  1 
+				----------------
+				|  10   | 20   |
+				----------------
+				ages.add(0,90);
+				  0		 1      2 
+				----------------------
+				| 90   | 10  |  20  |
+				---------------------
+
+				ages.add(1,45);
+				   0    1     2     3 
+				------------------------
+				| 90  | 45  | 10  | 20 |
+				------------------------
+
+			Example : Create a list to store cityNames 
+				1. add hyd 
+				2. add ban
+				3. add Che
+				4. add pune at index 1 
+				5. add Delhi at index 0
+				6. add SRNagar at index 2
+
+				List<String> cityNames =new List<String>();
+				cityNames.add('Hyd');
+				cityNames.add('Ban');
+				cityNames.add('Che');
+				cityNames.add(1,'Pune');
+  				  0	       1		2		3 
+				--------------------------------
+				| Hyd  | Pune	|  Ban  |  Che  |
+				--------------------------------
+				cityNames.add(0,'Delhi');
+				   0	      1		2		3      4
+				----------------------------------------
+				| Delhi |	Hyd  | Pune	|  Ban  |  Che  |
+				-----------------------------------------
+				cityNames.add(2,'SRNagar');
+
+				  0	      1			2		 3         4		5
+				-----------------------------------------------------
+				| Delhi |	Hyd  | SRNagar| Pune	|  Ban  |  Che  |
+				---------------------------------------------------
+				
+		   -->
+    
+    	c. size() : This will return count of no of elements in the list 
+    		<!--
+					List<Integer> ages =new List<Integer>{10,20,30,40};
+					Integer count=ages.size();
+					System.debug(count);	// 4
+					
+					List<String> names =new List<String>{'Sam','Ram','Kiran','Prasad'};
+					Integer count =names.size();
+					System.debug(count);	//4
+			-->
+    
+    	d. clear() : This will remove all the elements from the list.
+    		<!--
+					List<Integer> ages =new List<Integer>{10,20,30,40};
+					ages.clear();
+					System.debug(ages);	//{}
+
+					List<String> names =new List<String>{'Sam','Ram','Kiran'};
+					names.clear();
+					System.debug(names); // {}
+			-->
+    
+    	f. isEmpty() : This will return true ,if the list is empty 
+    		<!--
+					List<Integer> ages =new List<Integer>();
+					Boolean flag =ages.isEmpty();
+					System.debug(flag);	// true
+
+					List<Integer> ages =new List<Integer>{10,20,30};
+					Boolean flag =ages.isEmpty();
+					System.debug(flag);	// false
+			-->
+    
+    	g. remove(index) :  This method will remove the element  from the given index 
+    		 <!--
+					List<Integer> ages =new List<Integer>{10,20,30,40};
+					  0     1     2     3
+					-------------------------
+					| 10  | 20  | 30  | 40  |
+					-------------------------
+
+					ages.remove(1);
+					  0     1     2     
+					--------------------
+					| 10  |  30  | 40  |
+					--------------------
+
+					ages.remove(2);
+					  0     1         
+					--------------
+					| 10  |  30  | 
+					--------------
+					
+			 -->
+    
+    	h. sort() :  This will sort the data in the ascending order 
+    		<!--
+					List<Integer> ages =new List<Integer>{10,50,20,90};
+					ages.sort();
+					System.debug(ages);	// 10,20,50,90
+			-->
+    
+    	i. contains(listElement) : This will return true, if the list contains the given elemets
+    
+    		<!--
+				List<Integer> ages =new List<Integer>{10,20,30,40,50};
+				Boolean flag =ages.contains(20);	// true
+				Boolean flag1=ages.contains(90);	// false
+			-->
+    
+    	j. get(index) : This will return the element at the given index 
+    		<!--
+				List<Integer> ages =new List<Integer>{10,20,30,40,50};
+
+				   0	1	 2	 3	   4
+				---------------------------
+				| 10 | 20  |30 | 40 |  50 |
+				---------------------------
+				Integer a= ages.get(1);
+				System.debug(a); // 20
+				Integer b =ages.get(2);
+				System.debug(b); // 30
+			-->
+    
+    	 k. set(index) : This will set the value at the given index
+    
+    		<!--
+					List<Integer> ages =new List<Integer>{10,20,30,40,50};
+					   0	 1    2    3     4
+					------------------------------
+					| 10  | 20  | 30 | 40  | 50  |
+					------------------------------
+					ages.set(1,90);
+
+					   0	 1    2    3     4
+					------------------------------
+					| 10  | 90  | 30 | 40  | 50  |
+					------------------------------
+
+					ages.set(3,89);
+					
+					   0	 1    2    3     4
+					------------------------------
+					| 10  | 90  | 30 | 89  | 50  |
+					------------------------------
+		
+			-->
+    
+    	l. equals(list) :This will return true if the both lists have same elements in same order.
+    		<!--
+					List<Integer> ages =new List<Integer>{10,20,30,40};
+					List<Integer> myList =new List<Integer>{10,20,30};
+					Boolean flag =ages.equals(myList);
+					System.debug(flag); // false
+			-->
+    	
+    	m. addAll(list) : This will add group of elements to the list
+    		<!--
+				List<Integer> ages =new List<Integer>{10,20,30,40};
+				List<Integer> myvalues =new List<Integer>{10,90,80};
+				ages.addAll(myvalues);
+				system.debug(ages);	// 10,20,30,40,10,90,80
+			-->
+    	n.  addAll(set) : This will add set of elements to the list.
+
+</apex:page>

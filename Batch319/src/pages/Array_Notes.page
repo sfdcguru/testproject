@@ -1,0 +1,181 @@
+<apex:page >
+    Array:
+    1. Array is a collection of simillar elements .
+    2. Memory for the elements in the array is allocated sequentially.
+    3. Elements in the array are reffered using index .
+    4. Index value starts with 0
+    5. Syntax : 
+    	DataType[] arrayname =new DataType[Size];
+    
+    Example : 
+    	Integer[] ages ;
+    	String[]  names ;
+    	Account[] accs;
+    	Contact[] cons;
+    	Customer__c[] customers;
+    
+    Example : 
+    1. initialize the array 
+    	Integer[] ages =new Integer[4];
+    	String[]  names =new String[10];
+   
+    Example 1: Create a array to store citynames
+    		String[] cityNames =new String[4];
+    
+    Example 2: Create a array to store marks
+    		Integer[] marks =new Integer[10];
+
+    Example 3: Create a array to store salaries 
+    		Decimal[] salaries =new Decimal[5];
+    
+    Example 4: Create a array to store employee names
+    		String[] empNames =new String[4];
+    
+    Example 5: Create a array to store Account records
+    		Account[] accounts=new Account[5];
+    
+    Example 6: Create a array to store Contact records
+    		Contact[] contacts =new Contact[10];
+    
+    
+    Example 7: Create a array to insert  5 integer values 
+    		Integer[] ages =new Integer[]{10,20,30,40,50};
+    			0	 1	    2     3     4
+    		---------------------------------
+    		|  10  |  20  | 30  | 40  | 50  |
+    		----------------------------------
+    
+    Example 8: Create a array to insert 5 names 
+    		String[] names =new String[8]{'Sam','Ram','Kiran','Hari','Prasad'};
+    			0	  1		  2		   3       4       5      6      7
+    		--------------------------------------------------------------
+    		| Sam  |  Ram	| Kiran  | Hari  | Prasad| null | null | null |
+    		----------------------------------------------------------------
+    
+    Example 9: Create an array to store ages 
+    		
+    		Integer[] ages =new Integer[5];
+    		ages[0]=10;
+    		ages[1]=90;
+    		ages[4]=100;
+     		   0	  1     2      3        4
+    		--------------------------------------
+    		|  10  | 90  | null  | null   | 100  |
+    		-------------------------------------
+    
+    
+    Example 10 : Create an array to store cityNames and insert the value Hyd,Ban,Che,Pune 
+    		  String[] cityNames =new String[5];
+    		  cityNames[0]='Hyd';
+    		  cityNames[1]='Ban';
+    		  cityNames[2]='Che';
+    		  cityNames[3]='Pune';
+    			0		1	   2	  3		  4
+    		----------------------------------------
+    		|  Hyd  |  Ban  | Che  | Pune  | null  |
+    		----------------------------------------
+    
+    Example 11: Create an array to store companynames and insert wipro,tcs,dell,CSC,Capital
+    		String[] names =new String[5];
+    		names[0]='Wipro';
+    		names[1]='TCS';
+    		names[2]='Dell';
+    		names[3]='CSC';
+    		names[4]='Capital';
+    		
+    		-----------------------------------------
+    		| Wipro  |  TCS |  Dell | CSC|  Capital  |
+    		------------------------------------------
+    
+    Example :12 Create array of cityNames and print the values 
+    		String[] cityNames =new String[]{'Hyd','Ban','Che','Pune','Delhi'};
+    		   0	 1		2	   3      4
+    		------------------------------------
+    		| Hyd  | Ban  | Che  | Pune | Delhi |
+    		-------------------------------------
+    	<!--
+    		for(Integer i=0;i< citynames.size();i++){
+				System.debug(cityNames[i]);			// cityNames[0],cityNames[1]
+			
+			}
+
+		-->
+    
+     Example :13 Create a array of ages and print the values
+    		Integer[] ages =new Integer[]{10,20,30,40,50,60};
+               0     1     2     3     4    5 
+    		---------------------------------------
+    		|  10  | 20  | 30  | 40  | 50  | 60  |
+    		--------------------------------------
+    	<!--
+    		for(Integer i=0;i< ages.size();i++){
+    			System.debug(ages[i]);	
+    		}
+    	-->
+    
+     Example : 14 Create a array of studentnames and print the values 
+    			String[] studNames =new String[]{'Sam','Ram','Kiran','Prasad'};
+    				0	   1      2       3
+    			----------------------------------
+    			|  Sam  | Ram  | Kiran  | Prasad |
+    			----------------------------------
+    		<!--
+				for(Integer i=0;i< studNames.size();i++){
+					System.debug(studNames[i]);
+				}
+
+			-->
+    
+     Example : 15 Create array of salaries and print their sum
+    	<!--
+    		Decimal[] salaries =new Decimal[]{1000.00,2000.00,3000.00,4000.00};
+    		Decimal total=0;
+    		for(Integer i=0;i<salaries.size();i++){
+					total =total+salaries[i];
+            }
+			system.debug(total);
+         -->                                           	
+    
+    Example : 16 : Create a array of Accounts and insert the following data 
+    
+    			Name		Phone 		Rating 
+    			--------------------------------
+    			TCS			1111		Hot
+    			Dell		2222		Warm
+    			Capital		3333		Cold
+    
+    	<!--
+			Account[] accounts =new Account[4];
+
+			Account a1 =new Account();
+			a1.Name='TCS';
+			a1.Phone='111';
+			a1.Rating='Hot';
+			accounts[0]=a1;
+
+			Account a2 =new Account(Name='Dell',Phone='2222',Rating='Warm');
+			accounts[1]=a2;
+
+			Account a3 =new Account();
+			a3.put('name','capital');
+			a3.put('Phone','3333');
+			a3.put('Rating','cold');
+			accounts[2]=a3;
+
+					0				1				 2
+			------------------------------------------------------
+			| Name : TCS   |  	Name : Dell		| Name : Capital  |
+			| Phone: 1111  |    Phone: 2222		| Phone: 3333     |
+			| Rating: Hot  |    Rating: Warm	| Rating: Cold    |
+			-------------------------------------------------------
+
+			for(Integer i =0;i<accounts.size(); i++){
+				System.debug('Name:'+accounts[i].Name);
+				System.debug('Phone:'+accounts[i].Phone);
+				System.debug('Rating:'+accounts[i].Rating);
+			}
+		-->
+    
+    Example : 17 : Create a 
+    	
+</apex:page>

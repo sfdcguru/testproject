@@ -1,0 +1,39 @@
+<apex:page >
+    Access Modifiers: 
+    1. This will specify the scope of variables ,methods ,classes,intefaces defined in the organization.
+    2. We have four types of Access Modifiers 
+        a. global 
+        b. public
+        c. protected
+        d. private 
+    
+    3. global : 
+       1. If we define any class,interface,method or variable as global ,they can be accessed 
+          any where with in the organization or outside the organization.
+       2. Generally  webservice programs are defined as global.
+    
+    4. public : 
+        1.If we define any class ,interface,method or variable as public ,they can be 
+          accessed any where with in the organization.
+    
+    5.Protected:
+       1.If you define method,variable as protected they can be accessed with in the class 
+         in which we have defined and with in the child classes 
+    
+    6. Private:
+       1. If we define a method,variable as private ,they can be accessed with in the class 
+          in which they are defined 
+        Note : if we dont define any access modifier they by default they are considered as private.
+    
+    Note : Only test classes we define as private 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</apex:page>

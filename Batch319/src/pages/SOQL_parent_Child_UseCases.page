@@ -1,0 +1,40 @@
+<apex:page >
+    1. Write a query to fetch accounts with list of contacts 
+    2. Put all the contacts in a separte list 
+    <!--
+			List<Account> accounts =[select Name,Phone,(select LastName,FirstName from Contacts) from Account ];
+			List<Contact> contactList =new List<Contact>();
+			
+			for(Account a: accounts){
+				List<Contact> myList =a.contacts; // single account contacts
+				if(myList.size()>0){
+					contactList.addAll(myList);
+				}
+			}
+			List<Contact> contacts;
+	-->
+    1. Write a query to fetch all the accounts with list of opportunities 
+    2. Put all the opportunities in a separte list.
+    <!--
+		List<Account> accounts =[select Name,Phone,(select Name,Amount from Opportunities ) from Account ];
+		List<Opportunity> optyList =new List<Opportunity>();
+		for(Account a: accounts){
+			List<Opportunity> myList =a.opportunities;
+			if(myList.size()>0){
+				optyList.addAll(myList);  
+			}
+		}
+	-->
+   1. Write a query to fetch all accounts with corrsponding cases 
+   2. Write a query to fetch all the opportunity with opportunityLines 
+   3. Write a query to fetch all the cases with casehistory
+   4. Write a query to fetch all opportunity with quotes 
+   5. Write a query to fetch all the Accounts with AccountTeammembers
+   6. Write a query to fetch all the Groups with GroupMembers 
+   7. Write a query to fetch contacts with its account data 
+   8. write a query to fetch opportunity with its account data 
+   9. Write a query to fetch PriceBookEntry with corresponding product info
+   10.Write a query to fetch User with profile data 
+    
+    
+</apex:page>

@@ -1,0 +1,1164 @@
+<apex:page >
+    <!--
+	1.SOQL : 
+
+  a. Salesforce object Query language .
+
+  b. These are simillar to sql queries 
+
+  c. Soql's are used to fetch the data from the sobjecs(Standard or Custom objects)  .
+	
+  d. Using soql we can also fetch data from related objects (child or parent records)
+     using relation fields
+
+  e. Soql's will return the result in the form of List<sobject> | Map<Id,Sobject>
+ 
+  f. Soql will return maximum of 50,000 records in a single call 
+
+  syntax :
+
+    SELECT <fieldNames>  from <OBJECTNAME>
+
+		[ WHERE <Conditions> ]  		// Optional
+
+		[ GROUP BY <Column Names> ]		// Optional
+
+		[ HAVING <Conditions> ]			// Optional
+
+		[ ORDER BY <Column Names> ]		// Optional
+
+		[ FOR UPDATE]				// Optional
+
+		[ LIMIT <NumberOfRecordsTo Return> ]	// Optional
+
+		[ OFFSET <NumberOf Records to Skip> ]	// Optional
+
+		[ ALL ROWS ]				// Optional
+
+
+2. 	Query : This is the statement writen to fetch the records from the database based on            
+			the business requirement
+
+	Query Example  :
+
+	1. Write a soql to fetch name,industry  from Account sobject
+	
+		Select id,name,Industry from Account
+
+	2. Write a soql to fetch lastname,firstname from  contact 
+
+		select id,lastname,firstname from Contact
+
+	3. write a soql to fetch stagename, amount from Opportuntiy
+	
+		select stageName,Amount from Opportunity
+
+3. SOQL Queries can be executed in four formats in Apex .
+
+	1. List<Sobject> result=[query statement];
+
+	2. List<Sobject> result=Database.query(query statement);
+
+	3. Database.QueryLocator result=Databse.getQueryLocator(query statement);
+
+	4. Map<Id,Sobject> result=new Map<Id,Sobject>([query statement ]);
+
+4. SOQl Examples using Apex   :
+
+  1.Write a soql to fetch  all the account records with name,Insutry fields .
+
+		List<Account> result=[select id,name,industry from Account];
+
+  2.Write a soql to Fetch all the contact records  with lastname,firstname fields
+
+		List<Contact> result=[select id,lastname,firstname from Contact];
+
+  3.Write a soql query to fetch all the Opportunity records Name,StageName,closeDate
+
+		List<Opportunity> opps=[select name,stageName,closeDate from Opportunity];
+
+  4.Write a soql query to fetch all user records with lastname,firstname, profile
+
+		List<User> users=[select lastname,firstname,profile from User];
+
+  5.Write a soql query to fetch customer records with city,state,phone 
+
+		List<Customer__c> result=[select City__c,State__c,Phone__c from Customer__c];
+
+
+5. How to execute the soql queries 
+
+   1. Debug annonymous block
+
+   2. Query Editor in the Developer console 
+
+   3. Workbench to test the query result (Recommended for the testing) 
+
+   4. With in the Apex classes and  triggers code
+
+   5. Using sforce toolkit using Ajax in Visualforce pages
+
+
+ 6. Debug Anonymous Window :
+
+	userName
+	  |----Developer Console 
+			      |--------Panel
+					         |-----Debug
+						               |-----Open Annonymous window
+						
+	1. Write Query
+	2. Execute the query
+	3. See the result in the log file
+
+
+7. Working with Query Editor 
+
+	UserName
+	  |--------Developer Console 
+				|-------Expand the Console 
+							|------select Query Editor 
+
+     1. Write the query 
+
+     2. Execute the query
+	
+     3. From the result we can perform update, create , delete ,save ,Edit Detail page
+	operation on the selected records 
+
+
+	Note: Query editor is not for applying business logic  it is used only for manual 
+              operatons on the result set .
+
+8. Workbench : Workbench is a third party used to test the data or perform apex logics
+	and testing webservices 
+
+
+	1. Open the Url : https://workbench.developerforce.com/
+	
+	2. Select the environment as Sandbox /production 
+
+	3. Choose the api version
+
+	3. Login with salesforce account 
+
+	4  Enter the salesforce account username/password
+
+	5. Select Soql from dropdown list 
+	
+	6. Select the object 
+
+	7. Write the query
+		
+		Ex : select name,industry from Account
+
+	8.Execute 
+
+
+9. Soql query statements are written in two forms
+
+	1. Static query Statements 
+
+	2. Dynamic query statements 
+
+10..Static Query : 
+
+	a. When the field which we want to fetch 
+
+    b. When the object from which the data is fetched 
+
+	c. When the  conditions what we are going to apply 
+
+	are fixed and know to us then we make single query statement which will run
+	throughout the business operation are called static query
+
+	Ex : String query='select name,industry from Account'
+
+	Ex : select name,industry from Account where Industry='banking'
+
+	Ex : String accIndustry='banking';
+
+	     select name ,Industry from Account where Industry=:accIndustry  
+
+11.Dynamic Soql Query :
+
+	When the fields | Sobject | Conditions change from transaction to 
+	transaction we call it as synamic 
+
+	String query='select name,Industry from Account';
+
+	if(accIndustry== 'Energy'){
+		query= query+'where Industry=\'Energy\' ';
+	}
+	else{
+		query=query+' where phone=\'123\' ';
+	}
+
+	List<Account> result=Database.query(query);
+=====================================================================================
+Examples :
+======================================================================================
+
+	Example 1: 
+
+   Write a soql  to fetch name,industry ,phone from Accoutn and display it in the VF  page
+
+	Example :
+
+	public class SoqlExample1 {
+
+    		public List<Account> accs {set;get;}
+
+    		public SoqlExample1(){
+
+        		accs=[select id,name,industry,phone from Account];     
+    		}
+	}
+
+	VFPage :
+
+	<apex:page controller="SoqlExample1">
+    	<apex:form>
+    		<apex:pageBlock title="SoqlExample">
+        		<apex:pageBlockTable value="{!accs}" var="a">
+               		   <apex:column value="{!a.name}" />
+                	   <apex:column value="{!a.industry}" />
+                           <apex:column value="{!a.phone}" />
+                        </apex:pageBlockTable>
+                </apex:pageBlock>
+         </apex:form>
+	</apex:page>
+
+
+ Example 2: 
+   
+   Write the soql query to fetch data from opportunity object and display in the VF page
+
+    public class SoqlExample2 {
+   	public List<Opportunity> optyList {set;get;}
+    	public SoqlExample2(){
+        	optyList=[select name,stageName,Amount,closeDate from Opportunity];
+    	}
+    }
+
+   VF page :
+
+	<apex:page controller="SoqlExample2">
+		<apex:form>
+			<apex:pageBlock title="SoqlExample">
+				<apex:pageBlockTable value="{!optyList}" var="a">
+					<apex:column value="{!a.name}" />
+					<apex:column value="{!a.stageName}" />
+					<apex:column value="{!a.amount}" />
+					<apex:column value="{!a.closeDate}" />
+				</apex:pageBlockTable>
+			</apex:pageBlock>
+		</apex:form>
+	</apex:page>
+
+=======================================================================================
+12. Limit : 
+
+	a.Limit clause is used to restrict the number of rows to be returned by the SOQL
+	   Query Result.
+
+	b. Limit Clause is an optional statement in SOQL Query.
+	
+	c. Limit statement should be the last statement in the SOQL Query
+
+		Syntax:
+		Limit <Number Of Rows Returned>
+		
+		Ex:
+			Limit 1
+			Limit 10
+			Limit 50
+	
+		Ex : Write query to fetch one Account record  from Account object
+		
+			Account acc=[select id,name,Industry from Account limit 1];
+
+		Ex: Fetch 5 records from Account object 
+
+		List<Account> result=[select id,name,industry from Account limit 5];
+
+		Ex: Fetch 10 records from Case objects
+
+		List<Case> result=[select stageName,Priority from Case Limit 10 ];
+
+13. Offset : 
+
+	a.Offset clause is used to specify from which record result should be returned 		          
+	  from query result .
+
+	b. Maximum offset value is 2000
+
+		Syntax :
+		
+		offsett <RowNumber>
+		offset 1
+		offset 10
+		offset 1000
+
+	Ex : Return all  the opportunities  from 5th records 
+
+	List<Opportunity> oppList=[select name,StageName from opportunity offset 5];
+
+	Ex: write soql to fetch all the accounts from 10th records
+
+	List<Account> accs=[select id,name from Account Offset 10];
+
+
+	Note : if you taking limit and offset together we have use limit followed by offset
+
+		   List<Account> accs=[select name,Industry from Account Limit 5 offset 10 ];
+
+14.Order By : 
+
+	order by clause is used to sort the result  in the asscending order or 	descending.
+
+	Syntax :
+
+		order by FieldName  DESC| ASC
+
+		order by Field1,Field2 DESC |ASC
+
+	Example :
+	
+		Order by Name  ASC;
+		order by Name,Industry DESC;
+
+	Ex: Write a soql to fetch all the account records in the accending order of 
+	    accountName 
+
+	List<Account> accs=[select name,Industry from Account order By Name ASC];
+
+	Ex : Write a soql to fetch all the account records in the decending order of industry
+
+	Ex: List<Account> accs=[select name  from Account order by Name,Industry DESC ];
+
+	Ex: Write the soql to fetch last 10 opportunity records based on created date 
+
+	List<Opportuntiy> opps=[select name from Opportunity order by CreatedDate DESC LIMIT 10];
+
+	Ex : Write a soql to fetch last 10 opportunities based on closeDate
+
+	List<Opportunity> opps=[select name from Opportuntiy order By CloseDate DESC LIMIT 10];
+
+========================================================================================
+Examples :
+========================================================================================
+
+Example 1:
+
+	Example : 
+
+	public class SoqlExample1 {
+
+		public List<Account> result {set;get;}
+		public SoqlExample1(){
+			result=[select name,industry,phone from Account];
+		}
+		public void setLimit(){
+			result=[select name,Industry ,phone from Account  limit 5];
+		}
+		public void setOffset(){
+			result=[select name,Industry ,phone from Account  offset 5];
+		}
+		public void LimitOffset(){
+			result=[select name,Industry ,phone from Account Limit 5 offset 3   ];
+		}
+		public void sortAsc(){
+			result=[select name,industry,phone from Account Order By Name asc];
+		}
+		public void sortDesc(){
+			result=[select name,industry,phone from Account Order By Name,Industry desc];
+		}
+		public void fetchAll(){
+			result=[select name,industry,phone from Account ALL ROWS];
+		}
+	}
+
+
+	Visualforce : 
+
+	<apex:page controller="SoqlExample1">
+		<apex:form>
+			<apex:pageBlock title="SOQLExample">
+				<apex:pageBlockButtons location="top">
+					<apex:commandButton value="Limit" action="{!setLimit}" />
+					<apex:commandButton value="Offset" action="{!setOffset}" />
+					<apex:commandButton value="LimitOffset" action="{!LimitOffset}" />
+					<apex:commandButton value="SortAscending" action="{!sortAsc}" />
+					<apex:commandButton value="SortDesc" action="{!sortDesc}" />
+					<apex:commandButton value="ALLROWS" action="{!fetchAll}" />
+				</apex:pageBlockButtons>
+				<apex:pageBlockTable value="{!result}" var="a">
+					<apex:column value="{!a.name}" />
+					<apex:column value="{!a.industry}" />
+					<apex:column value="{!a.phone}" />
+				</apex:pageBlockTable>
+			</apex:pageBlock>
+		</apex:form>
+	</apex:page>
+
+
+	Example 2 :
+
+	1. Write a soql query to fetch last ten opportunity records based on closed date 
+
+	2. display this records in the VF page 
+
+	Solution :
+
+	class :
+		public class SOQLExample3 {
+    		public List<Opportunity> optyList {set;get;}
+    		public SoqlExample3(){
+        		optyList=[select id,stageName,CloseDate,Amount from Opportunity 					
+					Order By closeDate DESC LIMIT 10];
+    		}
+		}
+
+	VF Page :
+
+	<apex:page controller="SoqlExample3">
+    		<apex:pageBlock title="Opporunity">
+    			<apex:pageBlockTable value="{!optyList}" var="a">
+            			<apex:column value="{!a.stageName}"/> 
+            			<apex:column value="{!a.closeDate}" />
+            			<apex:column value="{!a.amount}" />
+        		</apex:pageBlockTable>
+    		</apex:pageBlock>
+	</apex:page>
+
+
+
+========================================================================================
+Excercise : 
+========================================================================================
+	1. Write a soql to fetch first 5 Accounts based on created date and display in the VF 
+       page
+
+	2. Write a soql query to fetch last 20 records opportunity records  based on closed date
+	   and display in the vF page
+
+	3. Fetch all the case records and display first 10 case records based on createdate 
+	   and display in the VF page
+
+=========================================================================================
+13. ALL ROWS : 
+	
+	1.All Rows clause  used to fetch all the records from sobject including the records 
+	  which are deleted in the last 15 days .
+
+		Ex:Write a soql to fetch all the records including records which are in 
+		   recylce bin  from Accoutn sobject
+
+		List<Account> accs=[select id,name,Industry from Account ALL ROWS];
+
+		Ex: Write a soql to fetch all the records including recycle bin from case 
+	
+		List<Case> cases=[select id,stage,Priority,origin from Case ALL ROWS];
+
+	
+14. SOQL with Where condition 
+
+	Syntax :
+
+	select fields from Sobject where condition 
+
+	1.Single Condition : 
+
+		Where fieldName  <Operator> value 
+
+	2.Mulitple Conditions :
+
+		Where fieldName <Operator> value  [ and | or ] FieldName <Operator> value
+
+
+	Example : 
+
+		Where name='satish';
+
+		where Industry='Banking' and Phone='123'
+
+	Example : 
+	
+	1.Write a soql to fetch all the account records whose industry is banking 
+	
+		List<Account> accs= [select name,industry ,phone from Account where industry='banking'];
+
+	2. Write a soql to fetch all the case records whose origin is email
+
+		List<Case> cases=[select stage,priority from Case where origin='Email'];
+
+	3.Write soql to fetch the all opprotunties whose stage name is 'closed won' and 
+	  amount is more than 50000
+
+		List<Opportunity> opps=[select name,stageName,Amount from Opportunity where 
+									stageName='closed won' and amount>50000];	
+
+
+	4.Comparing with variables :
+
+		where fieldName =: [variablename];
+
+		String empName='satish';
+
+		Where name=:empName;
+
+========================================================================================	
+Example : 
+
+	public class SoqlExample2 {
+		public List<Opportunity> optyList {set;get;}
+		public SoqlExample2(){
+			optyList=[select name,stageName,Amount from Opportunity];
+		}
+		public void staticWhere(){
+			optyList=[select name,stageName,Amount from Opportunity where stageName='closed won'];
+		}
+		public void dynamicWhere(){
+			String sname='closed Lost';
+			optyList=[select name,stageName,Amount from Opportunity where  stageName=:sname];    
+		}
+    
+	}
+
+	VF page :
+	<apex:page controller="SoqlExample2">
+		<apex:form>
+    	<apex:pageBlock title="Opportunity">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Static" action="{!staticWhere}" />
+                <apex:commandButton value="Dynamic" action="{!dynamicWhere}" />
+            </apex:pageBlockButtons>
+        	<apex:pageBlockTable value="{!optyList}" var="a">
+                <apex:column value="{!a.name}" />
+                <apex:column value="{!a.amount}" />
+                <apex:column value="{!a.stageName}" />
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+	</apex:page>
+
+
+Example 2: 
+
+	public class SoqlExample5 {
+		public string accName 	  {set;get;}
+		public string accIndustry {set;get;}
+		public List<Account> accs {set;get;}
+		public SoqlExample5(){
+			accs=[select id,name,industry,phone from Account];
+		}
+		public void single(){
+			accs=[select id,name,industry,phone from Account where Name=:accName];
+		}
+		public void multiple(){
+			accs=[select id,name,industry,phone from Account where name=:accName and
+					industry=:accIndustry]; 
+		}
+	}
+
+	VF page :
+	<apex:page controller="SoqlExample5">
+		<apex:form>
+		<apex:pageBlock title="SoqlExample">
+			Enter name : <apex:inputText value="{!accName}" /> <br/><br/>
+			Enter Industry: <apex:inputText value="{!accIndustry}" /><br/><br/>
+			<apex:commandButton value="Single" action="{!single}" />
+			<apex:commandButton value="Multiple" action="{!multiple}" />
+		</apex:pageBlock>
+		<apex:pageBlock title="Opporunity">
+    	<apex:pageBlockTable value="{!accs}" var="a">
+            <apex:column value="{!a.Name}"/> 
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.phone}" />
+        </apex:pageBlockTable>
+		</apex:pageBlock>
+	</apex:form>
+	</apex:page>
+
+=======================================================================================
+In clause :When we want to comapare 
+
+Syntax
+
+	Where FieldName IN ( values) 
+
+	Where name In ('Capital','Wipro','TCS')
+
+	Where stageName IN ( 'Closed Won','Closed Lost',Prospecting')
+
+
+	Where LeadSource IN('Phone Enquiry', 'Web')
+
+Ex : Write soql query to fetch all the account records whose industry is Banking or
+     enery or  Education.
+
+List<Account> accs=[select name,Industry,Phone from Account where Industry 
+                                        In( 'Banking','Energy','Education') ];
+
+Ex: Write a soql to fetch all the lead records whose leadSource is email,phone, web;
+
+List<Lead> leads=[select lastname,firstname,company from Lead where 
+                                            LeadSource IN ('Emaii','Web','Phone') ];
+
+Ex : Create List of names 
+
+   : Write a soql to fetch all the account records whose names are in above list of names
+
+List<String> names=new List<String>{'Sam','Ram','Kiran'};
+
+List<Account> accs=[select name,Industry from Account where name in:names];
+
+
+Example :
+public class SOQLExample3 {
+    public List<Account> accs {set;get;}
+    public SOQLExample3(){
+        accs=[select name,industry,phone from Account];
+    }
+    public void staticIn(){
+        accs=[select name,Industry,phone from Account where Industry 
+		                                                IN ('Banking','Energy')];
+    }
+    public void dynamicIn(){
+        List<string> myList=new List<String>{'Banking','Education'};
+        accs=[select name,Industry,phone from Account where Industry In :myList];
+    }
+    public void soqlIn(){
+        List<Account> myData=[select id ,name from Account where Industry='Energy'];
+        accs=[select name,industry,phone from Account where Id IN: mydata  and Rating='warm'];
+    } 
+}
+
+<apex:page controller="SOQLExample3">
+    <apex:form>
+    	<apex:pageBlock title="Account">
+        	<apex:pageBlockButtons>
+                <apex:commandButton value="StaticIn" action="{!staticin}" />
+                <apex:commandButton value="DynamicIn" action="{!dynamicIn}" />
+                <apex:commandButton value="SoqlIn" action="{!soqlIn}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!accs}" var="a">
+                    <apex:column value="{!a.name}" />
+                    <apex:column value="{!a.industry}" />
+                    <apex:column value="{!a.phone}" />
+                </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+
+=======================================================================================
+Task1 : Fetch all the opportunity records whose  account is industry is energy ;
+
+public class SoqlExample4 {
+    public List<Opportunity> oppList  {set;get;}
+    public SoqlExample4(){
+        List<Account> accs=[select id,name,Industry from Account where 	Industry='Energy'];
+        oppList=[select Name,Stagename,amount from Opportunity where AccountId In:accs];
+    }
+}
+
+
+Task 2: Write soql query to fetch all the case records whose priority is Normal or High
+
+List<Case> cases=[select subject,Stage from Case where Priority='Noram' or Prioty='High']
+
+List<Case> cases=[select Subject,Stage from Case where Priority IN ('Normal','High')];
+
+
+Task 3: Write soql query to fetch all the cases of those accounts whose rating is Hot.
+
+
+[select subject,Priority from Case where AccountId In ([select id from Account where 
+								rating='HOT']) ];
+
+
+List<Account> accs=[select id from Account where Rating='HOT'];
+
+List<Case> cases=[select subject,Priority from Case where AccountId=:accs];
+
+========================================================================================
+
+FOR UPDATE : 
+
+For Update clause will lock the records from getting updated by from other transactions
+untill the current transaction is completed
+
+
+	select fields from Sobject FOR UPDATE 
+
+
+List<Account> accs=[select id,name from Account FOR UPDATE];
+========================================================================================
+LIKE : 
+
+Like clause is used to compare the string values or search for string value in the 
+given fields 
+
+	'%' --Any 
+
+	' _' : one character
+
+	LIKE ' A%' : Any string starts with A 
+
+	LIKE '%sharma' : Any string that ends with sharma
+
+	LIKE '_k_r%'  : Any string which contains second character as k and fourth as r 
+
+
+Example :
+
+1.Write a soql query to fetch all the Contact records  whose lastname ends with s .
+
+[select lastname,firstname,phone from Contact where Lastname LIKE '%s'];
+
+
+2.Write a soql query to fetch all the Opportunity records whose opportunity name contains
+	'salesforce'
+
+ [select name,amount,stagename from Opportunity where name Like '%salesforce%' ]
+========================================================================================
+
+DATE and Time keywords  in soql :
+
+1. TODAY  
+
+2.Yesterday
+
+3.THIS_WEEk
+
+4.NEXT_WEEk
+
+5.LAST_WEEK
+
+6.THIS_MONTH
+
+7.NEXT_MONTH
+
+8.LAST_MONTH
+
+9.THIS_YEAR
+
+10.NEXT_YEAR
+
+11.LAST_N_WEEKS :n
+
+12.NEXT_N_WEEKS : n
+
+13.LAST_N_DAYS : n
+
+14.NEXT_N_DAYS: n
+
+Example : 
+
+1. Write a soql to fetch all the account records created in the last year 
+
+ List<Account> accs=[select id,name,industry from Account where createdDate=LAST_YEAR];
+
+
+2. Write soql to fetch all the opportunity records which are going to closed in next 
+   15 days 
+
+ List<Opportunity> opList=[select id,name,amount from Opportunity where
+                                               closeDate=NEXT_N_DAYS:15];
+
+3. Write a  soql to fetch all the application records which are Approved in last week
+
+	1.Object :Application
+
+	2. Fields :AppType ,CustomerName ,ApporvedDate ,Status
+
+	
+List<Application__c> apps=[select AppType__c,Customername__c from Application__c where
+				ApprovedDate__c =LAST_WEEK];
+
+========================================================================================
+Date andTime methods :
+
+CALENDAR_MONTH()	Returns a number representing the calendar month of a date field.	
+		
+			Ex: 1 for January
+			Ex :12 for December
+
+CALENDAR_QUARTER()	Returns a number representing the calendar quarter of a date field.	
+			Ex :
+			1 for January 1 through March 31
+			2 for April 1 through June 30
+			3 for July 1 through September 30
+			4 for October 1 through December 3
+
+CALENDAR_YEAR()	:	Returns a number representing the calendar year of a date field.
+
+DAY_IN_MONTH() :   Returns a number representing the day in the month of a date field.	
+
+			Ex :20 for February 20
+
+DAY_IN_WEEK() :Returns a number representing the day of the week for a date field.	
+			Ex: 1 for Sunday
+			Ex: 7 for Saturday
+
+DAY_IN_YEAR() :	Returns a number representing the day in the year for a date field.			
+
+DAY_ONLY()	Returns a date representing the day portion of a dateTime field.			
+		You can only use DAY_ONLY() with dateTime fields.
+
+========================================================================================
+Parent -to-child--Soql :
+
+If two objects are connected using a lookup or master-detail relation then we can use
+
+parent-to-child-soql query to fetch list of child records along with every parent.
+
+
+Ex:
+
+	-----------------				---------------------
+	|	PField 1	|				|  Child1			|
+	|   PField 2	|	1: M 		|  Child2			|
+	|	PField 3	|------------	|  RField(Lookup)	|
+	|	PField 4	|				|					|
+	-----------------				--------------------
+
+	1.Parent is Standard object and child is standard object
+
+	2.Parent is Standard object and Child is custom object
+
+	3.Parent is Custom object and child is standard object
+
+	4.Parent is Custom object and child is Custom object
+
+-----------------------------------------------------------------------------------
+1. Parent is Stamdard object and Child is Standard object 
+------------------------------------------------------------------------------------
+
+Syntax :
+
+List<Parent> resul=[select PField1,PField2,(select CField1,CField2 from Childs) from 											Parent];
+
+
+Ex: Account and Contact are connected by lookup 
+
+
+List<Account> accs=[select name,phone,(select lastname,firstname from Contacts ) from
+									Account];
+
+
+Ex : Account and Cases are connected by Lookup 
+
+
+List<Account> accs=[select name,Industry,(select origin,status from cases) from Account];
+
+
+Ex:  Account and Opportunity are connected by Lookup
+
+List<Account> accs=[select name,Industry,(select name,amount from Opportunities) from 
+								
+								Account];
+
+-------------------------------------------------------------------------------------
+Parent is a standard object and Custom object is a child 
+-------------------------------------------------------------------------------------
+
+Syntax :
+
+List<parent> result=[select pfield1,Pfield2,(select Cfield1,cfield2 from ChildRelationname__r)
+																			from Parent];
+
+
+Note : At the time of creating a lookup /master -detail field We have a field called 
+ChildRelationName ..What ever the name we give in this box that will be  used as 
+
+ChildRelationName name in soql
+
+
+Ex: Account  and Customer (Custom object) are connected by lookup relation with
+    Child relation name 'Customers' .
+
+List<Account> result=[select name,Industry,(select LastName__c,Phone__c from Customers__r) from Account];
+
+
+
+Ex: Contact and Loan object are connected by Lookup relation and childRelation name 
+    is Loans then we 
+
+List<Contact> result=[select lastname,firstname,(select security__c,Amount__c from
+
+				Loans__r ) from Contact];
+
+
+Ex: Account and Loan are connected by Child Relation Name  MyLoan 
+
+List<Account> result=[select name,industry,(select security__c,Amount__c from MyLoan__r)
+	
+					from Account];
+
+Note : generally child object name will be the child relation name
+
+---------------------------------------------------------------------------------------
+Custom Object is the parent and  standard object is the child 
+----------------------------------------------------------------------------------------
+
+Syntax : 
+
+select pField1,Pfield2,(select cfield1,cfield2 from ChildRelationName__r) from parent
+
+
+Ex: Account has lookup relation with Customer with Customer as parent and chilrelation
+    name as 'Accounts'
+
+List<Customer__c> result=[select Name,City__c,(select name,Industry from Accounts__r) 	
+																	from Customer__c];
+
+
+-------------------------------------------------------------------------------------
+Custom Object as parent and Custom object as child
+--------------------------------------------------------------------------------------
+
+Syntax : 
+
+List<parent> result=[select pfield1,Pfield2 ,(select CField1,Cfield2 from 
+					ChildRealtionName__r) from Parent];
+
+Ex: CreditCard  abd Payment objects are connected by Master-Detail relation with 
+    child relation name  as 'Payments'
+
+
+List<CreditCard__c> result=[select Card_Type__c,Limit__c,(select Name,Amount__c from 
+
+			payments__r) from CreditCard__c];
+=========================================================================================
+Scenario :1
+			
+Ex : Fetch all the Account records with list of corresponding  contacts and 
+
+replace contacts otherphone as accounts phone;
+
+List<Account> accs=[select id,phone ,(select id,otherPhone from Cotnacts) from Account];
+
+List<Contact> cons=new List<Contact>();
+
+for(Account a: accs){
+
+	for(Contact c:a.contacts){
+
+		c.otherPhone=a.phone;
+		cons.add(c);
+		
+	}
+
+}
+
+Scenario :2 
+
+Create a map with accountName as key and sum of corresponding child opportuntiy amount as value of map. and insert the values.
+
+/* AccountName is a string so key is string  */
+/* Sum of opportunity amount is currency so we have taken value as decimal */
+
+Map<String,Decimal> accMap=new Map<String,Decimal>();
+
+/* Write a parent child soql to fetch all the account records with  */
+/* corresponding child Opportunites  */
+
+List<Account> accs=[select id,name,(select id,amount from Opportunties) from Account];
+
+
+/* create a loop to one by one account from accList */
+
+
+for(Account a: accs){
+
+	
+	Decimal amount=0;
+
+/* Every account has list of opportunities so fetch the list of opportunties for 
+   account  a by using a.opportunities 
+
+	for(Opportunity op :a.opportunities){
+
+
+		amount=amount+op.amount;
+	}
+	
+// put account name as key and amount as value ;
+
+	accMap.put(a.name,amount);
+}
+
+/*  
+=========================================================================================
+Child to Parent Soql query :
+=========================================================================================
+There are four formats 
+
+	1.Child is Standard object and  Parent is a standard  object
+
+	2.Child is Standard object  and Parent is a custom object 
+
+	3.Child is Custom object and parent is standard object 
+
+	4.Child is Custom object and parent is Custom object 
+
+
+---------------------------------------------------------------------------------------
+1. Child is Standard object and parent is a standard object 
+--------------------------------------------------------------------------------------
+a. Relation between the object is created by Salesforce force 
+    i.e using standard Field 
+
+Syntax :
+
+List<Child> result=[select cfield1,cfield2 ,RelationFieldName.ParentField from Child];
+
+Ex : Contact object has lookup relation with Account using a Standard field 'Account'
+
+	Field Name 	DataType
+
+	Account		Lookup(Account)
+
+List<Contact> cons=[select lastname,firstname,Account.Name,Account.industry from
+						Contact];
+
+
+Ex: Contact object has lookup relation with user using standardField ' CreatedBy'
+
+	Field Name	DataType
+
+	CreatedBy	Lookup(User)
+
+List<Contact> cons=[select lastname,firstname,CreatedBy.Firstname,CreatedBy.LastName
+				from Contact];
+
+
+b. Relation between 
+-----------------------------------------------------------------------------------
+2. Child is Standard and Parent is Custom
+
+-------------------------------------------------------------------------------------
+
+Syntax :
+
+List<Child> result=[select CField1,RelationFieldName__r.PField from Child];
+
+Ex : Account object has lookup  realtion with Loan object using CustomField  with fieldName  'Customer__c'
+
+	Field Name	DataType
+	-----------------------------
+	Customer__c	Lookup(Loan__c)
+
+
+List<Account> result=[select Name,Industry,Customer__r.Security__c,Customer__r.Salary__c
+				from Account];
+
+-----------------------------------------------------------------------------------------
+3.Child is Custom object and parent is a Standard object :
+-----------------------------------------------------------------------------------------
+
+Syntax : 
+
+List<Child> result=[select CFields,RelationName__r.ParentField from Child];
+
+Ex : Create a Custom Lookupfield on Contact object choosing Account as parent 
+
+	Field Name : MyAccount__c
+
+
+List<Contact> cons=[select Lastname,firstname,MyAccount__r.Name,MyAccount__r.Industry
+					from Contact];
+
+
+Ex:Payment object has master-detail relation with Creditcard with the field name 
+
+	CreditCard
+
+List<Payment__c> result=[select Mode__c,Amount__c,Creditcard__r.Type__c,CreditCard__r.Limit__c from Payment__c];
+
+----------------------------------------------------------------------------------------
+Aggregate Functions :
+---------------------------------------------------------------------------------------
+	1. count() : 
+		a. It will return count of no of record returned by the soql query.
+		
+		b. If we use count() this will return Integer value.
+		
+		Integer count=[select count() from Account where Industry='Energy'];
+	
+	2. Count(FieldName) : 
+		a. It will return count of no of records which has given field values as 
+		   not null.
+		   
+		b. it will return the result in the form of AggregateResult.
+		
+	3.sum(FieldName)  :
+	
+		1. This will return you the summarized value of the given field from 
+			the queryResult.
+		2. Result will be in the form of AggregateResult.
+		
+	4. Max(FieldName) :
+	
+		1. This will return you max values of given field from the queryResult.
+	
+	5.Min(FieldName)  : 
+	
+		1. This will return you min value of given field from the queryResult.
+	
+	6.AVG( FieldName) :
+	
+		1. This will return you avg value of given field from the  queryResult.
+				
+
+	7. Soql queries with aggregate functions will return the value in the 
+	   form of AggregateResult.
+	   
+	 AggregateResult result=[select Sum(Amount)total,Max(Amount)maxval,Min(Amount)minval,
+		AVG(Amount)avgval from Opportunity ];
+		Decimal total=(Decimal) result.get('total');
+		Decimal maxval=(Decimal)result.get('maxval');
+		Decimal minval=(Decimal)result.get('minval');
+		Decimal avgval=(Decimal)result.get('avgval');
+		System.debug('Total :'+total);
+		System.debug('Max Val:'+maxval);
+		System.debug('Min Val:'+minval);
+		System.debug('Avg Val:'+avgVal);
+		
+	8. We can group aggregateResult based on any of the field.
+
+	9. When we group the records ,result will List<AggregateResult>
+	
+	10. Any Field you are trying to query should be either a part of 
+	   aggregate function or  group by clause
+	   
+	   
+	   List<AggregateResult> resMap=[select stageName,Sum(Amount)total,
+						Max(Amount)maxval,Min(Amount)minval,AVG(Amount)avgval from 
+						Opportunity group by StageName ];
+		
+		for(AggregateResult result: resMap){
+			String stageName=(String)result.get('stageName');
+			Decimal total=(Decimal) result.get('total');
+			Decimal maxval=(Decimal)result.get('maxval');
+			Decimal minval=(Decimal)result.get('minval');
+			Decimal avgval=(Decimal)result.get('avgval');
+			System.debug('=========Start=====');
+			System.debug('StageName :'+stageName);
+			System.debug('Total :'+total);
+			System.debug('Max Val:'+maxval);
+			System.debug('Min Val:'+minval);
+			System.debug('Avg Val:'+avgVal);
+		}
+	
+	
+	
+	
+	
+
+
+	-->
+</apex:page>

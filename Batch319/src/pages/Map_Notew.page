@@ -1,0 +1,254 @@
+<apex:page >
+    Map :
+    =====
+    1. It is a key-value pair .
+    2. Key should be unique 
+    3. Value can be duplicate 
+    4. Size of the map can grow or decrease based on run-time requirement.
+    5. Syntax : 
+    	<!--
+			Map<Key,value> mapName =new Map<key,value>();
+		-->
+    Example : 
+    1.create a map which will take student name as key and student phone as value.
+    	<!--
+			Map<String, String> stdMap =new Map<String,String>();
+		-->
+    2.Create a map which will take accountName as key and Account industry as value
+    	<!--
+			Map<String,String> accMap=new Map<String,String>();
+		-->
+    3.Create a map which will take rno as key and marks as value.
+    	<!--
+			Map<Integer,Integer> stdMap =new Map<Integer,Integer>();
+		-->
+    4.Create a map which will take LastName as key and FirstName as value
+    	<!--
+			Map<String,String> stdMap =new Map<String,String>();
+		-->
+    5.Create a map which will take account recordId as key and AccountName as value.
+    	<!--
+			Map<Id,String> accMap =new Map<Id,String>();
+		-->
+    6.Create a map which will take account recordId as key and Account as value.
+    	<!--
+			Map<Id,Account> accMap =new Map<Id,Account>();
+		-->
+    7.Create a map which will take account recordId as key and List of contacts as value.
+    	<!--
+			Map<Id,List<Contact>> accMap =new Map<Id,List<Contact>>();
+		-->
+    8.Create a map which will take account recordId as key and List of Opportunities as value
+    	<!--
+			Map<Id,List<Opportunity>> optyMap =new Map<Id,List<Opportunity>>();
+		-->
+    
+    Methods : 
+    -----------
+    1. put(key,value):  This will insert new value in the map
+    	<!--
+			Map<Integer,String> stdMap =new Map<Integer,String>();
+			stdMap.put(1,'Sam');
+			stdMap.put(2,'Ram');
+			stdMap.put(3,'Kiran');
+			stdMap.put(2,'Hari');
+
+			o/p: [ {1,sam},{2,Hari},{3,Kiran} ]
+		-->
+    2. get(key ) : This will return the value associated with the key 
+    	<!--
+			Map<Integer,String> stdMap =new Map<Integer,String>();
+			stdMap.put(1,'Sam');
+			stdMap.put(2,'Ram');
+			stdMap.put(3,'Kiran');
+			
+			String a =stdMap.get(1);
+			System.debug(a);	//Sam
+
+			String b =stdMap.get(2);
+			System.debug(b);	// Ram
+		-->
+    3. keySet() : This will return set of all the keys 
+    	<!--
+			Map<Integer,String> stdMap =new Map<Integer,String>();
+			stdMap.put(1,'Sam');
+			stdMap.put(2,'Ram');
+			stdMap.put(3,'Kiran');
+
+			Set<Integer> keys= stdMap.keySet();
+			System.debug(keys);	{1,2,3}
+
+			Map<String,String> empMap =new Map<String,String>();
+			empMap.put('K','Prasad');
+			empMap.put('L','Naveen');
+			empMap.put('M','Raghu');
+			Set<String> keys =empMap.keySet(); {'K','L','M'}
+		-->
+    
+    4. clear() : This will remove value from the map;
+    		<!--
+				Map<Integer,String> stdMap =new Map<Integer,String>();
+				stdMap.put(1,'Sam');
+				stdMap.put(2,'Ram');
+				stdMap.put(3,'Kiran');
+				stdMap.clear();
+			-->
+    
+    5. values() : This will return list of values from the Map 
+    	<!--
+			Map<Integer,String> stdMap =new Map<Integer,String>();
+			stdMap.put(1,'Sam');
+			stdMap.put(2,'Ram');
+			stdMap.put(3,'Kiran');
+			List<String> values =stdMap.values();
+			System.debug(values);	// {Sam,Ram,Kiran}
+
+			Map<String,String> empMap =new Map<String,String>();
+			empMap.put('K','Prasad');
+			empMap.put('L','Naveen');
+			empMap.put('M','Raghu');
+			List<String> values =empMap.values();
+			System.debug(values);	//{Prasad,Naveen,Raghu}
+		-->
+    
+    6. containskey(key) : This will return true, if the map contains the given key.
+    	<!--
+			Map<Integer,String> stdMap =new Map<Integer,String>();
+			stdMap.put(1,'Sam');
+			stdMap.put(2,'Ram');
+			stdMap.put(3,'Kiran');
+
+			Boolean flag =stdMap.containskey(2);	
+			System.debug(flag);	//true
+			
+			Boolean one =stdMap.containsKey(9);
+			System.debug(one); //false
+		-->
+    
+    7. size() : This will return the size of the map
+    
+    
+    UseCases : 
+    1. Create a List of Accounts 
+    	Id	Name		Phone 
+    	---------------------------------
+    	0001		Wipro		040-1234
+    	0002		TCS			020-2345
+    	0003		Dell		030-1234
+    
+    	<!--
+			List<Account> accounts =new List<Account>();
+			Account a1 =new Account();
+			a1.Id='0001';
+			a1.Name='Wipro';
+			a1.Phone='040-1234';
+			accounts.add(a1);
+			
+			Account a2 =new Account(Id='0002',Name='TCS',Phone='020-2345');
+			accounts.add(a2);
+	
+			Account a3 =new Account(Id='0003',Name='Dell',Phone='030-1234');
+			accounts.add(a3);
+		-->
+    
+    2. Create a map with  AccountId as key and Account Name as value
+    	<!--
+			Map<Id,String> accMap =new Map<Id,String>();
+		-->
+    
+    3. Take one by one value from the list and insert the data into map 
+    	<!--	
+    		for(Account a: accounts){
+    			accMap.put(a.Id,a.Name);
+    		}
+		-->
+    
+    4. Get all the keys from the map 
+    		<!--
+				Set<Id> keys =accMap.keySet();
+			-->
+    5. Get all the account names from the map 
+    		<!--
+				List<String> names =accMap.values();
+			-->
+    6. Check the size of the map 
+    		<!--
+				Integer count =accMap.size();
+			-->
+    
+    7. Check accountId 0002 in the map 
+    		<!--
+				Boolean flag =accMap.containsKey('0002');
+				System.debug(flag); 
+			-->
+    
+    
+   Example on for :
+    <!--
+			List<Account> accounts =new List<Account>();
+				for(Account a : accounts){
+
+				}
+				
+			List<Student__c> students =new List<Student__c>();
+				for(Student__c std : students){
+
+				}
+			
+			List<Student> students =new List<Student>();
+				for(Student std :students){
+
+				}
+
+			List<Contact> contacts =new List<Contact>();
+				integer i=1;
+				for(Contact c: contacts){
+					i=i+1;
+					if(i==5){
+						return ;
+					}
+				}
+
+	-->
+     1. Create a List of Accounts 
+    	Id	Name		Phone 
+    	---------------------------------
+    	0001		Wipro		040-1234
+    	0002		TCS			020-2345
+    	0003		Dell		030-1234
+    
+    2. Create a map with  accountName as key and phone as value .
+    	<!--
+			Map<String,String> accMap =new Map<String,String>();
+		-->
+    
+    3. Take one by one element from the list and put in the map 
+    	<!--
+			for(Account a: accounts){
+				accMap.put(a.name,a.phone);
+			}
+		-->
+    
+    4. Get all the AccountNames 
+    		<!--
+				Set<String> names =accMap.keySet();
+			-->
+    5. Get all the phone numbers
+    		<!--
+				List<String> phoneNumbers =accMap.values();
+			-->
+    
+    6. Get the phone number of TCS 
+    		<!--
+				String phone =accMap.get('TCS');
+			-->
+    7. Get the phone number of Dell
+    		<!--
+				String phone =accMap.get('Dell');
+			-->
+    
+    8. Check weather capital in the map
+    		<!--
+				Boolean flag =accMap.containsKey('capital');
+			-->
+</apex:page>

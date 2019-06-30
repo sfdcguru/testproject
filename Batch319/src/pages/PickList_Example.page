@@ -1,0 +1,12 @@
+<apex:page controller="PickList_Example">
+    <apex:form >
+    	<apex:selectList size="1" value="{!myValue}">
+            <apex:selectOption itemLabel="-None-" itemValue="none" />
+            <apex:selectOption itemLabel="Hyd" itemValue="TG" />
+            <apex:selectOption itemLabel="Ban" itemValue="KA" />
+        </apex:selectList>
+        <apex:commandButton value="Go" action="{!invoke}"  reRender="res"/>
+        <br/><br/>
+        <apex:outputLabel value="{!result}" id="res" />
+    </apex:form>
+</apex:page>

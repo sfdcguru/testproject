@@ -1,0 +1,120 @@
+<apex:page >
+    <!--
+    Lexcial : 
+---------
+1. Given statement is broken into small small segments ,in such a way thant no segment can be 
+   re-divided .
+2. Each segment is called lexical.
+3. It is the smalles unit in the programming .
+4. Every lexical may or maynot have meaning associated with it.
+
+5. Lexical is also called character.
+
+Example :
+    Integer aval=bval+10;   // stmt
+
+    I|n|t|e|g|e|r| |a|v|a|l|=|b|v|a|l|+|1|0|;
+
+    Lexical : I,n,t,e,g,e,r,a,v,a,l,=,b,v,a,l,+
+
+
+Token:
+-------
+1. Given statement is broken into small small segments in such a way that every segement has meaning 
+   associated with it.
+
+2. Each segment is called Token.
+
+3. Tokens are classfied into five types 
+    1. Constants
+    2. Separators 
+    3. Identifiers 
+    4. Operators
+    5. Keywords 
+
+    Example :
+    Integer aval=bval+10;
+
+    Integer| aval|=|bval|+|10|; |
+
+
+    Token       Type
+    ===========================
+    Integer     Keyword 
+
+    aval        Identifier 
+
+    =       Operator 
+
+    bval        Identifier
+
+    +       Operator
+
+    10      Constant
+
+    ;       Separator
+    
+
+Separators : 
+-------------
+1. These are used to separate the elements or statements 
+    
+    Seprator        meaning 
+    -----------------------------------
+    ()          Functional Braces
+
+    {}          Scope Braces 
+
+    []          Array Braces 
+
+    :           Colon
+
+    ;           Semi-colon
+
+    .           Period
+
+    ,           Comma
+
+
+    Example : Integer age,marks,salary;
+
+        Integer[] ages =new Integer[4];
+        
+        void show(){
+
+        }
+
+Constants :
+-----------
+1. Any element whose values doesnt change are called constants 
+2. There are three types of constants 
+    a. Numerical Constant
+    b. String constant
+    c. Boolean Constant
+
+3.Numerical constant : 
+    a. Any value that is formed using digits 0-9 with or with sign of the number 
+       or with or without decimal point are called numerical constant.
+
+    Example : 
+        1000.00
+        +999
+        -234
+        1000
+
+4. String constant :
+    a. Any value represented with in the single quote are called String constant.
+
+    Example : 
+    'ICICI001'
+    'ANC0002'
+    'ABC_TEst'
+
+
+5. Boolean constant : 
+    a. it will specify true or false.
+
+
+
+-->
+</apex:page>

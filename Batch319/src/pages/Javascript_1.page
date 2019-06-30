@@ -1,0 +1,10 @@
+<apex:page >
+    <script>
+    	function show(){
+        	console.log('Testing');
+        }
+    </script>
+    <apex:form >
+        <apex:commandButton value="Submit" oncomplete="show()" />
+    </apex:form>
+</apex:page>

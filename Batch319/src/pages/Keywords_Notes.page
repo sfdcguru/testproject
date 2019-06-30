@@ -1,0 +1,16 @@
+<apex:page >
+    <!--
+        Keywords:
+---------
+1. These are the reserved words.
+2. Meaning of these words are pre-defined by the compiler.
+3. Meaning of these words remain same ,irrespective of where we use in the program
+4. All the keywords are represented in small letters 
+
+Example : 
+class, interface ,public ,private,global,protected, static ,final ,
+if,else,for,while,do,void,limit ,offset ,all,rows,virtual, override,implements ,extends
+
+Note : keywords should not be used as identifier names.
+    -->
+</apex:page>

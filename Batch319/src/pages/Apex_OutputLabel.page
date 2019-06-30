@@ -1,0 +1,9 @@
+<!--
+apex:outputLabel : 
+1. This will print the label on the page.
+
+-->
+<apex:page >
+    <apex:outputLabel >Enter Name </apex:outputLabel> <br/><br/>
+    <apex:outputLabel value="Enter Age" />
+</apex:page>

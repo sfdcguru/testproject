@@ -1,0 +1,44 @@
+<apex:page id="page">
+    <apex:sectionHeader title="Student" subtitle="New Student" />
+    <apex:form id="fm">
+        
+        <apex:pageBlock title="Student" id="pb">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Submit" oncomplete="show()" />
+            </apex:pageBlockButtons>
+            <script>
+                function show(){
+                    var name =document.getElementById('{!$Component.pbs.pbsi1.name}').value;
+                    var age =document.getElementById('{!$Component.pbs.pbsi2.age}').value;
+                    if(name==''){
+                        document.getElementById('{!$Component.pbs.err1}').innerHTML='Name is required';
+                    }else{
+                        document.getElementById('{!$Component.pbs.err1}').innerHTML='';
+                    }
+                    if(age==''){
+                        document.getElementById('{!$Component.pbs.err2}').innerHTML='Age is required';
+                    }else{
+                        document.getElementById('{!$Component.pbs.err2}').innerHTML='';
+                    }
+                }
+            </script>
+            <apex:pageBlockSection id="pbs">
+                
+                <apex:pageBlockSectionItem id="pbsi1">
+                    <apex:outputLabel value="Enter Name" />
+                    <apex:inputText id="name" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:outputLabel id="err1" />
+                
+                <apex:pageBlockSectionItem id="pbsi2">
+                    <apex:outputLabel value="Enter Age" />
+                    <apex:inputText id="age" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:outputLabel id="err2" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

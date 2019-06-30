@@ -1,0 +1,194 @@
+<apex:page >
+    <!--
+        1. Create an apex class Employee .
+    public class Employee{
+
+    }
+
+==> private class Employee{ ===> outer class cannot be private // Error
+
+    }
+
+
+==> protected class Employee{  ===> outer class cannont be private // Error 
+
+     }
+
+2. Create a class Employee with name,age ,salary ,exp as datamembers 
+        global ,public ,protected, private
+
+    public class Employee{          // yes 
+        String name;
+        Integer age;
+        Decimal salary,exp;
+    }
+
+    public class Employee{          //yes
+        public String name;
+        public Integer age;
+        public Decimal salary,exp;
+    }
+
+    public class Employee{          //yes 
+        protected String name;
+        protected Integer age;
+        protected Decimal salary,exp;
+    }
+
+    global class Employee{          //yes
+        global String name;
+        global Integer age;
+        global Decimal salary,exp;
+    }
+
+    
+==> Create a class Employee with name, age ,salary,exp
+    name should be visable only in the class ,
+    age should be visable  in the class and child class 
+    salary should be visbale in the class and outside the class 
+    exp should be visable in the class ,outside the class and outside the organization
+
+    global class Employee {
+        String name;
+        protected Integer age;
+        public Decimal salary;
+        global Decimal exp;
+        
+    }
+
+    ==> class Public ===> Data members can be Private,protected,public 
+    ==> class Global ===> Data members can be Global ,public,protected,private
+
+
+==> Create a class Employee with name,age ,salary, exp 
+    create a constructor 
+    public class Employee{
+        public String name;
+        public Integer age;
+        public Decimal salary,exp;
+        
+        public Employee(){
+
+        }
+    }
+
+==> Create a class Employee with name,age ,salary, exp 
+    create a constructor and assign the values name as satish ,age as 34 ,salary as 20000
+    public class Employee{
+        public String name;
+        public Integer age;
+        public Decimal salary,exp;
+        public Employee(){
+            name='satish';
+            age=34;
+            salary=20000;
+        }
+    }
+
+==> Create a class Employee with name,age ,salary, exp 
+    create a constructor which will take empName and empAge as parameters 
+    public class Employee {
+        public String name;
+        public Integer age;
+        public Decimal salary,exp;
+        
+        public Employee(String empName, Integer empAge){
+
+        }
+    }
+    
+
+==> Create a class Employee with name,age ,salary, exp 
+    create a constructor which will take empName and empAge as parameters
+    assign empName to name and  empAge to age and salary as 10000 and exp as 5
+
+    public class Employee {
+        public String name ;
+        public Integer age;
+        public Decimal salary,exp;
+
+        public Employee(String empName, Integer empAge){
+            name=empName;
+            age=empAge;
+            salary=10000;
+            exp=5;
+        }
+
+    }
+
+    
+==> Create a class Employee with name,age ,salary, exp 
+    create a constructor and assign the values name as satish ,age as 34 
+    Create a method show which will calculate the values of salary and exp 
+        if age > 30 then salary 30K and exp =3 
+        else  : salary :50k and exp =5
+
+    public class Employee{
+        public String name;
+        public Integer age;
+        public Decimal salary,exp;
+        public Employee(){
+            name='Satish';
+            age=34;
+        }
+        public void show(){
+            if(age > 30 ){
+                salary=30000;
+                exp=3;
+            }else{
+                salary=50000;
+                exp=5;
+            }
+        }
+    }
+
+
+==> Create a class Employee  with a constructor 
+    Create a object for the class 
+
+    public class Employee {
+            public Employee(){
+                System.debug('iam constructor');
+            }
+    }
+
+    Execution : Open Anonymous window 
+          Employee emp =new Employee();
+
+
+=>  Create a class Employee 
+    Create a constructor with name and age as parameters   and print the values
+    Create a object for the class.
+
+    public class Employee {
+            public Employee(String name,Integer age){
+                System.debug('Name :'+name);
+                System.debug('Age :'+age);
+        
+            }
+    }
+
+    Execution :
+    Employee emp =new Employee('Satish',34);
+        
+==> Create a class College  with name,phone as datamembers 
+    Create a constructor  with colgName, colgPhone as parameters 
+     assgin colgName to name and colgPhone to phone and print the values of name and phone 
+    Create a object for the class.
+
+
+==> Create a class Student with name ,branch ,fee , tax 
+    Create a constructor which will take stdName and stdBranch as parameters 
+            and assign stdName to name ,stdBranch to branch  .
+    creat a method show which will calculate fee and tax        
+        if branch is CSE then fee is 50k and tax is 2000
+        if branch is not CSE then fee is 80k and tax is 5k
+
+    Create a object and print the values of name ,branch ,fee, tax
+
+
+
+    
+  
+    -->
+</apex:page>

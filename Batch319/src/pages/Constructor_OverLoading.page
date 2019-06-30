@@ -1,0 +1,25 @@
+<apex:page >
+    Constructor OverLoading:
+    -------------------------
+    1. if we define more than one constructor in the same class with different 
+       a. No of parameters or  type of  parameters or order of Parameters 
+      then we call it as Constructor overloading
+    
+    public class Example{
+        public Example(){
+    
+        }
+        public Example(Integer age){
+    
+        }
+        public Example(String name){
+    
+        }
+        public Example(String name,Integer age){
+    
+        }
+        public Example(Integer age,String name){
+    
+        }
+    }
+</apex:page>

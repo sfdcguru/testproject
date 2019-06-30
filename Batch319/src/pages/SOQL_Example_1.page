@@ -1,0 +1,13 @@
+<apex:page controller="SOQL_Example_1">
+<apex:form >
+<apex:commandButton value="Submit" action="{!show}" />
+    <apex:pageBlock title="Accounts">
+        <apex:pageBlockTable value="{!accounts}" var="a">
+            <apex:column value="{!a.name}" />
+            <apex:column value="{!a.industry}" />
+            <apex:column value="{!a.rating}" />
+            <apex:column value="{!a.phone}" />
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

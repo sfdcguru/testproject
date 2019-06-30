@@ -1,0 +1,20 @@
+<apex:page standardController="Account" extensions="Contacts_Alert">
+    <apex:form >
+    	<apex:pageBlock title="Account_ContactS">
+        	<apex:pageBlockButtons location="top">
+                <apex:commandButton value="UpdateContacts" action="{!callme}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:outputText value="{!Account.name}" />
+                <apex:outputText value="{!Account.Phone}" />
+                <br/>
+                <apex:datatable value="{!contacts}" var="a" frame="border" rules="rows" cellpadding="10" width="600">
+                    <apex:column value="{!a.lastName}" headervalue="lastName" />
+                    <apex:column value="{!a.firstName}" headervalue="FirstName" />
+                    <apex:column value="{!a.phone}" headervalue="phone" />
+                    <apex:column value="{!a.email}" headervalue="email" />
+                </apex:datatable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

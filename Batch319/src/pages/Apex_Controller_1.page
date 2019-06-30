@@ -1,0 +1,57 @@
+<!--
+	1. If we want use any apex class in the VF page 
+		a. Define the apex class as controller in the VF page .
+		b. Apex class should have constructor with zero parameters or no constructor.
+		c. If we want to define any variable in the class ,which should be used in the VF page 
+		   should obey the following 
+			1. Variable should be public or global
+			2. variable should have getter and setter method
+	2. getter method : 
+	   a. Taking the value from apex class variable and returning to the VF page.
+	   Example :	
+		String name;
+		public String getName(){
+			return name;
+		}
+
+		Integer age;
+		public Integer getAge(){
+			return age;
+		}
+
+	3. setter method :
+	   a. Taking the data from VF page and assigning the data to the variable in the apex class is called
+		  setter method
+		
+	   b Syntax:
+		  Integer age ;
+		  public void setAge(Integer age){
+				this.age=age;
+		  }
+
+		  String name;
+		  public void setName(String name){
+				this.name=name;
+		  }
+
+		4. Instead of writing getter and setter we can define the following 
+			Integer age {set;get;}
+
+		Example : 
+		 String name 	{set;get;}
+	 	 Decimal salary {set;get;}
+		 Date dob		{set;get;}
+
+
+Order of Execution of VF page 
+1. When we call the page 
+	a. First Apex class is invoked 
+	b. Constructor will be executed 
+	c. Getter and setter methods will be executed.
+	4. Page is loaded
+-->
+<apex:page controller="Apex_Intro">
+    Name : {! name} <br/><br/>
+    Age  :{!age} <br/><br/>
+    Place:{!place}
+</apex:page>

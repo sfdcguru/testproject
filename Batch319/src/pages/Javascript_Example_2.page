@@ -1,0 +1,41 @@
+<apex:page id="page">
+    <script>
+    	function show(){
+        	var name =document.getElementById('page:fm:pb:pbs1:pbsi1:name').value;
+            var age =document.getElementById('page:fm:pb:pbs2:pbsi2:age').value;
+            console.log('Name :'+name);
+            console.log('Age :'+age);
+        }
+    </script>
+    <apex:form id="fm">
+    	<apex:pageBlock title="Example" id="pb">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Submit" oncomplete="show()" />
+            </apex:pageBlockButtons>
+        	<apex:pageBlockSection id="pbs1">
+            	<apex:pageBlockSectionItem id="pbsi1">
+                    <apex:outputLabel value="Enter Name" />
+                    <apex:inputText id="name" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbs2">
+            	<apex:pageBlockSectionItem id="pbsi2">
+                    <apex:outputLabel value="Enter Age" />
+                    <apex:inputText id="age" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <script>
+            	function callMe(){
+                	var city =document.getElementById('{!$Component.pbs3.pbsi3.city}').value;
+                    console.log(city);
+                }
+            </script>
+              <apex:pageBlockSection id="pbs3">
+            	<apex:pageBlockSectionItem id="pbsi3">
+                    <apex:outputLabel value="Enter City" />
+                    <apex:inputText id="city" onchange="callMe()"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

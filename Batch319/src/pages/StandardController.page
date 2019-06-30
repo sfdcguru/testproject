@@ -1,0 +1,63 @@
+<apex:page >
+    <!--
+    Sobject  :
+    -----------
+    1. Any of the table created in the database of the salesforce is reffered as sobject in the apex programming
+    2. Sobject can be standard object or custom object
+    3. Example : 
+    	Account ,Contact, Opportuntiy ,Loan__c ,Payment__c
+    
+    StandardController: 
+    -------------------
+    1. If you want to reffer to exact properties of any one of the sobject then we define that 
+       sobject as standardController.
+    2. We can only define one sobject as standardController.
+    
+    Example : standardController="Account" 
+    		  standardController="Customer__c "
+    		  standardController="Loan__c"
+    
+    How to reffer to the fields of sobject		{! expression} 
+    ==> 	SObject		Field		Expression
+    		Standard	Standard	{!SObjectName.FieldName} 
+    		Standard	Custom		{!SobjectName.FieldName__c}
+    		Custom		Standard	{!SobjectName__c.FieldName}
+    		Custom		Custom		{!SobjectName__C.FieldName__c}
+    
+    
+    Account : 
+    	Name
+    	Phone 
+    	Active__c
+    	Email__c
+    	{! Account.Name }	
+    	{! Account.Phone}
+    	{! Account.Active__c}
+    	{! Account.Email__c}
+    
+    Customer__c 
+    LastName__c
+    FirstName__C
+    CreatedDate
+    {! Customer__c.LastName__c }
+    {! Customer__c. FirstName__c}
+    {! Customer__c.CreatedDate}
+    
+    
+	Account : 
+	Owner : Lookup(User)	   : Standard Salesforce Field 
+	MyData__c : Lookup(Contact): Custom Lookup field 
+
+	{! Account.OwnerId}	==> If the lookup is  standard then we need toadd Id after the fieldName 
+
+	{! Account.MyData__c} ==>
+    
+    -->
+    
+    
+    
+    
+    
+    
+    
+</apex:page>

@@ -1,0 +1,7 @@
+<apex:page >
+    <apex:pageBlock title="Student">
+        Student Name : <br/>
+        Student Age  : <br/>
+        Student Branch
+    </apex:pageBlock>
+</apex:page>

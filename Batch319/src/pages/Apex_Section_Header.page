@@ -1,0 +1,35 @@
+<!--
+apex:sectionHeader : 
+1. This will create header for the page .
+2. This will be always first element in the page
+3. Attributes : 
+	1. title : 
+	   a. This is a text value .
+	   b. This will be displayed as title for the header element.
+
+	2. subTitle : 
+	   a. This is a text value.
+	   b. This will be displayed as subtitle for the header element.
+
+	3. help  :
+	   a. It will take url of the page as value 
+	   b. When we click on help of this page link ,page whose url is given as help will be opened.
+
+	4. description :
+	   a. This is a text value.
+	   b. This will be displayed below the header .
+
+	5. rendered : 
+	   a. It is a boolean value .
+	   b. When set as true,header will be displayed on the page.
+
+-->
+
+<apex:page >
+    <apex:sectionHeader title="Account"  rendered="true" subtitle="New Account" help="/apex/Apex_Page" description="This is the home page" />
+    This is header Example <br/>
+    This is header example <br/>
+    This is header example 
+    
+   
+</apex:page>

@@ -1,0 +1,10 @@
+<apex:page controller="Apex_Method_Example">
+    <apex:form id="fm">
+        <apex:commandButton value="Call" action="{!callMe}" reRender="fm"/>
+        <apex:commandButton value="Invoke" action="{!invoke}" reRender="fm"/>
+        <br/><br/>
+        Name : {!name} <br/><br/>
+        City :{!city} <br/><br/>
+        Salary:{!salary}
+    </apex:form>
+</apex:page>

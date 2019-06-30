@@ -1,0 +1,9 @@
+<apex:page standardController="Account" recordSetVar="items">
+    <apex:dataList value="{!items}" var="a">
+    	{!a.name}
+    </apex:dataList>
+    <br/><br/>
+    <apex:repeat value="{!items}" var="a">
+    	{!a.name}
+    </apex:repeat>
+</apex:page>

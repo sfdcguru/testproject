@@ -1,0 +1,10 @@
+<apex:component >
+    <apex:attribute name="title" type="String" description="Title Name" />
+    <apex:attribute name="message" type="String" description="Message " />
+    <apex:attribute name="color" type="String" description="color" />
+    <apex:attribute name="background" type="String" description="bgcolor" />
+    <div style="background:{!background};color:{!color}" >
+        Tile : {!title} <br/><br/>
+        Message:{!message}
+    </div>
+</apex:component>

@@ -1,0 +1,19 @@
+<!--
+	Apexpages.Message : 
+	1. Message is a pre-defined apex class
+	2. It is defined under the name space of ApexPages .
+	3. This is used to generate the messages using apex programming 
+	4. Syntax :
+		Apexpages.Message(Apexpages.Severity,message);
+		Severity Can be : CONFIRM ,ERROR,WARNING,INFO,,FLATAL
+
+	5. After the message is created successfully add the message to the page.
+		Apexpages.addMessage(msg)
+
+	6. If you want to print the message on the VF page ,then use 
+			<apex:pageMessages />
+-->
+
+<apex:page controller="Apex_Message_Example">
+    <apex:pageMessages />
+</apex:page>

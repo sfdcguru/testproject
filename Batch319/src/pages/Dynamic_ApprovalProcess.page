@@ -1,0 +1,44 @@
+<apex:page >
+  ProcessRequest
+  1.This is a pre-defined apex  in namespace of Approval.
+  2.This is a parent class for ProcessSubmitRequest and ProcessWorkItemRequest class.
+  3.This class contains 
+    	a. setComments()
+    	b. getComments()
+    	c. setNextApproverIds()
+    	d. getNextApproverIds()
+    
+    
+   ProcessSubmitRequest:
+   1. This is defined under the namespace of Approval.
+   2. This is a pre-defined apex class.
+   3. This s a child class of Approval.ProcessRequest 
+   4. Methods :
+    	Parent Class : 
+    	a. setComments()
+    	b. getComments()
+    	c. setNextApproverIds()
+    	d. getNextApproverIds()
+    	----------------------------------
+    	e.setProcessDefinitionNameOrId(nameOrId)
+    	f.setObjectId(RecordId)
+    	g.setSubmiterId(UserId)
+    	h.setSkipEntryCriteria(skipEntryCriteria)
+    	i.getObjectId()
+    	j.getSubmitterId()
+    	k.getProcessDefinitionNameOrId()
+    	l.getSkipEntryCriteria()
+    
+    3.ProcessResult : 
+      1. This class will sepcify the status of the approvalProcess
+    	getEntityId() :The ID of the record being processed.
+		getErrors() :If an error occurred, returns an array of one or more
+    				database error objects including the error code and description.
+		getInstanceId()	:The ID of the approval process that has been submitted for approval.
+		getInstanceStatus():  The status of the current approval process.
+    						Valid values are: Approved, Rejected, Removed or Pending.
+		getNewWorkitemIds()	:The IDs of the new items submitted to the approval process. 
+    							There can be 0 or 1 approval processes.
+		isSuccess()		:A Boolean value that is set to true if the approval process completed successfully; otherwise, it is set to false.
+    	
+</apex:page>

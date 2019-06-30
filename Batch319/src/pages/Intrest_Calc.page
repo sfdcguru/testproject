@@ -1,0 +1,33 @@
+<apex:page controller="Intrest_Calculator">
+    <apex:sectionHeader title="Intrest" subtitle="Calculator" help="/apex/page" description=""  />
+    <apex:form >
+        <apex:pageBlock title="Intrest" >
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Submit" action="{!callMe}" reRender="pb" />
+                <apex:commandButton value="Cancel" action="{!cancel}" reRender="pb" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" id="pb">
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Amount"   />
+                    <apex:inputText value="{!amount}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Rate" />
+                    <apex:inputText value="{!rate}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Years" />
+                    <apex:inputText value="{!years}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Intrest" />
+                    <apex:outputText value="{!intrest}" />
+                </apex:pageBlockSectionItem>                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

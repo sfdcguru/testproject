@@ -1,0 +1,166 @@
+<apex:page >
+    DML : (Data Manipulation Language)
+    ======================================
+    1. On the table if we are inserting a new data 
+                    or 
+                    modifying the exiting data 
+                    or      
+                    deleting the existing data
+                    or 
+                    undeleting the deleted records 
+        we call it as DML Operation
+    
+    2. To peform this dml operations  we have 
+            a. insert 
+            b. update 
+            c. upsert 
+            d. delete 
+            e. undelete 
+            f. merge
+            g.Database.insert()
+            h.Database.update()
+            i.Datebase.upsert()
+            j.Database.merge()
+            k.Database.delete()
+            l.Database.undelete()
+            m.Database.emptyRecyclebin()
+    
+    3. insert :     
+            a. insert keyword is used to insert new records into the database.
+            b. Syntax :     
+                insert sobject/sobject[]
+    
+            c. When ever we insert new records two points are taken into consideration
+                1. All the required fields should be enetered
+                2. Validation rules are verified
+    
+            Example : 
+            1. Create a account record and insert       
+                Account acc =new Account();
+                acc.Name='Wipro';
+                acc.Phone='040-1234';
+                acc.Rating='Hot';
+                insert acc; 
+    
+            2. Create a opportunity record and insert
+                 Opportunity op =new Opportunity();
+                 op.Name='Wipro-';
+                 op.StageName='Prospecting';
+                 op.closeDate=System.today()+15;
+                 op.Amount=10000;
+                 insert op;
+                                                                             |--Email,Web   |----High,Normal,Low
+            3. Create a new Case with wilson as owner of the record (subject,origin,status,priority)
+                                                                                    |---New ,Completed
+                User u =[select id from User where firstName='Wilson'];
+                Case c=new Case();
+                c.Subject='Hardware issue';
+                c.Origin='Web';
+                c.Status='New ';
+                c.Priority='High';
+                c.ownerId=u.Id;
+                insert c;
+    
+        4.Create a new Contact for the Account whose name is wipro
+
+            Account acc =[select Id,Name from Account where name='Wipro'];
+            Contact con=new Contact();
+            con.LastName='Myla';
+            con.FirstName='Satish';
+            con.Phone='040-1234';
+            con.AccountId=acc.Id;
+            insert con;
+
+
+        5. Create a new Opportunity for Account whose name is Genepoint
+            Account acc =[select Id,Name from Account where name='Genepoint'];
+            Opportunity  op =new Opportunity();
+            op.Name='Genepoint';
+            op.StageName='Prospecting';
+            op.closeDate=System.today();
+            op.AccountId=acc.Id;
+            insert op;
+
+        6. Create a new Customer record  with wilson as owner 
+            lastName__c,firstName__c,Phone__c,City__c
+              User u =[select id from User where firstName='Wilson'];
+            Customer__c cus =new Customer__c();
+            cus.LastName__C='KL';
+            cus.FirstName__c='Satish';
+            cus.Phone__c='040-1234';
+            cus.City__c='Hyd';
+            cus.ownerId=u.Id; 
+            insert cus;
+
+<!--
+     4.Update  :
+       ----------
+        syntax : update sobject/Sobject[]
+        1.Fetch all the accounts which are created today and update Active__c field value as yes 
+            List<Account> accounts =[select Id,Name,Active__c from Account where createdDate=TODAY];
+            for(Account a: accounts){
+                a.Active__c=true;
+            }
+            update accounts;
+
+        2. Fetch all the  leads which are created on friday and update thier leadSource as web 
+            and rating as hot 
+            List<Lead> leads =[select id,LeadSource,Rating from Lead where DAY_IN_WEEK(CreatedDate) =6 ];
+            for(Lead l:leads){
+                l.leadSource='Web';
+                l.rating='Hot';
+            }
+            update leads;
+        
+  -->  
+    
+   <!--
+    Delete  :
+        Syntax :  delete sobject/Sobject[]
+        1. Fetch all the accounts created  in the second week of the month and delete 
+            List<Account> accounts =[select Id,Name,Phone from Account where WEEK_IN_MONTH(CreatedDate) =2];
+            delete accounts;
+        
+        2. Fetch all the leads which whose rating is cold and delete them 
+            List<Lead> leads =[select id,lastName,firstName,Phone from lead where rating='Cold'];
+            delete leads;
+    -->
+    1. Fetch all the accounts with corrsponding contacts 
+    2. Update contacts otherphone as Account phone .
+    <!--
+        List<Account> accounts =[select Name,Phone,(select Id,otherphone from Contacts) from Account ];
+        List<Contact> myList =new List<Contact>();
+        for(Account a: accounts){
+            for(Contact c: a.contacts){
+                c.otherphone=a.phone;
+                myList.add(c);
+            }
+        }
+        update myList;
+    -->
+    
+    1. Write a soql to fetch all the accounts with corresponding opportunities 
+    2. If account industry is Energy then set corresponding opportunity stagename as closed won
+    3. if account industry is Not energy then set corresponding opportunity stagename as prospecting 
+        and closeDate as today+15 days 
+    
+    <!--
+
+        List<Account> accounts =[select Name,Industry,(select id,stageName,closeDate from Opportunities) 
+                                                        from Account ];
+        List<Opportunity> optyList =new List<Opportunity>();
+        for(Account a: accounts){
+            for(Opportunity op :a.opportunities){
+                if(a.industry=='Energy'){
+                    op.stageName='Closed Won';
+                }else{
+                    op.stageName='Prospecting';
+                    op.closeDate=System.today();
+                }
+                optyList.add(op);
+            }
+        }
+        update optyList
+    -->
+    
+</apex:page>
